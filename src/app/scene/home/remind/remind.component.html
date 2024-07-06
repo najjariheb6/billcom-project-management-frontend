@@ -1,0 +1,31 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <br>
+
+        <div class="container">
+
+                <div class="col-md-8">
+                    <div class="widget widget-reminder">
+                        <div class="widget-reminder-header">TODAY,               <strong>{{today | date}}  </strong>
+                        </div>
+                        <div class="widget-reminder-container" *ngFor="let remind of reminds | sortDate ">
+                            <div class="widget-reminder-time">
+                                {{formatDate(remind.createdAt)}}<br />
+                                
+                            </div>
+                            <div class="widget-reminder-divider ">                     
+                            </div>
+                            <div class="widget-reminder-content">
+                                <h6 style="color: #f76809;">{{remind.subject}}</h6>
+                                <a class="widget-desc"><i class="fa fa-bell" aria-hidden="true"></i> &nbsp;
+                                   {{remind.message}} . </a>
+                            </div>
+                        </div>
+                       
+                        
+                    </div>
+                </div>
+                
+          </div>    
+</div>
+</div>

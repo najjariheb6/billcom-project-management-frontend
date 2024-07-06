@@ -1,0 +1,40 @@
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+  rel="stylesheet"
+/>
+<br />
+
+<br />
+<br />
+
+<div class="row justify-content-center">
+  <div class="col-lg-2.75" *ngFor="let team of project.project.teamList">
+    <div class="card card-one">
+      <div class="header" (click)="goToTeamDetails(team.id)">
+        <div class="avatar">
+          <img [src]="hostPhoto + team.leader.user.user_id" alt="" />
+        </div>
+      </div>
+      <h3>{{ team.teamName }}</h3>
+      <div class="desc">
+        Team Lead : {{ team.leader.user.firstName }}
+        {{ team.leader.user.lastName }}
+      </div>
+
+      <ul class="agent-contact-details">
+        <li>
+          <i class="fa fa-mobile" aria-hidden="true"></i>
+          &nbsp;&nbsp;&nbsp;<span>{{ team.leader.user.mobile }}</span>
+        </li>
+        <li>
+          <i class="fa fa-envelope" aria-hidden="true"></i
+          >&nbsp;&nbsp;&nbsp;<span>{{ team.leader.user.email }} </span>
+        </li>
+      </ul>
+
+      <div class="footer">
+        <a (click)="removeTeam(team.id)"><i class="fas fa-user-times"></i></a>
+      </div>
+    </div>
+  </div>
+</div>

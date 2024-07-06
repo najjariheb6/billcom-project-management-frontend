@@ -1,0 +1,72 @@
+<div class="card ">
+
+    <div class="card-header">
+        <h3 class="card-title"> Project charge assessment</h3>
+
+
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+            </button>
+        </div>
+
+
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <div class="col-md-4 pull-center">
+
+            <mat-form-field class="form-group" [formGroup]="projectForm">
+                <mat-label style="color: #f76809">choose Project</mat-label>
+                <mat-select style="width: 250px;" formControlName="idProject" class="form-control" id="searchListCharge"
+                    (click)="getProjects()" class="form-control">
+      
+                    <div  class="col-md-12 form-group">
+                        <form >
+                            <br>
+                            <input type="search" (ngModelChange)="searchProjects(k.value)" #k="ngModel"
+                                ngModel name="k" id="searchName" class="form-control mr-sm-4"
+                                placeholder="put project title..." required>
+                        </form>
+                    </div>
+                    <mat-option *ngFor="let project of projects" [value]='project.project.id'
+                        (click)="getProjectSpecefic()" style="height: 100px;width: 300px;">
+                        {{project?.project.name}}
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div  *ngIf="projectChargeDetail.length > 0" class="row">
+            <div class="col-md-12">
+                    <table class="table project-table table-centered table-nowrap table-hover">
+                        <thead>
+                            <br>
+                            <tr>
+
+                                <th  style="color: #f88538;" > Project : {{projectChargeDetail[0].name}} </th>
+                                <th style="color: #f88538;" >Details</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let p of projectChargeDetail;  " >
+                                <td *ngIf = "p !=projectChargeDetail[0] " >{{p.name}} : </td>
+                                <td   *ngIf = "p !=projectChargeDetail[0] " >{{p.value}}</td>
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+
+
+
+
+
+
+                </div>
+        </div>
+        <!-- /.row -->
+    </div>
+</div>

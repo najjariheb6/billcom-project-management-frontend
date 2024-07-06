@@ -1,0 +1,49 @@
+<h5 class="card-header">Add Role</h5>
+<div style="text-align:center;">
+    <br>
+    <img src="assets/logo.png" height="100px" weight="100px">
+    <br>
+</div>
+<div class="card-body">
+
+    <form [formGroup]="addRoleForm" (ngSubmit)="onSubmit()">
+
+        <div class="nav flex-column nav-pills">
+            <label>Post</label>
+            <select formControlName="role" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
+                <option selected>List of Roles</option>
+                <option *ngFor="let item of list1">{{item.name}} 
+                </option>       
+                <!-- <option value="manager">Manager</option>
+                <option value="leader"> Team leader</option>
+                <option value="member">Member</option> -->
+                <!-- <option value="project leader">project Leader</option> -->
+
+            </select>
+            <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+                <div *ngIf="f.role.errors.required">Post is required</div>
+            </div>
+        </div>
+        <div></div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="text-center">
+            <div></div>
+            <button class="btn btn-sm ">Update</button> &nbsp;
+            <button class="btn btn-sm   " style="background-color: crimson; " type="reset" (click)="close()">Cancel</button>
+        </div>
+    
+
+
+    </form>
+
+
+
+</div>

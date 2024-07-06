@@ -1,0 +1,69 @@
+
+
+.notification_dd{
+	position: absolute;
+	top: 40px;
+	right: 7px;
+	background: #fff;
+	width: 360px;
+	height: auto;
+	
+	border: 1px solid #c7d8e2;
+	border-radius: 3px;
+	box-shadow: 10px 10px 30px rgba(95, 78, 78, 0.125),
+	-10px -10px 30px rgba(95, 78, 78, 0.125);
+}
+.notification_dd:before{
+	content:"";
+	position: absolute;
+	top: -20px;
+	right: 16px;
+	border: 10px solid;
+	border-color: transparent transparent #fff transparent;
+
+}
+
+.notification_dd li:hover{
+	background-color: #e6eaec;
+
+}
+
+.notification_dd li  {
+	display:flex;
+
+}
+
+.notification_dd li {
+	border-bottom: 1px solid #f1f2f4;
+	padding: 10px 20px;
+	display: flex;
+	align-items: center;
+} 
+.notification_dd .notification_ul{
+	max-height: 620px; 
+	overflow: scroll;
+	overflow-x: hidden;
+}
+
+.notification_dd li .notify_data{
+	margin: 0px 15px;
+	width: 350px;
+
+}
+.notification_dd li .notify_data .title{
+	color: #000;
+	font-weight: 600;
+font-size: 15px;
+}
+.title{
+	color: #000;
+	font-weight: 600;
+font-size: 15px;
+}
+.notification_dd li .notify_data .sub_title{
+	font-size: 13px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-top: 5px;
+}

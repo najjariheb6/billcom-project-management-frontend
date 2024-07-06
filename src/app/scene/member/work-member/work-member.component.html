@@ -1,0 +1,111 @@
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <br>
+
+    <div class="row">
+
+
+      <div class="col-lg-12 ">
+        <div class="card">
+          <div class="card-body">
+            <div class="table-responsive project-list">
+
+
+              <div class="col-lg-4 float-right">
+                <form [formGroup]="DashboardForm" (ngSubmit)="onSubmit()">
+                  <div>
+                    <label for="month">Select Month?     </label>
+                    &nbsp; &nbsp; <input id="month" type="month" name="month" min="currentDate" max="2025-12-31"
+                      required pattern="[0-9]{4}-[0-9]{2}" formControlName="weekDate"
+                      [ngClass]="{ 'is-invalid': submitted && f.weekDate.errors }">&nbsp; &nbsp; &nbsp; &nbsp;
+                    <button class="btn btn-sm float right ">Search</button>
+
+                    <div *ngIf="submitted && f.weekDate.errors" class="invalid-feedback">
+                      <div *ngIf="f.weekDate.errors.required">enter from date</div>
+
+
+                    </div>
+
+                  </div>
+                  <br>
+                </form>
+
+
+
+              </div>
+
+              <br>
+
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th class="col-md-6 col-sm-6 text-right" style="color: #FFF;">
+                      Team\Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+
+                    <th scope="col" style="color: #f88538;" *ngFor='let workDetail of workDtoList '>
+                      {{formatDate(workDetail.date)}}</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <td>
+
+                    <tr *ngFor='let team of teams '> {{team?.teamName}}
+
+                      <br>
+
+
+                      <hr>
+                    </tr>
+                  </td>
+                  <td *ngFor='let workDetail of workDtoList  '>
+
+                    <tr *ngFor='let work of workDetail.listWork '>
+                      <input type="text" Pattern="[0-8]" [(ngModel)]="work.nbHour" class="col-sm-12" max="8" min="-4"
+                        (ngModelChange)="addHourToMemberWork(work.nbHour,work.idWork)" required #workref="ngModel">
+                      <div *ngIf="workref.errors?.pattern" class="alert alert-danger">
+
+                        <div [hidden]="workref.errors?.pattern">
+                        </div>
+                      </div>
+                      <hr>
+
+
+
+                    </tr>
+                  </td>
+
+
+                </tbody>
+              </table>
+
+            </div>
+
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+  </div>

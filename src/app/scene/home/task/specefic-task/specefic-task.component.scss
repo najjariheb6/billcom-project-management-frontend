@@ -1,0 +1,19 @@
+.btn-sm {
+    background-color: #f88538;
+    color: #fff;
+    padding: 7px 12px;
+
+}
+label{
+    color: #f88538;
+}
+input:focus,
+textarea:focus,
+select:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #f76809;
+    outline-width: 0;
+   
+}

@@ -1,0 +1,20 @@
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <div class="content">
+      <div class="card">
+        <button style="color:#d62839 ;" type="button" class="btn btn-tool " (click)="closeDiolog()" data-card-widget="remove" ><i class="fas fa-times float-right"></i>
+        </button>
+          <div class="firstinfo"><img src="assets/alert.png" />
+           
+              <div class="profileinfo">
+                  <h1>Alert</h1>
+                  <h3>{{data.message}}</h3>
+              </div>
+          </div>
+      </div>
+      <div class="badgescard"> 
+          <span><button mat-flat-button id="no-button"  class="confirm-button" [mat-dialog-close]="false">No</button></span>
+          <span><button mat-flat-button id="yes-button" class="annule-button" [mat-dialog-close]="true">Yes</button> </span>
+
+      </div>
+  </div>

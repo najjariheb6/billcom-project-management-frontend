@@ -1,0 +1,95 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"
+  integrity="sha256-3sPp8BkKUE7QyPSl6VfBByBroQbKxKG7tsusY2mhbVY="
+  crossorigin="anonymous"
+/>
+
+<div class="container">
+  <div class="text-right">
+    <button (click)="close()" type="button" class="btn btn-tool">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <br />
+
+  <div class="row">
+    <div *ngIf="user" class="col-lg-10 mx-auto">
+      <div class="career-search mb-60">
+        <div class="filter-result" *ngFor="let taskteam of data">
+          <div
+            class="job-box d-md-flex align-items-center justify-content-between mb-30"
+          >
+            <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
+              <div
+                class="img-holder mr-md-4 mb-md-0 mb-4 mx-auto mx-md-0 d-md-none d-lg-flex"
+              >
+                {{ taskteam.task.status.statusDescritpion }}
+              </div>
+
+              <div class="job-content">
+                <h5 class="text-center text-md-left">
+                  {{ taskteam.task.taskName }} &nbsp;&nbsp;&nbsp;Team :
+                  {{ taskteam.team.teamName }}
+                </h5>
+
+                <ul class="d-md-flex flex-wrap text-capitalize ff-open-sans">
+                  <li class="mr-md-4">
+                    <i class="zmdi zmdi-time mr-2"></i>
+                    Started Date : {{ formatDate(taskteam.task.creationDate) }}
+                    <i class="zmdi zmdi-time mr-2"></i> Due Date :
+                    {{ formatDate(taskteam.task.deleveryDate) }}
+                  </li>
+                </ul>
+
+                <ul class="d-md-flex flex-wrap text-capitalize ff-open-sans">
+                  <li *ngIf="taskteam.visible">
+                    <form
+                      [formGroup]="changeDateForm"
+                      (ngSubmit)="onSubmit(taskteam.task.id)"
+                    >
+                      <div class="form-group col-12">
+                        <div class="col-10 col-sm-11">
+                          <input
+                            type="datetime-local"
+                            id="start"
+                            name="trip-start"
+                            value="currentDate"
+                            min="currentDate"
+                            max="2025-12-31"
+                            formControlName="deleveryDate"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+                      <div class="text-center">
+                        <button
+                          class="btn btn-sm float right"
+                          style="color: #fff"
+                        >
+                          change
+                        </button>
+                        &nbsp;
+                      </div>
+                    </form>
+                  </li>
+                </ul>
+              </div>
+              <div
+                *ngIf="taskteam.team.leader.user.user_id === user.user_id"
+                class="job-right my-4 flex-shrink-0"
+              >
+                <button
+                  class="btn btn-sm float right"
+                  (click)="taskteam.visible = !taskteam.visible"
+                >
+                  Change Due date
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

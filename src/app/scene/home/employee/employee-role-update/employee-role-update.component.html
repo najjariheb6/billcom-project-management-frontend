@@ -1,0 +1,36 @@
+
+<app-card-form [title]="titleUpdateRole"></app-card-form>
+
+
+<div class="card">
+    
+    <!-- /.card-header -->
+    <div class="card-body p-0" >   
+      <div class="table-responsive">
+        <div class="card-footer clearfix">
+          <a (click)="addRole()"class="btn btn-sm  float-right "style="color: #fff;"  >Update Role</a>
+        </div>
+        <table class="table m-0">
+          <thead>
+          <tr>
+            <th style="color: #f88538;" >Post</th>
+            <th style="color: #f88538;" >Operation</th>
+
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let role of roles ">
+                <td>{{role.name}}</td>
+                <td><a   class="btn btn-outline-danger pull-center"  data-toggle="tooltip" (click)="deleteRole( role.name)"><i class="fas fa-user-slash"></i></a></td>
+
+          
+          </tbody>
+        </table>
+      </div>
+ 
+      <!-- /.table-responsive -->
+    </div>
+    <!-- /.card-body -->
+  
+    <!-- /.card-footer -->
+  </div>

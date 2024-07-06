@@ -1,0 +1,163 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="container bootdey">
+    <div class="card-header">
+        <button (click)="close()" style="color: white;" type="button" class="btn btn-tool pull-right"
+            data-card-widget="remove"><i class="fas fa-times"></i>
+        </button>
+        <h5>New Task</h5>
+
+    </div>
+    <div class="email-app">
+
+
+        <main>
+            <form [formGroup]="addTaskForm" (ngSubmit)="onSubmit()">
+
+
+
+
+                <div class="form-row">
+
+
+
+
+                    <div class="form-group col-4">
+                        <label class="col-4 col-sm-11">title : </label>
+                        <div class="col-10 col-sm-11">
+                            <input type="text" formControlName="taskName" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.taskName.errors }" />
+                            <div *ngIf="submitted && f.taskName.errors" class="invalid-feedback">
+                                <div *ngIf="f.taskName.errors.required">title is required</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-4">
+                        <label class="col-4 col-sm-11">Choose Member :</label>
+
+                        <div class="col-10 col-sm-11">
+
+                            <select formControlName="idMember" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.idMember.errors }">
+                                <option *ngFor="let member of members" [value]="member.id"> {{member.user.firstName}}
+                                    {{member.user.lastName}} </option>
+
+                            </select>
+                            <div *ngIf="submitted && f.idMember.errors" class="invalid-feedback">
+                                <div *ngIf="f.idMember.errors.required">choose member please!</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div  class="form-group col-4">
+                        <label class="col-4 col-sm-11">Status : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i (click)="showFormStatus()"  class="fas fa-plus"></i></label>
+                        <div *ngIf="!showForm" class="col-10 col-sm-11">
+
+                            <select formControlName="idStatus" class="form-control" placeholder="Status"
+                                [ngClass]="{ 'is-invalid': submitted && f.idStatus.errors }">
+                                <option *ngFor="let status of stateGroup " [value]="status.statusDescritpion">
+                                    {{status?.statusDescritpion}}</option>
+
+                            </select>
+
+
+                            <div *ngIf="submitted && f.idStatus.errors" class="invalid-feedback">
+                                <div *ngIf="f.idStatus.errors.required">Status is required</div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div *ngIf="showForm" class="col-10 col-sm-11">
+                            <!--<form  [formGroup]="statusForm" (ngSubmit)="addStatus()">
+                                <div class="input-group input-group-sm">-->
+                                    <input formControlName="idStatus" class="form-control " type="content"
+                                         aria-label="statut">
+                                   
+                              <!--  </div>
+                           </form>-->
+                        </div>
+
+
+
+                    </div>
+                   <!---- -->
+                    <div class="form-group col-4">
+                        <label class="col-4 col-sm-11">Priority :</label>
+                        <div class="col-10 col-sm-11">
+                            <select formControlName="priority" class="form-control" placeholder="Priority"
+                                [ngClass]="{ 'is-invalid': submitted && f.priority.errors }">
+                                <option value="highPriority">highPriority</option>
+                                <option value="mediumPriority">mediumPriority</option>
+                                <option value="lowPriority">lowPriority</option>
+                            </select>
+                            <div *ngIf="submitted && f.priority.errors" class="invalid-feedback">
+                                <div *ngIf="f.priority.errors.required">Priority is required</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group col-4">
+
+                        <label class="col-4 col-sm-11">Started Date : </label>
+                        <div class="col-10 col-sm-11">
+                            <input type="datetime-local" id="start" name="trip-start" value="currentDate"
+                                min="currentDate" max="2025-12-31" formControlName="startedDate" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.startedDate.errors }">
+
+                            <div *ngIf="submitted && f.startedDate.errors" class="invalid-feedback">
+                                <div *ngIf="f.startedDate.errors.required">enter started date</div>
+                                <div *ngIf="f.startedDate.errors.dateValidator">enter a date after the current date
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group col-4">
+
+                        <label class="col-4 col-sm-11">Due Date : </label>
+                        <div class="col-10 col-sm-11">
+                            <input type="datetime-local" id="start" name="trip-start" value="currentDate"
+                                min="currentDate" max="2025-12-31" formControlName="deleveryDate" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.deleveryDate.errors }">
+
+                            <div *ngIf="submitted && f.deleveryDate.errors" class="invalid-feedback">
+                                <div *ngIf="f.deleveryDate.errors.required">enter due date</div>
+                                <div *ngIf="f.deleveryDate.errors.dateValidator">enter a date after the current date
+                                </div>
+                                <div *ngIf="f.deleveryDate.errors.dueDateValidator">enter a date after the started date
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-12 ml-auto">
+                        <div class="form-group mt-4">
+                            <textarea formControlName="descriptionTask" class="form-control" id="message" name="body"
+                                rows="12" placeholder="Click here to reply"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-sm float right  ">Save Task</button>
+                            &nbsp;
+                            <button class="btn btn-sm   " style="background-color: crimson; " type="reset"
+                                (click)="close()">Cancel</button>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </main>
+    </div>
+</div>

@@ -1,0 +1,223 @@
+<app-card-form [title]="titleTeam"></app-card-form>
+
+<div class="card-body">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Team Name : </label>
+      <input
+        type="text"
+        formControlName="teamName"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.teamName.errors }"
+      />
+      <div *ngIf="submitted && f.teamName.errors" class="invalid-feedback">
+        <div *ngIf="f.teamName.errors.required">Team Name is required</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <mat-form-field class="form-group">
+            <mat-label style="color: black">Team Leader : </mat-label>
+            <mat-select
+              style="width: 300px"
+              formControlName="idLeader"
+              class="form-control"
+              (click)="getListLeader()"
+              [ngClass]="{ 'is-invalid': submitted && f.idLeader.errors }"
+            >
+              <div>
+                <form class="form-inline my-2 my-lg-0">
+                  <input
+                    type="search"
+                    (ngModelChange)="searchEmployees(key.value)"
+                    #key="ngModel"
+                    ngModel
+                    name="key"
+                    id="searchName"
+                    class="form-control mr-sm-2"
+                    placeholder="Search Leader..."
+                    required
+                  />
+                </form>
+              </div>
+              <mat-option
+                *ngFor="let employee of employees"
+                [value]="employee.user_id"
+                style="height: 100px; width: 300px"
+              >
+                <img
+                  class="img-thumbnail"
+                  style="height: 80px; width: 80px"
+                  src="{{ hostPhoto + employee.user_id }}"
+                />
+                {{ employee?.firstName }} {{ employee?.lastName }}
+              </mat-option>
+            </mat-select>
+            <div
+              *ngIf="submitted && f.idLeader.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.idLeader.errors.required">List is required</div>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <mat-form-field class="form-group">
+            <mat-label style="color: black">Team Member : </mat-label>
+            <mat-select
+              multiple
+              style="width: 300px"
+              formControlName="idmembers"
+              class="form-control"
+              (click)="getListMember()"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.idmembers.errors }"
+            >
+              <a class="row">
+                &nbsp;<mat-form-field class="col-md-4 form-group">
+                  <mat-label style="color: #f76809">
+                    <br />
+                    &nbsp;Filter By</mat-label
+                  >
+                  <mat-select class="form-control" class="form-control">
+                    <mat-option (click)="formEmp()"> Name </mat-option>
+                    <mat-option (click)="formSkill()"> Skill </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <div *ngIf="showemp" class="col-md-7 form-group">
+                  <form>
+                    <br />
+                    <input
+                      type="search"
+                      (ngModelChange)="searchMembers(k.value)"
+                      #k="ngModel"
+                      ngModel
+                      name="k"
+                      id="searchName"
+                      class="form-control mr-sm-2"
+                      placeholder="Search Member..."
+                      required
+                    />
+                  </form>
+                </div>
+                <div *ngIf="showSkill" class="col-md-7 form-group">
+                  <form>
+                    <br />
+                    <div class="input-group">
+                      <input
+                        type="search"
+                        [(ngModel)]="skill"
+                        name="skill"
+                        class="form-control"
+                        placeholder="Search By Skil "
+                        required
+                      />
+
+                      <div class="input-group-append">
+                        <button
+                          class="btn btn-secondary"
+                          (click)="searchBySkill()"
+                        >
+                          <i class="fa fa-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </a>
+              <mat-option
+                *ngFor="let employee of employees"
+                [value]="employee.user_id"
+                style="height: 100px; width: 300px"
+              >
+                <img
+                  class="img-thumbnail"
+                  style="height: 80px; width: 80px"
+                  src="{{ hostPhoto + employee.user_id }}"
+                />
+                {{ employee?.firstName }} {{ employee?.lastName }}
+              </mat-option>
+            </mat-select>
+            <div
+              *ngIf="submitted && f.idmembers.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.idmembers.errors.required">List is required</div>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="start">Started Date : </label>
+          <input
+            type="date"
+            id="start"
+            name="trip-start"
+            value="currentDate"
+            min="currentDate"
+            formControlName="startedDate"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.startedDate.errors }"
+          />
+
+          <div
+            *ngIf="submitted && f.startedDate.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.startedDate.errors.required">enter started date</div>
+            <div *ngIf="f.startedDate.errors.dateControl">
+              enter a date after the current date
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="end">Due Date :</label>
+          <input
+            type="date"
+            id="end"
+            name="trip-start"
+            value="currentDate"
+            min="currentDate"
+            formControlName="dueDate"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }"
+          />
+
+          <div *ngIf="submitted && f.dueDate.errors" class="invalid-feedback">
+            <div *ngIf="f.dueDate.errors.required">Enter a due date</div>
+
+            <div *ngIf="f.dueDate.errors.endTeamDateControl">
+              this date is out of project period
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button class="btn btn-sm">Register</button>
+
+      &nbsp;
+      <button
+        class="btn btn-sm"
+        style="background-color: crimson"
+        type="reset"
+        (click)="close()"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

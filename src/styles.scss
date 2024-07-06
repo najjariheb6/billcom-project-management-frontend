@@ -1,0 +1,57 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+
+
+
+.btn-sm {
+  background-color: #f76809;
+  
+  width: 160px;
+  color: #fff;
+  border-radius: 2px
+}
+input:focus,file:focus,
+textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #f76809;
+    outline-width: 0
+}
+  
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+  
+.content-wrapper{
+
+  overflow: scroll;
+  overflow-x: hidden;
+    height: 720px;   }
+    .files-list .file-box {
+      display: inline-block;
+      vertical-align: middle;
+      width: 80px;
+      padding: 2px;
+      border-radius: 3px;
+      -moz-border-radius: 3px;
+      background-clip: padding-box
+  }
+
+.files-list .file-box p {
+      width: 100%;
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap
+  }
+  .pointerr{
+    cursor: pointer;
+}

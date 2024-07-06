@@ -1,0 +1,76 @@
+<div class="card-header">
+    <div class="text-right">
+        <button (click)="close()" type="button" style="color: white;" class="btn btn-tool" data-card-widget="remove">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <h5>Add Event</h5>
+</div>
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" >
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="title">Event : </label>
+                        <input type="text" id="title" formControlName="title" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+                            <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                                <div *ngIf="f.title.errors.required">name is required</div>
+                            </div>
+                        </div>
+                    
+                </div>
+
+                <div class="form-row">
+
+                    &nbsp;&nbsp;&nbsp;&nbsp; <div class="col-md-5">
+
+                        <div class="form-group">
+                            <label for="start">Started At : </label>
+                            <input type="datetime-local" id="start" name="start" value="currentDate"
+                                min="currentDate" max="2025-12-31" formControlName="start" class="form-control"
+                       
+                                [ngClass]="{ 'is-invalid': submitted && f.start.errors }">
+
+                                <div *ngIf="submitted && f.start.errors" class="invalid-feedback">
+                                    <div *ngIf="f.start.errors.required">enter started date</div>
+                                    <div *ngIf="f.start.errors.dateValidator">enter a  date after the current date</div>
+
+                                </div>
+
+
+                        </div>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="end">Ends At : </label>
+                            <input type="datetime-local" id="end" name="trip-start" value="currentDate"
+                            min="currentDate" max="2025-12-31" formControlName="end" class="form-control"
+                   
+                            [ngClass]="{ 'is-invalid': submitted && f.end.errors }">
+
+                            <div *ngIf="submitted && f.end.errors" class="invalid-feedback">
+                                <div *ngIf="f.end.errors.required">Enter a due date</div>
+                                <div *ngIf="f.end.errors.dueDateValidator">enter a  date after the started date</div>
+
+                            </div>
+                        
+                        
+                        
+                        
+                            </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-sm">Add</button>
+                    &nbsp;
+
+                    <button class="btn btn-sm   "  (click)="close()" style="background-color: crimson;color: #fff; "  type="reset" >Cancel</button>
+
+                </div>
+            </form>
+            </div>
+            </div>
+            </div>

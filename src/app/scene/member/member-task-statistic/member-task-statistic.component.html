@@ -1,0 +1,24 @@
+<div class="col-md-8" >
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="d-flex align-items-center mb-3" >Tasks completed / Team  </h5>
+                    <div *ngFor="let t of tasksdone" >
+                    <div class="progress-text">
+                        <div class="row"  >
+                            <div class="col-7"> Team : {{t.name}}</div>
+                            <div class="col-5 text-right">{{t.value}} / 100 </div>
+                        </div>
+                    </div>
+                 
+                        <progress-bar   [progress]="t.value" [color-degraded]="{'20' : '#dc3545','30' : '#ffc107','40' : '#17a2b8','60' : '#28a745'}"></progress-bar>
+
+                      
+             
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

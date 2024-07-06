@@ -1,0 +1,192 @@
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <br>
+
+    <div class="row">
+
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3">
+          <span class="info-box-icon bg-warning elevation-1"><i style="color: #fff" class="fas fa-tasks"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Number of Task</span>
+            <span class="info-box-number">{{nbTask}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3">
+          <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-down"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Delayed Task </span>
+            <span class="info-box-number">{{nbDelayed}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+
+      <!-- fix for small devices only -->
+
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3">
+          <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Advanced Task</span>
+            <span class="info-box-number">{{nbAdvanced}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box">
+          <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Nb Team</span>
+            <span class="info-box-number">
+              {{memberKpiList.length}}
+            </span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+    </div>
+
+
+    <div id="contentToConvert">
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title">Daily Recap Report </h5>
+
+              <div class="card-tools">
+                <div class="btn-group">
+                  <button (click)="convertToPDF()" type="button" class="btn btn-tool ">
+                    <i class="far fa-file-pdf"></i>
+                  </button>
+
+                </div>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-8">
+                  <p class="text-center">
+                    <strong>{{today | date}} {{today | date:'h:mm '}} </strong>
+                  </p>
+
+                  <a>
+                  <!----  <form [formGroup]="DashboardForm" (ngSubmit)="onSubmit()">
+                      <div>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label for="month">Select year? </label>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input id="month" type="month" name="month"
+                          min="currentDate" max="2025-12-31" required pattern="[0-9]{4}-[0-9]{2}"
+                          formControlName="weekDate" [ngClass]="{ 'is-invalid': submitted && f.weekDate.errors }">
+                        &nbsp; &nbsp; <button class="btn-sm float right " style="border-color: #f76809;
+                      ">Search</button>
+
+
+
+                        <div *ngIf="submitted && f.weekDate.errors" class="invalid-feedback">
+                          <div *ngIf="f.weekDate.errors.required">enter from date</div>
+
+
+                        </div>
+
+                      </div>
+
+                    </form>-->
+
+                    <div class="col-md-7 form-group">
+                      <form class="form-inline my-2 my-lg-0">
+                        <br>
+                        <div class="input-group">
+                          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label for="month">Select year? </label>
+                          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <input type="search" [(ngModel)]="year" name="year" class="form-control "
+                          placeholder="enter year " required>
+
+                          <div class="input-group-append">
+                            <button class="btn btn-secondary" (click)="searchYearStatistic()"><i
+                                class="fa fa-search"></i></button>
+                          </div>
+                        </div>
+                      </form>
+
+                    </div>
+
+
+
+
+
+                  </a>
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+                  <strong *ngIf="!current" class="pointerr" (click)="getCurrentWork()">current work</strong>
+
+
+                  <div>
+
+
+                    <ngx-charts-bar-vertical-2d [results]="memberKpiList" [view]="view" [scheme]="colorScheme"
+                      [schemeType]="schemeType" [gradient]="gradient" [xAxis]="xAxis" [yAxis]="yAxis" [legend]="legend"
+                      [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+                      [yAxisLabel]="yAxisLabel" [legendTitle]="legendTitleMulti" [legendPosition]="legendPosition"
+                      [animations]="animations" [showGridLines]="showGridLines" [barPadding]="barPadding"
+                      [tooltipDisabled]="tooltipDisabled"></ngx-charts-bar-vertical-2d>
+
+                  </div>
+
+                  <!-- /.chart-responsive -->
+
+                </div>
+                <!-- /.col -->
+                <div class="col-md-4">
+                  <p class="text-center">
+                    <strong>Delay Rate</strong>
+                  </p>
+
+                  <ngx-charts-gauge [view]="views" [results]="delayRateList" [scheme]="colorScheme" [legend]="legend"
+                    [legendPosition]="legendPosition" (select)="onSelect($event)" (activate)="onActivate($event)"
+                    (deactivate)="onDeactivate($event)">
+                  </ngx-charts-gauge>
+
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- ./card-body -->
+
+            <!-- /.card-footer -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,126 @@
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <br />
+    <!-- <h6  *ngIf="authService.isManager() || authService.isProjectLeader() " class="mb-0 pull-right"> <a (click)="redirectToTeam()"  style="color: #f88538;"> Team</a>  / Chat Room </h6>   -->
+    <h6 *ngIf="authService.isLeader()" class="mb-0 pull-right pointerr">
+      <a (click)="goToTeamAsLeader()" style="color: #f88538"> Team</a> / Chat
+      Room
+    </h6>
+    <h6 *ngIf="authService.isMember()" class="mb-0 pull-right pointerr">
+      <a routerLink="/member/member-home" style="color: #f88538"> Team List</a>
+      / Chat Room
+    </h6>
+
+    <br />
+    <div class="card direct-chat direct-chat-warning">
+      <div class="card-header">
+        <h3 class="card-title">Direct Chat</h3>
+
+        <div class="card-tools">
+          <button
+            (click)="addToRoom()"
+            type="button"
+            class="btn btn-sm"
+            data-toggle="tooltip"
+            title="Contacts"
+            data-widget="chat-pane-toggle"
+          >
+            <i class="fas fa-comments"></i> &nbsp; Join Conversation
+          </button>
+          <button
+            type="button"
+            class="btn btn-tool"
+            data-card-widget="collapse"
+          >
+            <i class="fas fa-minus"></i>
+          </button>
+
+          <button type="button" class="btn btn-tool" data-card-widget="remove">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- /.card-header -->
+      <div class="card-body">
+        <!-- Conversations are loaded here -->
+        <div *ngIf="show" class="direct-chat-messages">
+          <!-- Message. Default to the left -->
+          <div *ngFor="let chatMessage of chatMessages | sortDate">
+            <div
+              *ngIf="chatMessage.idUser == employee.user_id"
+              class="direct-chat-msg right"
+            >
+              <div class="direct-chat-infos clearfix">
+                <span class="direct-chat-name float-left">{{
+                  chatMessage.user
+                }}</span>
+                <!-- <span class="direct-chat-timestamp float-right">{{today | date}} {{today | date:'h:mm '}}</span>-->
+                <span class="direct-chat-timestamp float-right">{{
+                  formatDate(chatMessage.createdAt)
+                }}</span>
+              </div>
+              <!-- /.direct-chat-infos -->
+              <img
+                class="direct-chat-img"
+                [src]="hostPhoto + chatMessage.idUser"
+                alt="message user image"
+              />
+              <!-- /.direct-chat-img -->
+              <div
+                class="direct-chat-text"
+                style="background-color: #f88538; color: #fff; border: #f88538"
+              >
+                {{ chatMessage.message }}
+              </div>
+              <!-- /.direct-chat-text -->
+            </div>
+            <div
+              *ngIf="chatMessage.idUser != employee.user_id"
+              class="direct-chat-msg"
+            >
+              <div class="direct-chat-infos clearfix">
+                <span class="direct-chat-name float-right">{{
+                  chatMessage.user
+                }}</span>
+                <span class="direct-chat-timestamp float-left"
+                  >{{ today | date }} {{ today | date : "h:mm " }}</span
+                >
+              </div>
+              <!-- /.direct-chat-infos -->
+              <img
+                class="direct-chat-img"
+                [src]="hostPhoto + chatMessage.idUser"
+                alt="message user image"
+              />
+              <!-- /.direct-chat-img -->
+              <div class="direct-chat-text">
+                {{ chatMessage.message }}
+              </div>
+              <!-- /.direct-chat-text -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-body -->
+      <div class="card-footer">
+        <form (ngSubmit)="sendMessage(sendForm)" #sendForm="ngForm">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              name="message"
+              id="input-message"
+              required
+              ngModel
+            />
+            <span class="input-group-append">
+              <button type="submit" class="btn btn-warning">Send</button>
+            </span>
+          </div>
+        </form>
+      </div>
+      <!-- /.card-footer-->
+    </div>
+  </div>
+</div>

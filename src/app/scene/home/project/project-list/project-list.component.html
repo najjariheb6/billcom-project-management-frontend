@@ -1,0 +1,237 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <br>
+
+    <div class="row">
+
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box">
+          <span class="info-box-icon bg-info elevation-1"> <i class="nav-icon fas fa-edit"></i>
+
+          </span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Total Project</span>
+            <span class="info-box-number">
+              {{projects.length}}
+            </span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3">
+          <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-stop"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Stopped project</span>
+            <span class="info-box-number">{{nbStoppedProject}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+
+      <!-- fix for small devices only -->
+      <div class="clearfix hidden-md-up"></div>
+
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3">
+          <span class="info-box-icon bg-success elevation-1"><i class="fas fa-check-circle"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Completed project</span>
+            <span class="info-box-number">{{nbCompletedProject}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3">
+          <span class="info-box-icon bg-secondary  elevation-1"><i class="fas fa-pause-circle"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Paused project</span>
+            <span class="info-box-number">{{nbPendingProject}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+
+    </div>
+    <!-- end row -->
+
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+
+          <div class="card-body">
+            <a class="row ">
+              <mat-form-field class="col-xs-4 col-4 col-md-2 form-group" >
+                <mat-label style="color: #f76809" >  <br>  &nbsp;Filter By</mat-label>
+                <mat-select  id="filter" class="form-control" class="form-control">
+                  <mat-option (click)="showSerachPeriode()"> Periode </mat-option>
+                  <mat-option (click)="searchProjectName()" > Project Title </mat-option>
+                  <mat-option (click)="searchProjectStatus()"> Project Status </mat-option>
+
+                </mat-select>
+              </mat-form-field>
+              <div *ngIf="showPeriod" class="col-xs-2 col-4 col-md-2 form-group">
+                <br>
+                <input type="date" id="start" name="trip-start" value="currentDate" min="currentDate" max="2025-12-31"
+                  class="form-control" [(ngModel)]="myDateValue">
+              </div>
+              <div *ngIf="showPeriod" class="col-xs-2 col-2 col-md-2 form-group">
+                <br>
+                <input type="date" id="start" name="trip-start" value="currentDate" min="currentDate" max="2025-12-31"
+                  class="form-control" [(ngModel)]="toDate">
+              </div>
+              <div *ngIf="showPeriod" class="col-xs-2 col-4 col-md-4 form-group">
+                <br>
+                <button class="btn btn-sm  "
+                  (click)="filterDate()">Filter</button>&nbsp;
+                <button class="btn btn-sm  " style="background-color: crimson; "
+                  (click)="getList()">Cancel</button>
+              </div>
+              <div *ngIf="showTitle" class="col-xs-2 col-6 col-md-3 form-group">
+                <br>
+                <div class="input-group">
+                  <input type="search" (ngModelChange)="searchByTitle(k.value)" #k="ngModel" ngModel name="k"
+                    id="searchNameTitle" class="form-control " placeholder="Search Project " required>
+
+                  <div class="input-group-append">
+                    <button class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="showStatus" class="col-xs-2 col-6 col-md-3 form-group">
+                <br>
+                <div class="input-group">
+                  <input type="search" (ngModelChange)="searchByStatus(k.value)" #k="ngModel" ngModel name="k"
+                    id="searchName" class="form-control " placeholder="Search Status " required>
+
+                  <div class="input-group-append">
+                    <button class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-4 col-6 col-md-2  pull-right form-group">
+                <br>
+                <a class="btn btn-sm  " id="newProject" style="background-color: #f88538; color: #fff;"
+                  (click)="goToAddProject()">Add New Project
+                </a>
+              </div>
+            </a>
+
+
+            <div class="table-responsive project-list">
+
+              <table class="table project-table table-centered table-nowrap table-hover">
+                <thead>
+                  <br>
+                  <tr>
+                    <th style="color: #f88538;"></th>
+                    <th style="color: #f88538;">Projects</th>
+                    <th style="color: #f88538;">Start Date</th>
+                    <th style="color: #f88538;">Due Date</th>
+                    <th style="color: #f88538;">Status</th>
+                    <th style="color: #f88538;">Team</th>
+                    <th style="color: #f88538;">Progress</th>
+                    <th style="color: #f88538;">Action</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let p of projects | sortProject | paginate : {id:'listing_pagination',itemsPerPage:3,currentPage:page, totalItems: totalRecords}; let index = index;  ">
+                    <td (click)="goToProjectDetail(p.project.id)">
+                      <a class="team" href="javascript: void(0);"
+                      class="team-member" data-toggle="tooltip" data-placement="top" title=""
+                      data-original-title="Roger Drake">
+                      <img img [src]="hostPhoto + p.project.projectLeader.user_id" class="rounded-circle avatar-xs" alt="" />
+                    </a>
+
+
+                    </td>
+                    <td (click)="goToProjectDetail(p.project.id)">{{p.project.name}}</td>
+                    <td (click)="goToProjectDetail(p.project.id)">{{formatDate(p.project.startedDate)}}</td>
+                    <td (click)="goToProjectDetail(p.project.id)">{{formatDate(p.project.endDate)}}</td>
+
+                    <td *ngIf="p.project.statusProject == 'COMPLETED'"><span
+                        class="badge badge-success pull-center">completed</span></td>
+                    <td *ngIf="p.project.statusProject == 'PROGRESSING'"><span
+                        class="badge badge-info pull-center">progressing</span></td>
+                    <td *ngIf="p.project.statusProject == 'STOPPED'"><span
+                        class="badge badge-danger pull-center">Stopped</span></td>
+                    <td *ngIf="p.project.statusProject == 'PENDING'"><span
+                        class="badge badge-warning pull-center">pending</span></td>
+                    <td *ngIf="p.project.statusProject == 'PAUSED'"><span
+                        class="badge badge-secondary pull-center">Paused</span></td>
+
+                    <td>
+                      <div *ngIf="p.project.teamList.length > '0'">
+                        <a class="team" *ngFor="let team of p.project.teamList " href="javascript: void(0);"
+                          class="team-member" data-toggle="tooltip" data-placement="top" title=""
+                          data-original-title="Roger Drake">
+                          <img img [src]="hostPhoto+team.leader.user_id" class="rounded-circle avatar-xs" alt="" />
+                        </a>
+                      </div>
+                      <div *ngIf="p.project.teamList.length == '0'">
+                        <a> <strong>This project does not have team yet!</strong>
+                        </a>
+                      </div>
+                    </td>
+                    <td>
+                      <p class="mb-0">Progress<span class="float-right">{{p.progress}}%</span></p>
+
+
+                      <progress-bar [progress]="p.progress"
+                        [color-degraded]="{'20' : '#dc3545','30' : '#ffc107','40' : '#17a2b8','60' : '#28a745'}">
+                      </progress-bar>
+                    </td>
+
+                    <td>
+                      <div *ngIf="p.project.statusProject != 'COMPLETED'" class="action">
+                        <a class="btn btn-outline-secondary pull-center" data-toggle="tooltip"><i
+                            class="fas fa-pause-circle" (click)="updateStatus(p.project.id, 'PAUSED')"></i></a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="btn btn-outline-danger" data-toggle="tooltip"
+                          (click)="updateStatus(p.project.id, 'STOPPED')"><i class="fas fa-stop-circle"></i></a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="btn btn-outline-success" data-toggle="tooltip"
+                          (click)="updateStatus(p.project.id, 'PROGRESSING')"><i class="fas fa-play-circle"></i></a>
+
+                      </div>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+            <!-- end project-list -->
+
+
+            <div class="pull-right">
+              <pagination-controls class="custom-pagination" id="listing_pagination" maxSize="10" directionLinks="true"
+                (pageChange)="page = $event"></pagination-controls>
+            </div>
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+  </div>
+</div>

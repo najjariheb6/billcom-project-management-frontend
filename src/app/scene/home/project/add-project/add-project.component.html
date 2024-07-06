@@ -1,0 +1,231 @@
+<div class="card-header">
+  <div class="text-right">
+    <button
+      (click)="close()"
+      type="button"
+      style="color: white"
+      class="btn btn-tool"
+      data-card-widget="remove"
+    >
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <h5>Create Project</h5>
+</div>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-8 pb-5">
+      <form
+        [formGroup]="projectForm"
+        (ngSubmit)="onSubmit()"
+        enctype="multipart/form-data"
+      >
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="name">Projet Name</label>
+            <input
+              type="text"
+              id="projectId"
+              formControlName="name"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+            />
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+              <div *ngIf="f.name.errors.required">name is required</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="col-md-5">
+            <div class="form-group">
+              <label for="start">started Date</label>
+              <input
+                type="date"
+                id="start"
+                name="trip-start"
+                value="currentDate"
+                min="currentDate"
+                formControlName="startedDate"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.startedDate.errors }"
+              />
+
+              <div
+                *ngIf="submitted && f.startedDate.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.startedDate.errors.required">
+                  enter started date
+                </div>
+                <div *ngIf="f.startedDate.errors.dateValidator">
+                  enter a date after the current date
+                </div>
+              </div>
+            </div>
+          </div>
+          &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="col-md-5">
+            <div class="form-group">
+              <label for="end">end Date</label>
+              <input
+                type="date"
+                id="end"
+                name="trip-start"
+                value="currentDate"
+                min="currentDate"
+                formControlName="endDate"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.endDate.errors }"
+              />
+
+              <div
+                *ngIf="submitted && f.endDate.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.endDate.errors.required">Enter a due date</div>
+                <div *ngIf="f.endDate.errors.dueDateValidator">
+                  enter a date after the started date
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <fieldset>
+          <div class="col-md-12">
+            <div class="form-group">
+              <div>
+                <label for="account-ln">Add files</label>
+
+                <input
+                  type="file"
+                  (change)="onUploadFiles($event.target.files)"
+                  name="files"
+                  multiple
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              formControlName="description"
+              id="description"
+              class="form-control"
+              rows="9"
+              [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button class="btn btn-sm" id="submitProject">Add</button>
+          &nbsp;
+
+          <button
+            class="btn btn-sm"
+            (click)="close()"
+            type="reset"
+            style="background-color: crimson"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-4 pb-5">
+      <!-- Account Sidebar-->
+      <div class="author-card pb-3">
+        <div class="author-card-cover text-center">
+          <label for="account-fn "
+            >Assign Project <br />
+            to project leader
+          </label>
+        </div>
+
+        <div style="text-align: center">
+          <img src="assets/project-leader.jpg" height="100px" weight="100px" />
+        </div>
+      </div>
+      <div class="wizard">
+        <nav class="list-group list-group-flush">
+          <a class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <i class="fe-icon-shopping-bag mr-1 text-muted"></i>
+                <div class="d-inline-block font-weight-medium text-uppercase">
+                  Project leader List
+                </div>
+              </div>
+            </div>
+          </a>
+          <a>
+            <div class="mb-4">
+              <div class="input-group">
+                <input
+                  type="search"
+                  (ngModelChange)="searchEmployees(k.value)"
+                  #k="ngModel"
+                  ngModel
+                  name="k"
+                  id="searchName"
+                  class="form-control"
+                  placeholder="Search Project Leader..."
+                  required
+                />
+
+                <div class="input-group-append">
+                  <button class="btn btn-secondary">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <a
+            class="list-group-item"
+            *ngFor="
+              let employee of employees | slice : 0 : 5;
+              let index = index
+            "
+          >
+            <div
+              class="d-flex justify-content-between align-items-center"
+              style="overflow: overlay"
+            >
+              <div>
+                <i class="fe-icon-heart mr-1 text-muted"></i>
+                <div class="d-inline-block font-weight-medium text-uppercase">
+                  <!--<img class="img-thumbnail"
+                                        style="height: 50px;width: 50px;" src='{{hostPhoto+employee.user_id}}'>-->
+                  {{ employee?.firstName }} {{ employee?.lastName }}
+                </div>
+              </div>
+              <span *ngIf="employees.length > 0" class="badge"
+                ><input
+                  type="checkbox"
+                  [employee]="employee"
+                  (change)="onChange($event)"
+                  [disabled]="isChecked && isCheckedName != employee.user_id"
+              /></span>
+              <span *ngIf="employees.length == 0" class="badgee"
+                ><input type="checkbox" [employee]="employee"
+              /></span>
+            </div>
+          </a>
+          <div *ngIf="leadProject" style="color: crimson">
+            <a>Assign project to Project Leader please</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <!-- Profile Settings-->
+  </div>
+</div>

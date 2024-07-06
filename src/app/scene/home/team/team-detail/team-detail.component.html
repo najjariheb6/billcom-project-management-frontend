@@ -1,0 +1,368 @@
+<main class="content">
+  <div *ngIf="team" class="content-wrapper">
+    <div class="container-fluid">
+      <br />
+      <div class="row">
+        <div class="col-lg-3 left">
+          <br />
+
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex flex-column align-items-center text-center">
+                <img
+                  *ngIf="
+                    authService.isManager() || authService.isProjectLeader()
+                  "
+                  [src]="hostPhoto + team?.leader.user.user_id"
+                  alt="Admin"
+                  class="rounded-circle p-1"
+                  width="110"
+                />
+
+                <div class="mt-3">
+                  <h4>
+                    <a style="color: #f88538">
+                      {{ team?.teamName }}{{ i }} Team</a
+                    >
+                  </h4>
+                  <a
+                    >Team Lead : {{ team?.leader.user.firstName }}
+                    {{ team?.leader.user.lastName }}</a
+                  >
+
+                  <p class="text-muted font-size-sm">
+                    {{ formatDate(team?.startDate) }} =>
+                    {{ formatDate(team?.duetDate) }}
+                  </p>
+                  <h6 class="mb-0 pull-center pointerr">
+                    <a style="color: #f88538" (click)="showProjectDetail()">
+                      Project Detail</a
+                    >
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="showProject" class="card mb-2">
+            <div class="card-header">
+              <h3 class="card-title">Project Detail</h3>
+
+              <div class="card-tools">
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="remove"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="mb-1 text-center" class="pointerr">
+                <strong class="text-muted">
+                  &nbsp; &nbsp; &nbsp; &nbsp; {{ project.name }}</strong
+                >
+              </div>
+              <br />
+              <div class="mb-1" class="pointerr">
+                <strong class="text-muted">
+                  <img
+                    class="img-thumbnail"
+                    style="height: 60px; width: 60px"
+                    src="{{ hostPhoto + project.idProjectLeader }}"
+                  />
+                  &nbsp; &nbsp; {{ project.projectLeader }}</strong
+                >
+              </div>
+
+              <p class="text-muted font-size-sm">
+                {{ formatDate(project?.startedDate) }} =>
+                {{ formatDate(project?.endDate) }}
+              </p>
+            </div>
+          </div>
+
+          <div class="card mb-2">
+            <div class="card-header">
+              <h3 class="card-title">Operations</h3>
+
+              <div class="card-tools">
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="remove"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="mb-1" class="pointerr" (click)="showTaskTeam()">
+                <i class="nav-icon fas fa-edit"></i
+                ><strong class="text-muted"> &nbsp; &nbsp; Tasks</strong>
+              </div>
+              <div class="mb-1" class="pointerr" (click)="addTask(team.id)">
+                <i class="fas fa-list-alt"></i
+                ><strong class="text-muted"> &nbsp; &nbsp; Add tasks</strong>
+              </div>
+
+              <div
+                class="mb-1"
+                *ngIf="authService.isLeader()"
+                class="nav-item pointerr"
+                (click)="RedirectToRoom()"
+              >
+                <i class="fas fa-comment-alt"></i> &nbsp; &nbsp;<strong
+                  class="text-muted"
+                >
+                  Room</strong
+                >
+              </div>
+
+              <div
+                (click)="redirectTeamLeadToCalendar()"
+                class="mb-1"
+                *ngIf="authService.isLeader()"
+                class="nav-item pointerr"
+              >
+                <i class="nav-icon fas fa-calendar-alt"></i>
+                <strong class="text-muted">&nbsp; &nbsp;&nbsp; Calendar</strong>
+              </div>
+            </div>
+          </div>
+
+          <!---
+
+          <ul class="nav flex-column nav-pills">
+            <li *ngIf="authService.isManager() || authService.isProjectLeader() " class="nav-item pointerr"
+              (click)="createRoom()"><a class="nav-link "><i class="fa fa-fw fas fa-comment-alt mr-2 pointerr"></i>Room
+              </a>
+            </li>
+            <li *ngIf="authService.isLeader()  " class="nav-item pointerr" (click)="RedirectToRoom()"><a
+                class="nav-link "><i class="fa fa-fw fas fa-comment-alt mr-2 pointerr"></i>Room </a></li>
+
+            <li *ngIf="authService.isManager() || authService.isProjectLeader() " class="nav-item pointerr"><a
+                (click)="goToCalendar()" class="nav-link"><i class="nav-icon fas fa-calendar-alt"></i> &nbsp;
+                Calendar</a></li>
+            <li *ngIf="authService.isLeader() " class="nav-item"><a (click)="redirectTeamLeadToCalendar()"
+                class="nav-link pointerr"><i class="nav-icon fas fa-calendar-alt pointerr"></i> &nbsp; Calendar</a></li>
+
+          </ul>
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <div class="mb-4">
+            <div class="small mb-2">Events</div>
+            <ul class="nav flex-column nav-pills">
+              <li *ngIf="authService.isManager() || authService.isProjectLeader() " class="nav-item pointerr"
+                (click)="createRoom()"><a class="nav-link "><i class="fa fa-fw fas fa-comment-alt mr-2 pointerr"></i>Room </a>
+              </li>
+              <li *ngIf="authService.isLeader()  " class="nav-item pointerr" (click)="RedirectToRoom()"><a class="nav-link "><i
+                    class="fa fa-fw fas fa-comment-alt mr-2 pointerr"></i>Room </a></li>
+
+              <li *ngIf="authService.isManager() || authService.isProjectLeader() " class="nav-item pointerr"><a
+                  (click)="goToCalendar()" class="nav-link"><i class="nav-icon fas fa-calendar-alt"></i> &nbsp;
+                  Calendar</a></li>
+              <li *ngIf="authService.isLeader() " class="nav-item"><a (click)="redirectTeamLeadToCalendar()"
+                  class="nav-link pointerr" ><i class="nav-icon fas fa-calendar-alt pointerr"></i> &nbsp; Calendar</a></li>
+
+            </ul>
+          </div>-->
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Members</h3>
+
+              <div class="card-tools">
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="remove"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-test">
+              <ul class="card-body">
+                <form [formGroup]="memberForm">
+                  <div class="form-group col">
+                    <mat-form-field class="example-card">
+                      <mat-label>
+                        <a class="nav-link" style="color: #f88538"
+                          ><i
+                            class="fa fa-fw fa-plus mr-2"
+                            style="color: #f88538"
+                          ></i
+                          >Add Member</a
+                        ></mat-label
+                      >
+                      <mat-select
+                        multiple
+                        style="width: 250px"
+                        formControlName="idmembers"
+                        class="form-control"
+                        (click)="getListMember()"
+                        class="form-control"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.idmembers.errors
+                        }"
+                      >
+                        <div>
+                          <form class="form-inline my-4 my-lg-2">
+                            <input
+                              type="search"
+                              (ngModelChange)="searchMember(key.value)"
+                              #key="ngModel"
+                              ngModel
+                              name="key"
+                              id="searchName"
+                              class="form-control mr-sm-2"
+                              placeholder="Search Member to add..."
+                              required
+                            />
+                          </form>
+                        </div>
+
+                        <mat-option
+                          *ngFor="let employee of employees"
+                          [value]="employee.user_id"
+                          style="height: 100px; width: 300px"
+                        >
+                          <img
+                            class="img-thumbnail"
+                            style="height: 80px; width: 80px"
+                            src="{{ hostPhoto + employee.user_id }}"
+                          />
+                          {{ employee?.firstName }} {{ employee?.lastName }}
+                        </mat-option>
+                        <div class="text-center">
+                          <button
+                            class="btn btn-sm"
+                            style="color: #fff"
+                            type="reset"
+                            (click)="addMemberToTeam(team.id)"
+                          >
+                            Add member
+                          </button>
+                          &nbsp;
+                        </div>
+                        <br />
+                      </mat-select>
+                      <div
+                        *ngIf="submitted && f.idmembers.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f.idmembers.errors.required">
+                          List is required
+                        </div>
+                      </div>
+                    </mat-form-field>
+                  </div>
+                </form>
+
+                <a class="card" *ngFor="let member of members">
+                  <a class="d-flex nav-link pointerr">
+                    <div class="media">
+                      <div
+                        class="mr-3 align-self-center media-left media-middle"
+                      >
+                        <div class="avatar-image avatar-image--loaded">
+                          <div class="avatar avatar--md avatar-image__image">
+                            <div class="avatar__content">
+                              <img [src]="hostPhoto + member.user.user_id" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div
+                        *ngIf="
+                          authService.isManager() ||
+                          authService.isProjectLeader()
+                        "
+                        class="media-body"
+                      >
+                        <div (click)="goToTask(member.id)" class="mt-0">
+                          {{ member?.user.firstName }}
+                          {{ member?.user.lastName }}
+                        </div>
+                      </div>
+                      <div *ngIf="authService.isLeader()" class="media-body">
+                        <div (click)="redirectToTask(member.id)" class="mt-0">
+                          {{ member?.user.firstName }}
+                          {{ member?.user.lastName }}
+                        </div>
+                      </div>
+                    </div>
+                    <i
+                      (click)="deleteMemberFromTeam(member.id)"
+                      class="fas fa-times fa-circle ml-auto align-self-center ml-2"
+                    ></i>
+                  </a>
+                </a>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-9 right">
+          <h6
+            *ngIf="authService.isManager() || authService.isProjectLeader()"
+            class="mb-0 pull-right pointerr"
+          >
+            <a (click)="redirectToProject()" style="color: #f88538">
+              Project Detail</a
+            >
+            / Team
+          </h6>
+          <h6 *ngIf="authService.isLeader()" class="mb-0 pull-right pointerr">
+            <a routerLink="/leader/leader-home" style="color: #f88538">
+              Team List</a
+            >
+            / Team
+          </h6>
+          <br />
+          <app-task-date [memberList]="members"></app-task-date>
+
+          <app-team-dashboard [teamParent]="team"></app-team-dashboard>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

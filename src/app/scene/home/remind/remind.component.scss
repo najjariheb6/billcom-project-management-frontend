@@ -1,0 +1,84 @@
+body{
+    background:#eee;
+    margin-top:20px;
+    }
+    .widget {
+        background: #fff;
+        margin-bottom: .75rem;
+        display: block;
+        position: relative;
+        box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
+    }
+    .widget .widget-header,
+    .widget-reminder-content,
+    .widget-reminder-time,
+    a.widget-header-title {
+        padding: 0.625rem;
+    }
+   
+    .widget-footer.with-border,
+    .widget-reminder-container + .widget-reminder-container {
+        border-top: 1px solid #efeff4;
+    }
+    .widget-footer.with-bg,
+    .widget-header.with-bg {
+        background: #efeff4;
+    }
+    .widget-header.with-border {
+        border-bottom: 1px solid #efeff4;
+    }
+    .widget-reminder-header {
+        background: #efeff4;
+        padding: 0.625rem;
+        font-size: 0.625rem;
+        font-weight: 700;
+        color: #8a8a8f;
+    }
+    .widget-reminder-container {
+        position: relative;
+    }
+    
+    .widget-reminder-time {
+        width: 5rem;
+        float: left;
+        text-align: right;
+        font-size: 0.625rem;
+    }
+    .widget-reminder-divider {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 5rem;
+        width: 0.125rem;
+        background-color: #000;
+
+    }
+    .widget-reminder-content {
+        margin-left: 5.125rem;
+    }
+    .widget-header-title {
+        margin: 0;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+    .widget .widget-title, .widget .widget-title a {
+        font-size: .75rem;
+        color: #000;
+        line-height: 1rem;
+    }
+    .widget .widget-title {
+        font-weight: 600;
+        margin: 0;
+    }
+    .widget-desc, .widget-desc a {
+        font-size: .7975rem;
+        line-height: 3rem;
+        color: #000;
+        font-weight: 500;
+    }
+    
+   
+    .pull-right {
+        float: right!important;
+    }
+  

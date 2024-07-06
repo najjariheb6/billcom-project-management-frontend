@@ -1,0 +1,94 @@
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <br />
+    <main class="content">
+      <div class="container p-0">
+        <div class="card-header">
+          <div class="card-tools">
+            <form class="form-inline my-2 my-lg-0">
+              <input
+                type="search"
+                (ngModelChange)="searchTeam(key.value)"
+                #key="ngModel"
+                ngModel
+                name="key"
+                id="searchName"
+                class="form-control mr-sm-2"
+                placeholder="Search team..."
+                required
+              />
+            </form>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div *ngFor="let team of teams" class="col-sm-3 .col-lg">
+            <div class="card m-b-30">
+              <br />
+              <div class="text-right">
+                <button
+                  (click)="deleteTeam(team?.id)"
+                  type="button"
+                  class="btn btn-tool pull-right"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+              <div class="card-body row" (click)="goToTeamDetails(team)">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="chart-responsive">
+                        <img
+                          class="img-thumbnail"
+                          [src]="hostPhoto + team?.leader.user.user_id"
+                        />
+                      </div>
+                      <!-- ./chart-responsive -->
+                    </div>
+                    <div class="col-md-6">
+                      <ul class="chart-legend clearfix">
+                        <li>
+                          <i
+                            class="col-8 card-title align-self-center mb-0"
+                          ></i>
+                          <h5 style="color: #f88538">{{ team?.teamName }}</h5>
+                          <h3 style="color: #1d1d1d">Team</h3>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <!-- /.row -->
+                  </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer bg-white p-0">
+                  <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                      <a class="nav-link">
+                        Team Lead :
+                        <span class="float-center text-danger"
+                          >{{ team.leader.user.firstName }}
+                          {{ team.leader?.user.lastName }}
+                        </span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link">
+                        Team Number :
+                        <span class="float-center text-success"
+                          ><i>{{ team?.teamMember.length + 1 }}</i>
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- /.footer -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

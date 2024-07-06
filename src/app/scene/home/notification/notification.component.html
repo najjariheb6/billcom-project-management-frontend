@@ -1,0 +1,75 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <br>
+
+            <div class="row  ">
+                <div class="col-lg-2 pull-center">
+</div>
+                <div class="col-lg-8 pull-center">
+                    <div class="card">
+
+                        <div class="chat_container">
+                            <div class="job-box">
+                                <div class="job-box-filter">
+                                    <div class="col-lg-3 float-right">
+
+                                        <div class="input-group">
+                                            <input type="search" (ngModelChange)="searNotificatios(k.value)"
+                                                #k="ngModel" ngModel name="k" id="searchName" class="form-control "
+                                                placeholder="Search Notification..." required>
+
+                                            <div class="input-group-append">
+                                                <button class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <br>
+                                </div>
+
+                                <div class="inbox-message">
+
+                                    <ul>
+                                        <li
+                                            *ngFor="let notif of notifications | sortNotification | paginate : {id:'listing_pagination',itemsPerPage:6,currentPage:page, totalItems: totalRecords}">
+                                            <a>
+                                                <div class="message-avatar">
+                                                    <img [src]="hostPhoto+notif.idCreatedBy" alt="">
+                                                </div>
+                                                <div class="message-body">
+                                                    <div class="message-body-heading">
+                                                        <h5 class="pull-right"> <span class="unread "
+                                                                *ngIf="notif.seen == false"><i class="fa fa-eye-slash"
+                                                                    aria-hidden="true"></i></span></h5>
+                                                    </div>
+                                                    <p>{{notif.message}} <a style="color: #f88538;">{{notif.subject}}
+                                                        </a></p>
+                                                    <span class="pull-right">{{formatDate(notif.createdAt)}}</span>
+
+                                                </div>
+                                            </a>
+                                            <br>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div>
+                                    <div class="pull-right ">
+                                        <pagination-controls class="custom-pagination" id="listing_pagination"
+                                            maxSize="10" directionLinks="true" (pageChange)="page = $event">
+                                        </pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
+                <div class="col-lg-2 pull-center">
+                </div>
+            </div>
+
+
+
+    </div>
+</div>

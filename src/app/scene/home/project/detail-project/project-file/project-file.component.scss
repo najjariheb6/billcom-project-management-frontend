@@ -1,0 +1,9 @@
+ .files-list .file-box {
+    display: inline-block;
+    vertical-align: middle;
+    width: 80px;
+    padding: 2px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    background-clip: padding-box
+}

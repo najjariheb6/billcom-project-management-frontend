@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Team Dashboard </h5>
+
+        <div class="card-tools">
+          <div class="btn-group">
+            <button (click)="convert()" type="button" class="btn btn-tool " >
+              <i class="far fa-file-pdf"></i>
+            </button>
+
+          </div>
+          <button type="button" class="btn btn-tool" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+
+          <button type="button" class="btn btn-tool" data-card-widget="remove">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-8">
+            <p class="text-center">
+              <strong>{{today | date}} {{today | date:'h:mm '}} </strong>
+            </p>
+
+            <div>
+              <app-weekly-dashboard [team]="teamDashboardChild"></app-weekly-dashboard>
+            </div>
+            <!-- /.chart-responsive -->
+
+          </div>
+          <!-- /.col -->
+          <div class="col-md-4">
+            <p class="text-center">
+              <strong>Delay Rate/Progress Rate</strong>
+              <br>
+
+            </p>
+            <br>
+            <ngx-charts-gauge [view]="view" [results]="TypePercentages" [scheme]="colorScheme" [legend]="legend"
+              [legendPosition]="legendPosition" (select)="onSelect($event)" (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)">
+            </ngx-charts-gauge>
+
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- ./card-body -->
+
+      <!-- /.card-footer -->
+    </div>
+    <!-- /.card -->
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="card-header">
+    <div class="text-right">
+        <button (click)="close()" type="button" style="color: white;" class="btn btn-tool" data-card-widget="remove">
+            <i class="far fa-edit text-right"></i>
+        </button>
+        <button (click)="deleteEvent()" type="button" style="color: white;" class="btn btn-tool" >
+             <i class="far fa-calendar-times text-right"></i>
+        </button>
+    </div>
+    <h5>Event :  {{data.title}}     
+    </h5>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <form (ngSubmit)="onSubmit()" >
+                <div class="col-md-12">
+                    <br>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="title">Event</label>
+                            <input type="text" class="form-control" id="title" required
+                                [(ngModel)]="event.title" name="title" />
+                        </div>
+                      
+                    </div>
+                <div class="form-row">
+                   <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="start">Started At</label>
+                           <input input type="datetime-local" id="start" name="start" value="currentDate"
+                                min="currentDate" max="2025-12-31"  class="form-control"
+                       
+                                [(ngModel)]="event.start"/>
+                        </div>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="end">Ends At </label>
+                            <input type="datetime-local" id="end" name="end" value="currentDate" required
+                            min="currentDate" max="2025-12-31"  class="form-control"
+                   
+                            [(ngModel)]="event.end"/>
+                        
+                        
+                        
+                        
+                            </div>
+                    </div>
+                </div>
+             
+                </div>
+            </form>
+            </div>
+            </div>
+            

@@ -1,0 +1,156 @@
+<br />
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-footer clearfix">
+          <a
+            (click)="goToAddEmployee()"
+            class="btn btn-sm float-right"
+            id="submit"
+            style="color: #fff"
+            >Add new user</a
+          >
+        </div>
+
+        <br />
+        <div class="card-tools">
+          <button
+            type="button"
+            class="btn btn-tool"
+            data-card-widget="collapse"
+          >
+            <i class="fas fa-minus"></i>
+          </button>
+          <button type="button" class="btn btn-tool" data-card-widget="remove">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="card-tools">
+          <form class="form-inline my-2 my-lg-0">
+            <input
+              type="search"
+              (ngModelChange)="searchEmployees(key.value)"
+              #key="ngModel"
+              ngModel
+              name="key"
+              id="searchName"
+              class="form-control mr-sm-2"
+              placeholder="Search users..."
+              required
+            />
+          </form>
+        </div>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table m-0 table-hover">
+            <thead>
+              <tr>
+                <th style="color: #f88538">First Name</th>
+                <th style="color: #f88538">Last Name</th>
+
+                <th style="color: #f88538">Email</th>
+                <th style="color: #f88538">Post</th>
+                <th style="color: #f88538">Status</th>
+                <th style="color: #f88538">Update</th>
+                <th style="color: #f88538">Details</th>
+
+                <th style="color: #f88538">Delete</th>
+                <th style="color: #f88538">Enable</th>
+                <!---- <th style="color: #f88538;">Add Photo </th>-->
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let employee of employees
+                    | sortEmployee
+                    | paginate
+                      : {
+                          id: 'listing_pagination',
+                          itemsPerPage: 10,
+                          currentPage: page,
+                          totalItems: totalRecords
+                        }
+                "
+              >
+                <td>{{ employee?.firstName }}</td>
+                <td>{{ employee?.lastName }}</td>
+                <td>{{ employee?.email }}</td>
+                <td>
+                  <b>{{ getRole(employee.roles) | uppercase }}</b>
+                </td>
+                <td *ngIf="employee.active === true">
+                  <span class="badge badge-success pull-center">Active</span>
+                </td>
+                <td *ngIf="employee.active === false">
+                  <span class="badge badge-danger pull-center">Inactive</span>
+                </td>
+
+                <td>
+                  <a
+                    class="btn btn-outline-success pull-center"
+                    data-toggle="tooltip"
+                    (click)="updatePost(employee.user_id)"
+                    ><i class="fas fa-user-edit"></i
+                  ></a>
+                </td>
+                <td>
+                  <a
+                    class="btn btn-outline-info pull-center"
+                    data-toggle="tooltip"
+                    (click)="getDetails(employee.user_id)"
+                    ><i class="fa fa-eye"></i
+                  ></a>
+                </td>
+
+                <td>
+                  <a
+                    class="btn btn-outline-danger pull-center"
+                    data-toggle="tooltip"
+                    (click)="deleteEmployee(employee.user_id)"
+                    ><i class="fas fa-user-slash"></i
+                  ></a>
+                </td>
+<!--                <td>-->
+<!--                  <a-->
+<!--                    class="btn btn-outline-warning pull-center"-->
+<!--                    data-toggle="tooltip"-->
+<!--                    (click)="enableEmployee(employee.user_id)"-->
+<!--                    ><i class="fas fa-user-check"></i-->
+<!--                  ></a>-->
+<!--                </td>-->
+                  <td>
+                      <a
+                              class="btn btn-outline-warning pull-center"
+                              data-toggle="tooltip"
+                              (click)="toggleEmployeeStatus(employee.user_id, employee.active)"
+                      >
+                          <i class="fas fa-user-check" *ngIf="employee.active === false"></i>
+                          <i class="fas fa-user-times" *ngIf="employee.active === true"></i>
+                      </a>
+                  </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pull-right">
+          <pagination-controls
+            class="custom-pagination"
+            id="listing_pagination"
+            maxSize="10"
+            directionLinks="true"
+            (pageChange)="page = $event"
+          ></pagination-controls>
+        </div>
+        <!-- /.table-responsive -->
+      </div>
+      <!-- /.card-body -->
+
+      <!-- /.card-footer -->
+    </div>
+  </div>
+</div>

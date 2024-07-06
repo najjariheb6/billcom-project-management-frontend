@@ -1,0 +1,227 @@
+<aside class="main-sidebar sidebar-light-primary elevation-4">
+    <!-- Brand Logo -->
+    <a class="brand-link">
+        <img
+                src="assets/logo.png"
+                alt="logo"
+                class="brand-image"
+
+        />
+<!--        <span class="brand-text font-weight-light">Billcom </span>-->
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div *ngIf="employee" class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img
+                        [src]="hostPhoto + employee.user_id"
+                        class="img-circle"
+                        alt="User Image"
+                />
+            </div>
+            <div class="info">
+                <a class="d-block">{{ employee.firstName }} {{ employee.lastName }}</a>
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul
+                    class="nav nav-pills nav-sidebar flex-column"
+                    data-widget="treeview"
+                    role="menu"
+                    data-accordion="false"
+            >
+                <li *ngIf="auth.isManager()" class="nav-item has-treeview menu-open">
+                    <a class="nav-link active">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Operations
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a routerLink="/member/user-profil" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Profile</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/home/listEmployee" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Employees</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/home/project-dashboard" class="nav-link">
+                                <i class="nav-icon fas fa-chart-pie"></i>
+                                <p>Charts</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/home/project-list" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Projects</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/home/notification" class="nav-link">
+                                <i class="far fa-comments"></i>
+                                <p>&nbsp; Notification</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li *ngIf="auth.isProjectLeader()" class="nav-item has-treeview menu-open">
+                    <a class="nav-link active">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            Operations
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a routerLink="/member/user-profil" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Profile</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/project-leader/charts" class="nav-link">
+                                <i class="nav-icon fas fa-chart-pie"></i>
+                                <p>Charts</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/project-leader/home" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Project</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/home/notification" class="nav-link">
+                                <i class="far fa-bell"></i>
+                                <p>&nbsp; Notification</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/home/remind" class="nav-link">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <p>
+                                    &nbsp; Remind
+                                    <span class="badge badge-danger right">{{ reminds.length }}</span>
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li *ngIf="auth.isLeader()" class="nav-item has-treeview menu-open">
+                    <a class="nav-link active">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            Operations
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a routerLink="/member/user-profil" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Profile</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/leader/leader-home" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Team List Leader</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/leader/leader-chart" class="nav-link">
+                                <i class="nav-icon fas fa-chart-pie"></i>
+                                <p>Charts</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/home/notification" class="nav-link">
+                                <i class="far fa-bell"></i>
+                                <p>&nbsp; Notification</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/home/remind" class="nav-link">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <p>
+                                    &nbsp; Remind
+                                    <span class="badge badge-info right">{{ reminds.length }}</span>
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li *ngIf="auth.isMember()" class="nav-item has-treeview menu-open">
+                    <a class="nav-link active">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            Operations
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a routerLink="/member/user-profil" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Profile</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/member/member-home" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Team List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/member/member-hour" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Work</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/home/dayOff/demande" class="nav-link">
+                                <i class="fa fa-calendar nav-icon"></i>
+                                <p>DayOff</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/member/member-dashboard" class="nav-link">
+                                <i class="nav-icon fas fa-chart-pie"></i>
+                                <p>Charts</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/home/notification" class="nav-link">
+                                <i class="fas fa-bell"></i>
+                                <p>&nbsp; Notification</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/home/remind" class="nav-link">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <p>
+                                    &nbsp; Remind
+                                    <span class="badge badge-danger right">{{ reminds.length }}</span>
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

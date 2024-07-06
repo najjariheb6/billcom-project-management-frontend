@@ -1,0 +1,26 @@
+.btn-sm {
+  background-color: #f76809;
+  
+  width: 120px;
+  color: #fff;
+  border-radius: 2px;
+
+ 
+  
+  
+
+  }
+  .btn-secondary{
+    background-color: #f88538;
+    border: 1px solid #f88538;
+  }
+  input:focus,mat-form-field:focus
+textarea:focus,
+mat-label:focus,
+mat-select:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #f76809;
+    outline-width: 0
+}

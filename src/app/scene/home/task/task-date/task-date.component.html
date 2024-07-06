@@ -1,0 +1,64 @@
+<div class="career-search mb-60">
+
+    <form class="career-form mb-60" [formGroup]="DateForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-4 col-lg-2 my-2">
+                <label style="color: #fff;">Member tasks betwen two date :  </label>
+            </div>
+
+            <div class="col-md-4 col-lg-3 my-2">
+                <label style="color: #fff;">Choose team member : </label>
+                <div class="select-container">
+
+                    <select class="custom-select"   formControlName="idMember"  [ngClass]="{ 'is-invalid': submitted && f.idMember.errors }"
+                       >
+                        <option *ngFor="let member of memberList"  [value]="member.id"  > {{member.user.firstName}}
+                            {{member.user.lastName}}  </option>
+
+                    </select>
+                    <div *ngIf="submitted && f.idMember.errors" class="invalid-feedback">
+                        <div *ngIf="f.idMember.errors.required">choose member please!</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3 my-2">
+                <label style="color: #fff;">From:</label>
+
+                <input type="date" id="start" value="currentDate" min="currentDate" 
+                    formControlName="startedDate" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.startedDate.errors }">
+
+
+                <div *ngIf="submitted && f.startedDate.errors" class="invalid-feedback">
+                    <div *ngIf="f.startedDate.errors.required" >enter from date</div>
+
+                </div>
+
+            </div>
+            <div class="col-md-6 col-lg-3 my-2">
+                <label style="color: #fff;">To:</label>
+
+                <input type="date" id="start" value="currentDate" min="currentDate"
+                    formControlName="finalDate" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.finalDate.errors }">
+
+
+                    <div *ngIf="submitted && f.finalDate.errors" class="invalid-feedback">
+                        <div *ngIf="f.finalDate.errors.required">enter to date</div>
+                        <div *ngIf="f.finalDate.errors.dueDateValidator">enter a  date after the started date</div>
+
+                    </div>
+
+
+
+            </div>
+            <div class="col-md-6 col-lg-1 my-2">
+                <br>
+                <button class="btn  float right  " style="color: #fff;">Search</button>
+
+            </div>
+        </div>
+    </form>
+
+    
+</div>

@@ -1,0 +1,37 @@
+body{
+    background:#f3f3f3;
+ 
+}
+.btn-secondary{
+    background-color: #f88538;
+    border: 1px solid #f88538;
+  }
+
+.avatar-xs {
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+
+
+.custom-pagination{
+    background-color: #f88538;
+    color: #f88538;
+    .itemsPerPage {
+        background: #f88538;
+    }
+
+}
+
+.btn-sm {
+    background-color: #f88538;
+    color: #fff;
+  }
+  input:focus,file:focus,
+  textarea:focus {
+      -moz-box-shadow: none !important;
+      -webkit-box-shadow: none !important;
+      box-shadow: none !important;
+      border: 1px solid #f76809;
+      outline-width: 0
+  }

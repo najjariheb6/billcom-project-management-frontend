@@ -1,0 +1,125 @@
+<br>
+<!--<div>
+  <input type="button" value="Convert" (click)="convertToPDF()"/>
+</div>-->
+<div id="contentToConvert">
+<app-daily-dashboard [teamDashboardChild]="teamParent"></app-daily-dashboard>
+<div class="row">
+
+
+  <div *ngFor="let  statistic of taskMemberStatistic" class="col-lg-4 right">
+
+
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">{{statistic.teamMember.user.firstName}} {{statistic.teamMember.user.lastName}}</h3>
+
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+          </button>
+          <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="chart-responsive float-left ">
+              <canvas id="pieChart" height="150" baseChart [data]="statistic.status" [labels]="statistic.label"
+                [chartType]="doughnutChartType" [options]="doughnutChartOptions" [colors]="doughnutChartColor"></canvas>
+            </div>
+            <!-- ./chart-responsive -->
+          </div>
+          <!-- /.col -->
+
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.card-body -->
+      <div class="card-footer bg-white p-0">
+        <ul class="nav nav-pills flex-column">
+          <li class="row">
+            <div>
+              <a *ngFor="let  n of statistic.label" class="nav-link text-danger"><strong
+                  style="color: #f88538;">{{n}}</strong>
+
+              </a>
+
+            </div>
+            <div>
+              <a class="float-right text-danger" *ngFor="let  s of statistic.status" class="nav-link"> &nbsp; &nbsp;
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{{s}} %
+
+              </a>
+
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- /.footer -->
+    
+      <a (click)="statistic.visible =!statistic.visible" style="background-color: darkgray; color: #fff;" class="small-box-footer text-center pointerr" >More info      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <i  data-card-widget="collapse" class="fas fa-minus"></i></a>
+        
+       <div  *ngIf="statistic.visible" class="card-header">
+        
+        <div class="info-box mb-3 " style="background-color: #f68059;">
+          <span class="info-box-icon"> <i class="fas fa-hourglass-end" style="color: #fff;"></i></span>
+         
+          <div class="info-box-content" style="color: #fff;">
+        
+            <span class="info-box-text">Tasks Delayd    &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;    <i  *ngIf="statistic.taskDateStatusDto.length > '0'" (click)="statistic.getdelaytask =!statistic.getdelaytask" class="fas fa-bars"></i> </span> 
+        
+            <span *ngIf="statistic.taskDateStatusDto.length == '0'" class="info-box-number">{{statistic.teamMember.user.firstName}} {{statistic.teamMember.user.lastName}} has no task delay  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;   <i class="fas fa-grin-alt"></i> </span>
+            <span   *ngIf="statistic.taskDateStatusDto.length > '0'" class="info-box-number">{{statistic.taskDateStatusDto.length}} task delay</span>
+
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <div *ngIf="statistic.getdelaytask" class="info-box mb-3">
+          <ul  class="nav nav-pills flex-column">
+            
+            <li *ngFor="let taskDateDelay of statistic.taskDateStatusDto" class="nav-item">
+              <a   class="nav-link">
+                {{taskDateDelay.task.taskName}}
+                <span class="float-right text-danger">  &nbsp; <i  class="fas fa-grip-lines-vertical"></i> &nbsp; &nbsp; &nbsp;
+                  {{taskDateDelay.difference}} days ago  
+                </span>
+              </a>
+            </li>
+            
+          </ul>
+        </div>
+        <div class="info-box mb-3 " style="background-color: #0eb493;">
+          <span class="info-box-icon" ><i class="fas fa-hourglass-start" style="color: #fff;"></i></span>
+    
+          <div class="info-box-content" style="color: #fff;">
+            <span class="info-box-text">Tasks in Advance    &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;    <i  *ngIf="statistic.tasksAdvancedList.length > '0'" (click)="statistic.getInAdvancetask =!statistic.getInAdvancetask" class="fas fa-bars"></i> </span> 
+            <span *ngIf="statistic.tasksAdvancedList.length == '0'" class="info-box-number">{{statistic.teamMember.user.firstName}} {{statistic.teamMember.user.lastName}} has no task in advance  </span>
+            <span  *ngIf="statistic.tasksAdvancedList.length > '0'" class="info-box-number">{{statistic.tasksAdvancedList.length}} task in ADvance</span>
+
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <div *ngIf="statistic.getInAdvancetask" class="info-box mb-3">
+          <ul  class="nav nav-pills flex-column">
+            
+            <li *ngFor="let tasksAdvanced of statistic.tasksAdvancedList" class="nav-item">
+              <a   class="nav-link">
+                {{tasksAdvanced.task.taskName}}
+                <span class="float-right text-success">  &nbsp; <i  class="fas fa-grip-lines-vertical"></i> &nbsp; &nbsp; &nbsp;
+                  Before {{tasksAdvanced.difference}} days   
+                </span>
+              </a>
+            </li>
+            
+          </ul>
+        </div>     
+      </div>
+    </div>
+  </div>
+</div>
+</div>

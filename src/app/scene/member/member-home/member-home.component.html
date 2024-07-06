@@ -1,0 +1,40 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!--<div class="col-lg-3 left">
+            <br>
+            <h4 class="m-b-20">List team</h4>
+
+          
+        </div>-->
+        <br>
+        <div class="row justify-content-center">
+            <br>
+            <div class="col-lg-2.75" *ngFor="let team of teams">
+                <div class="card card-one" >
+                    <div class="header">
+                        <div class="avatar">
+                            <img [src]="hostPhoto +team.idLeader" alt="">
+                        </div>
+                    </div>
+                    <h5>
+                        {{team.teamName}}
+                    </h5>
+                    <div class="footer">
+                        <a (click)="goToTask(team.teamMemberid, team.id)"><i class="nav-icon fas fa-edit"></i></a>
+                        <a (click)="goToRoom(team.id)"><i class="fas fa-comments"></i></a>
+                        <a (click)="goToCalendar(team.id)"><i class="nav-icon fas fa-calendar-alt"></i></a>
+                    </div>
+                </div>
+                
+                <!-- </div>
+        <div class="col-lg-9 right">
+            salut
+        </div>-->
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

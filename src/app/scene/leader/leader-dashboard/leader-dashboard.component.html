@@ -1,0 +1,75 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="col-xs-2 col-6 col-md-3  pull-right form-group ">
+            <br>
+            <div class="input-group">
+                <input type="search" (ngModelChange)="searchTeam(k.value)" #k="ngModel" ngModel name="k"
+                    id="searchNameTitle" class="form-control " placeholder="Search Team " required>
+
+                <div class="input-group-append">
+                    <button class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+       <br>
+       <br> <br>
+        <br>
+        <div class="row">
+            <br>
+            
+            <div *ngFor="let  team of listTeamKpi" class="col-lg-4 ">
+
+
+                <div class="card" >
+                    <div class="card-header">
+                        <h3 class="card-title">{{team.name}} </h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                    class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                                    class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div (click) ="goToTeamDetails(team.id)" class="card-body">
+                        <ngx-charts-pie-chart [results]="team.series" [view]="view" [scheme]="colorScheme"
+                            [gradient]="gradient" [legend]="showLegend" [legendPosition]="legendPosition"
+                            [labels]="showLabels" [doughnut]="isDoughnut" (select)="onSelect($event)"
+                            (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+                        </ngx-charts-pie-chart>
+                        <!-- ./chart-responsive -->
+
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer bg-white p-0">
+                        <ul class="nav nav-pills flex-column">
+                            <li class="row">
+                                <div>
+                                    <a *ngFor="let  status of team.series" class="nav-link text-danger"><strong
+                                            style="color: #f88538;">{{status.name}}</strong>
+
+                                    </a>
+
+                                </div>
+                                <div>
+                                    <a class="float-right text-danger" *ngFor="let  value of  team.series"
+                                        class="nav-link"> &nbsp; &nbsp;
+                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                        &nbsp; &nbsp; &nbsp; &nbsp;
+                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{{value.value}} %
+
+                                    </a>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.footer -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<h3>Update Employee</h3>
+<div [hidden]="submitted" style="width: 400px;">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">First Name</label>
+      <input type="text" class="form-control" id="firstName" required [(ngModel)]="employee.firstName" name="firstName">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Last Name</label>
+      <input type="text" class="form-control" id="lastName" required [(ngModel)]="employee.lastName" name="lastName">
+    </div>
+
+    <div class="form-group">
+      <label for="name">mobile</label>
+      <input type="text" class="form-control" id="phoneNumberId" required [(ngModel)]="employee.mobile" name="phoneNumber">
+    </div>
+    <div class="form-group">
+        <label for="name">mobile</label>
+        <input type="text" class="form-control" id="phoneNumberId" required [(ngModel)]="employee.mobile" name="phoneNumber">
+      </div>
+      <div class="form-group">
+        <label for="name">password</label>
+        <input type="text" class="form-control" id="passwordId" required [(ngModel)]="employee.password" name="password">
+      </div>
+      <div class="form-group">
+        <label for="name">Role</label>
+        <input type="text" class="form-control" id="roleId" required [(ngModel)]="employee.roles" name="roles">
+      </div>
+      <div class="form-group">
+        <label for="name">active</label>
+        <input type="text" class="form-control" id="activeId" required [(ngModel)]="employee.active" name="active">
+      </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>

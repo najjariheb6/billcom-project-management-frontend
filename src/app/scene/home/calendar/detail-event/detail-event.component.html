@@ -1,0 +1,68 @@
+<div class="card-header">
+    
+    <div *ngIf="updateForm" class="text-right">
+        <button *ngIf="shown" (click)="update()" type="button" style="color: white;" class="btn btn-tool" >
+            <i class="far fa-edit text-right"></i>
+        </button>
+        <button  *ngIf="shown"  (click)="deleteEvent()" type="button" style="color: white;" class="btn btn-tool" >
+             <i class="far fa-calendar-times text-right"></i>
+        </button>
+    </div>
+    <h5>Event :  {{data.taskType.title}}     
+    </h5>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <form (ngSubmit)="onSubmit()" >
+                <br>
+
+                <div *ngIf="show" class="col-md-12">
+                    <div class="form-group">
+                        <label for="title">Event : </label>
+                        <input  type="text" id="title" name="title" class="form-control" required
+                        [(ngModel)]="event.title">
+                            
+                        </div>
+                    
+                </div>                  
+             
+                    <div class="form-row">
+
+                        &nbsp;&nbsp;&nbsp;&nbsp; <div class="col-md-5">
+
+                        <div class="form-group">
+                            <label for="start">Started At : {{formatDate(data.taskType.start)}}</label>
+                           <input *ngIf="show"input type="datetime-local" id="start" name="start" value="currentDate"
+                                min="currentDate" max="2025-12-31"  class="form-control"
+                       
+                                [(ngModel)]="event.start"/>
+
+
+                        </div>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="end">Ends At :  {{formatDate(data.taskType.end)}}</label>
+                            <input  *ngIf="show" type="datetime-local" id="end" name="end" value="currentDate" required
+                            min="currentDate" max="2025-12-31"  class="form-control"
+                   
+                            [(ngModel)]="event.end"/>
+                        
+                        
+                        
+                        
+                            </div>
+                    </div>
+                </div>
+                <div *ngIf="show" class="text-center">
+
+                    <button class="btn btn-sm">Update</button>                    &nbsp;
+
+                    <button class="btn btn-sm   " (click)="close()" style="background-color: crimson;color: #fff; " type="reset">Cancel</button>
+                   
+                </div>
+            </form>
+            </div>
+            </div>
+            

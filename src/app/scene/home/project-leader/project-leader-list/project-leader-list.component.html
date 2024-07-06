@@ -1,0 +1,207 @@
+<div class="row">
+  <div class="col-lg-3 col-md-4 col-sm-4">
+    <div class="main-box clearfix">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex flex-column align-items-center text-center">
+            <div class="mt-3">
+              <h4>
+                <span class="badge badge-warning pull-center"
+                  >Pending Project</span
+                >
+              </h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <ul class="nav nav-pills flex-column">
+            <li *ngFor="let p of listProjectLeader | sortProjectLeader">
+              <a class="nav-item" *ngIf="p.project.statusProject == 'PENDING'">
+                <br />
+                &nbsp; {{ p.project.name }}
+
+                <label
+                  (click)="updateStatus(p.project.id, 'PROGRESSING')"
+                  class="float-right switch"
+                >
+                  <input type="checkbox" />
+                  <span class="slider round"></span>
+                </label>
+                <a class="d-flex nav-link"
+                  ><span class="pointerr">
+                    Added on : {{ formatDate(p.project.createdDate) }}</span
+                  ></a
+                >
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-9 right">
+    <div class="mb-3 Card_custom-card--border_5wJKy card">
+      <div class="table-responsive-xl">
+        <div class="col-lg-3 float-right"></div>
+        <table class="mb-0 table table-hover">
+          <thead>
+            <tr>
+              <th class="align-middle bt-0" style="color: #f88538">Project</th>
+              <th class="align-middle bt-0" style="color: #f88538">Status</th>
+              <th class="align-middle bt-0" style="color: #f88538">Team</th>
+
+              <th class="align-middle bt-0" style="color: #f88538">Progress</th>
+              <th
+                class="align-middle bt-0 text-right"
+                style="color: #f88538"
+              ></th>
+            </tr>
+          </thead>
+          <tbody
+            *ngFor="
+              let p of listProjectLeader
+                | sortProject
+                | paginate
+                  : {
+                      id: 'listing_pagination',
+                      itemsPerPage: 4,
+                      currentPage: page,
+                      totalItems: listProjectLeader.length
+                    };
+              let index = index
+            "
+          >
+            <tr *ngIf="p.project.statusProject != 'PENDING'">
+              <td
+                (click)="goToProjectDetail(p.project.id)"
+                class="align-middle"
+              >
+                <div>
+                  <a>{{ p.project.name }}</a>
+                </div>
+              </td>
+              <td
+                (click)="goToProjectDetail(p.project.id)"
+                *ngIf="p.project.statusProject == 'COMPLETED'"
+              >
+                <span class="badge badge-success pull-center">completed</span>
+              </td>
+              <td
+                (click)="goToProjectDetail(p.project.id)"
+                *ngIf="p.project.statusProject == 'PROGRESSING'"
+              >
+                <span class="badge badge-info pull-center">processing</span>
+              </td>
+              <td
+                (click)="goToProjectDetail(p.project.id)"
+                *ngIf="p.project.statusProject == 'STOPPED'"
+              >
+                <span class="badge badge-danger pull-center">Stopped</span>
+              </td>
+              <td
+                (click)="goToProjectDetail(p.project.id)"
+                *ngIf="p.project.statusProject == 'PENDING'"
+              >
+                <span class="badge badge-warning pull-center">pending</span>
+              </td>
+              <td
+                (click)="goToProjectDetail(p.project.id)"
+                *ngIf="p.project.statusProject == 'PAUSED'"
+              >
+                <span class="badge badge-secondary pull-center">Paused</span>
+              </td>
+
+              <td (click)="goToProjectDetail(p.project.id)">
+                <div *ngIf="p.project.teamList.length > '0'">
+                  <a
+                    class="team"
+                    *ngFor="let team of p.project.teamList"
+                    href="javascript: void(0);"
+                    class="team-member"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title=""
+                    data-original-title="Roger Drake"
+                  >
+                    <img
+                      img
+                      [src]="hostPhoto + team.leader.user.user_id"
+                      class="rounded-circle avatar-xs"
+                      alt=""
+                    />
+                  </a>
+                </div>
+                <div *ngIf="p.project.teamList.length == '0'">
+                  <a> <strong>This project does not have team yet!</strong> </a>
+                </div>
+              </td>
+
+              <td
+                (click)="goToProjectDetail(p.project.id)"
+                class="align-middle"
+              >
+                <p class="mb-0">
+                  Progress<span class="float-right">{{ p.progress }}%</span>
+                </p>
+
+                <progress-bar
+                  [progress]="p.progress"
+                  [color-degraded]="{
+                    '20': '#dc3545',
+                    '30': '#ffc107',
+                    '40': '#17a2b8',
+                    '60': '#28a745'
+                  }"
+                >
+                </progress-bar>
+              </td>
+              <td class="align-middle text-right"></td>
+              <td class="align-middle text-right">
+                <div
+                  *ngIf="p.project.statusProject != 'COMPLETED'"
+                  class="action"
+                >
+                  <a
+                    class="btn btn-outline-secondary pull-center"
+                    data-toggle="tooltip"
+                    ><i
+                      class="fas fa-pause-circle"
+                      (click)="updateStatus(p.project.id, 'PAUSED')"
+                    ></i
+                  ></a>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <a
+                    class="btn btn-outline-danger"
+                    data-toggle="tooltip"
+                    (click)="updateStatus(p.project.id, 'STOPPED')"
+                    ><i class="fas fa-stop-circle"></i
+                  ></a>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <a
+                    class="btn btn-outline-success"
+                    data-toggle="tooltip"
+                    (click)="updateStatus(p.project.id, 'PROGRESSING')"
+                    ><i class="fas fa-play-circle"></i
+                  ></a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer">
+        <div class="pull-right">
+          <pagination-controls
+            class="custom-pagination"
+            id="listing_pagination"
+            maxSize="10"
+            directionLinks="true"
+            (pageChange)="page = $event"
+          ></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

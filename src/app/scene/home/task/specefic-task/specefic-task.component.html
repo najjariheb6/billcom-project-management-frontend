@@ -1,0 +1,99 @@
+<div>
+  <div class="card card-border-primary">
+    <div class="card-header" style="background-color: white;">
+      <div class="card-actions float-right">
+        <div class="dropdown show">
+          <button (click)="close()" type="button" class="btn btn-tool pull-right">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <h4 class=" text-center" style="color: #f88538;"> add task with  " {{state}} " status </h4>
+    </div>
+
+    <div class="card-body p-3">
+
+      <div class="card mb-3 bg-light">
+        <div class="card-body p-3">
+          <form [formGroup]="addTaskForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label>Title :</label>
+                <input type="text" formControlName="taskName" placeholder="title" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.taskName.errors }">
+                <div *ngIf="submitted && f.taskName.errors" class="invalid-feedback">
+                  <div *ngIf="f.taskName.errors.required">title is required</div>
+                </div>
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="inputZip">Priority :</label>
+                <select formControlName="priority" class="form-control">
+
+                  <option value="highPriority" selected>highPriority</option>
+                  <option value="mediumPriority">mediumPriority</option>
+                  <option value="lowPriority">lowPriority</option>
+                </select>
+                <div *ngIf="submitted && f.priority.errors" class="invalid-feedback">
+                  <div *ngIf="f.priority.errors.required">Priority is required</div>
+                </div>
+              </div>
+
+
+              <div class="form-group col-md-6">
+                <label for="inputCity"> Started Date :</label>
+
+                <input type="datetime-local" id="start" name="trip-start" value="currentDate" min="currentDate"
+                  max="2025-12-31" formControlName="startedDate" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.startedDate.errors }">
+                <div *ngIf="submitted && f.startedDate.errors" class="invalid-feedback">
+                  <div *ngIf="f.startedDate.errors.required">enter started date</div>
+                  <div *ngIf="f.startedDate.errors.dateValidator">enter a date after the current date</div>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputCity"> Due Date : </label>
+
+                <input type="datetime-local" id="start" name="trip-start" value="currentDate" min="currentDate"
+                  max="2025-12-31" formControlName="deleveryDate" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.deleveryDate.errors }">
+                <div *ngIf="submitted && f.deleveryDate.errors" class="invalid-feedback">
+                  <div *ngIf="f.deleveryDate.errors.required">enter started date</div>
+                  <div *ngIf="f.deleveryDate.errors.dateValidator">enter a date after the current date</div>
+                  <div *ngIf="f.deleveryDate.errors.dueDateValidator">enter a date after the started date</div>
+
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inputAddress2">Description : </label>
+                <textarea type="text" style="width: 570px;" class="form-control" formControlName="descriptionTask"
+                  id="inputAddress2" name="body" placeholder="Add description to task Here"></textarea>
+              </div>
+
+            </div>
+            <div class="text-center">
+              <button class="btn btn-sm float right  " style="color: #fff;">Save Task</button>&nbsp;
+
+              <button class="btn btn-sm   "  style="background-color: crimson;color: #fff; "  type="reset" (click)="close()">Cancel</button>
+
+            </div>
+          </form>
+          <br>
+
+
+
+
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+
+  </div>
+
+</div>
