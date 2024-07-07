@@ -7,88 +7,97 @@
     <h5>Update Profile</h5>
 
 </div>
-   
-                <form (ngSubmit)="onSubmit()">
-                    <div class="row mt-5 align-items-center">
-                        <div class="col">
-                            <div class="row align-items-center">
-                                <div class="col-md-7">
-                                    <h4 class="mb-1">{{employee?.firstName}} {{employee?.lastName}}</h4>
-                                  
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="my-4" />
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputfirstName">First Name</label>
-                            <input type="text" class="form-control" id="inputfirstName" required
-                                [(ngModel)]="employee.firstName" name="firstName" />
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="inputLastName">Last Name</label>
-                            <input type="text" class="form-control" id="inputLastName" required
-                                [(ngModel)]="employee.lastName" name="lastName" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputmobile">Mobile</label>
-                        <input type="text" class="form-control" Pattern="^9[0-9]{7}" size="10" minlength="8"
-                            maxlength="8" id="inputmobile" required [(ngModel)]="employee.mobile" name="mobile"
-                            #mobileref="ngModel" />
-                        <div *ngIf="mobileref.errors" class="alert alert-danger">
-                            <div [hidden]="!mobileref.errors?.pattern">
-                                mobile ref
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-group">
-                            <label for="inputAddress">Address</label>
-                            <input type="adresse" class="form-control" id="inputAddress" placeholder="adresse" required
-                                [(ngModel)]="employee.adresse" name="adresse">
-                        </div>
-                    </div>
+<form (ngSubmit)="onSubmit()">
+    <div class="row mt-5 align-items-center">
+        <div class="col">
+            <div class="row align-items-center">
+                <div class="col-md-7">
+                    <h4 class="mb-1">{{ employee?.firstName }} {{ employee?.lastName }}</h4>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputpassportNumber">Passeport Number</label>
-                            <input type="text" class="form-control" Pattern="^9[0-9]{7}" size="10" minlength="8"
-                                maxlength="8" id="inputpassportNumber" required [(ngModel)]="employee.passportNumber"
-                                name="passportNumber" #passportNumberref="ngModel" />
-                            <div *ngIf="passportNumberref.errors" class="alert alert-danger">
-                                <div [hidden]="!passportNumberref.errors?.pattern">
-                                    Passeport length should be 8!
-                                </div>
-                            </div>
 
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="inputState5">Date validity passport</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="my-4"/>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputfirstName">First Name</label>
+            <input type="text" class="form-control" id="inputfirstName" required
+                   [(ngModel)]="employee.firstName" name="firstName"/>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputLastName">Last Name</label>
+            <input type="text" class="form-control" id="inputLastName" required
+                   [(ngModel)]="employee.lastName" name="lastName"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputmobile">Mobile</label>
+        <input type="text" class="form-control" Pattern="^9[0-9]{7}" size="10" minlength="8"
+               maxlength="8" id="inputmobile" required [(ngModel)]="employee.mobile" name="mobile"
+               #mobileref="ngModel"/>
+        <div *ngIf="mobileref.errors" class="alert alert-danger">
+            <div [hidden]="!mobileref.errors?.pattern">
+                mobile ref
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-group">
+            <label for="inputAddress">Address</label>
+            <input type="adresse" class="form-control" id="inputAddress" placeholder="adresse" required
+                   [(ngModel)]="employee.adresse" name="adresse">
+        </div>
+    </div>
 
-                          <input type="date" id="inputState5" name="trip-start" 
-                                min="currentDate"  class="form-control"value="currentDate"
-                                [(ngModel)]="employee.passeportValidityDate">
-                        </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputpassportNumber">Passeport Number</label>
+            <input type="text" class="form-control" Pattern="^9[0-9]{7}" size="10" minlength="8"
+                   maxlength="8" id="inputpassportNumber" required [(ngModel)]="employee.passportNumber"
+                   name="passportNumber" #passportNumberref="ngModel"/>
+            <div *ngIf="passportNumberref.errors" class="alert alert-danger">
+                <div [hidden]="!passportNumberref.errors?.pattern">
+                    Passeport length should be 8!
+                </div>
+            </div>
 
-                    </div>
-                    <div class="form-group">
-                        <div class="form-group">
-                            <label for="validityVisa">Date validity Visa</label>
-                            <input type="date" id="validityVisa" name="trip-start" 
-                                min="currentDate"  class="form-control" 
-                                [(ngModel)]="employee.visaValidateDate">
-                        </div>
-                    </div>
-                    <hr class="my-4" />
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-sm">Save Change</button>                 &nbsp;
+        </div>
+<!--        <div class="form-group col-md-6">-->
+<!--            <label for="inputState5">Date validity passport</label>-->
+<!--            <input type="date" id="inputState5" name="trip-start"-->
+<!--                   min="currentDate" class="form-control" value="currentDate"-->
+<!--                   [(ngModel)]="employee.passeportValidityDate">-->
+<!--        </div>-->
+        <div class="form-group col-md-6">
+            <label for="inputPasseportValidityDate">Date Validity Passport</label>
+            <input type="date" id="inputPasseportValidityDate" name="passeportValidityDate"
+                   class="form-control" [(ngModel)]="employee.passeportValidityDate">
+        </div>
+    </div>
+    <div class="form-group">
+<!--        <div class="form-group">-->
+<!--            <label for="validityVisa">Date validity Visa</label>-->
+<!--            <input type="date" id="validityVisa" name="trip-start"-->
+<!--                   min="currentDate" class="form-control"-->
+<!--                   [(ngModel)]="employee.visaValidateDate">-->
+<!--        </div>-->
+        <div class="form-group">
+            <label for="validityVisa">Date Validity Visa</label>
+            <input type="date" id="validityVisa" min="currentDate" name="visaValidateDate" class="form-control"
+                   [(ngModel)]="employee.visaValidateDate">
+        </div>
+    </div>
+    <hr class="my-4"/>
+    <div class="text-center">
+        <button type="submit" class="btn btn-sm">Save Change</button> &nbsp;
 
-                        <button class="btn btn-sm  "  type="reset" style="background-color: crimson;"
-                        (click)="close()">Cancel</button>
-                    </div>
-                </form>
+        <button class="btn btn-sm  " type="reset" style="background-color: crimson;"
+                (click)="close()">Cancel
+        </button>
+    </div>
+</form>
             
 

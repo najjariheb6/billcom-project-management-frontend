@@ -156,7 +156,7 @@ export class UserLoggedComponent implements OnInit {
 
 
   gotoChangeModel() {
-    this.dialogConfig.implementUserLoggedUpdateDialog(this.employee, UpdateLoggedUserComponent, '700px', '770px')
+    this.dialogConfig.implementUserLoggedUpdateDialog(this.employee, UpdateLoggedUserComponent, '700px', '700px')
 
   }
   formatDate(d: Date) {

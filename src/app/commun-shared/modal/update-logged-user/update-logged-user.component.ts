@@ -1,53 +1,78 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Employee, User } from 'src/app/model/employee';
-import { EmployeeServiceService } from 'src/app/rest-service/employee-service.service';
-import { NotficationService } from 'src/app/shared/service/notfication.service';
+import {Component, Inject, OnInit} from '@angular/core';
+import {FormGroup, NgForm} from '@angular/forms';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {Employee, User} from 'src/app/model/employee';
+import {EmployeeServiceService} from 'src/app/rest-service/employee-service.service';
+import {NotficationService} from 'src/app/shared/service/notfication.service';
 
 @Component({
-  selector: 'app-update-logged-user',
-  templateUrl: './update-logged-user.component.html',
-  styleUrls: ['./update-logged-user.component.scss']
+    selector: 'app-update-logged-user',
+    templateUrl: './update-logged-user.component.html',
+    styleUrls: ['./update-logged-user.component.scss']
 })
 export class UpdateLoggedUserComponent implements OnInit {
 
-  employee: Employee = null
-  constructor(private employeeService: EmployeeServiceService, private notification: NotficationService, public dialogRef: MatDialogRef<UpdateLoggedUserComponent>, @Inject(MAT_DIALOG_DATA) public data) { }
+    employee: Employee = null;
 
-  ngOnInit(): void {
-    this.employee = this.data
-  }
+    constructor(private employeeService: EmployeeServiceService,
+                private notification: NotficationService,
+                public dialogRef: MatDialogRef<UpdateLoggedUserComponent>,
+                @Inject(MAT_DIALOG_DATA) public data
+    ) {
+    }
 
-  onSubmit() {
+    ngOnInit(): void {
+        this.employee = this.data;
 
-    const user = new User(
-      this.employee.firstName,
-      this.employee.lastName,
-      this.employee.mobile,
-      this.employee.email,
-      this.employee.adresse,
-      this.employee.passportNumber,
-      this.employee.passeportValidityDate,
-      this.employee.visaValidateDate
-    )
-    this.employeeService.updateEmployee(this.data.user_id, user).subscribe((data) => {
+        // Format date fields to yyyy-MM-dd
+        this.employee.passeportValidityDate = this.formatDate(this.employee.passeportValidityDate);
+        this.employee.visaValidateDate = this.formatDate(this.employee.visaValidateDate);
 
-      this.notification.showSuccess('User Profile updated', 'ok');
-      this.close()
+    }
 
+    onSubmit() {
+        const user = new User(
+            this.employee.firstName,
+            this.employee.lastName,
+            this.employee.mobile,
+            this.employee.email,
+            this.employee.adresse,
+            this.employee.passportNumber,
+            this.employee.passeportValidityDate,
+            this.employee.visaValidateDate
+        );
+        console.log(user);
+        this.employeeService.updateEmployee(this.data.user_id, user).subscribe((data) => {
 
-    },
-      err => {
-        console.log(err)
-      }
-    );
+                this.notification.showSuccess('User Profile updated', 'ok');
+                this.close();
+            },
+            err => {
+                console.log(err);
+            }
+        );
+    }
 
+    formatDate(date: string): string {
+        if (!date) {
+            return null;
+        }
+        const d = new Date(date);
+        let month = '' + (d.getMonth() + 1);
+        let day = '' + d.getDate();
+        const year = d.getFullYear();
 
-  }
-  close() {
+        if (month.length < 2) {
+            month = '0' + month;
+        }
+        if (day.length < 2) {
+            day = '0' + day;
+        }
 
-    this.dialogRef.close()
-  }
+        return [year, month, day].join('-');
+    }
 
+    close() {
+        this.dialogRef.close();
+    }
 }

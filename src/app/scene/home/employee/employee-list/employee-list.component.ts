@@ -76,7 +76,7 @@ export class EmployeeListComponent implements OnInit {
 
 
   goToAddEmployee() {
-    this.modalComponent.implement(NewEmployeeComponent, '900px', '900px');
+    this.modalComponent.implement(NewEmployeeComponent, '600px', '900px');
 
 
   }

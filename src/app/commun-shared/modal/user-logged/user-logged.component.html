@@ -1,333 +1,333 @@
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <div class="container-fluid">
-    <br />
-    <div class="row" *ngIf="employee" id="user-profile">
-      <div class="col-lg-3 col-md-4 col-sm-4">
-        <div class="main-box clearfix">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex flex-column align-items-center text-center">
-                <img
-                  *ngIf="added"
-                  [src]="hostPhoto + employee.user_id"
-                  alt="Admin"
-                  class="rounded-circle p-1"
-                  width="130"
-                />
-                <img
-                  *ngIf="!added"
-                  [src]="url"
-                  alt="Admin"
-                  class="rounded-circle p-1"
-                  width="130"
-                />
+    <!-- Content Header (Page header) -->
+    <div class="container-fluid">
+        <br/>
+        <div class="row" *ngIf="employee" id="user-profile">
+            <div class="col-lg-3 col-md-4 col-sm-4">
+                <div class="main-box clearfix">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <img
+                                        *ngIf="added"
+                                        [src]="hostPhoto + employee.user_id"
+                                        alt="Admin"
+                                        class="rounded-circle p-1"
+                                        width="130"
+                                />
+                                <img
+                                        *ngIf="!added"
+                                        [src]="url"
+                                        alt="Admin"
+                                        class="rounded-circle p-1"
+                                        width="130"
+                                />
 
-                <div class="parent-div">
-                  <button class="btn-upload">
-                    <a style="color: #f88538" class="editImage">
-                      <i class="fa fa-camera"></i>
-                    </a>
-                  </button>
-                  <input
-                    type="file"
-                    name="upfile"
-                    accept="image/*"
-                    (change)="onSelectedFile($event)"
-                  />
-                </div>
+                                <div class="parent-div">
+                                    <button class="btn-upload">
+                                        <a style="color: #f88538" class="editImage">
+                                            <i class="fa fa-camera"></i>
+                                        </a>
+                                    </button>
+                                    <input
+                                            type="file"
+                                            name="upfile"
+                                            accept="image/*"
+                                            (change)="onSelectedFile($event)"
+                                    />
+                                </div>
 
-                <div class="mt-3">
-                  <h4 style="color: #f88538">
-                    {{ employee?.firstName }} {{ employee?.lastName }}
-                  </h4>
-                  <p class="text-secondary mb-1">
-                    {{ getRole(employee.roles) }}
-                  </p>
-                  <!-- <p class="text-muted font-size-sm">Full Stack Developer</p>-->
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="profile-details">
-            <div *ngIf="authService.isMember()" class="col-md-12">
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="d-flex align-items-center mb-3">
-                        Tasks completed / Team
-                      </h5>
-                      <div *ngFor="let t of tasksdone">
-                        <div class="progress-text">
-                          <div class="row">
-                            <div class="col-7">Team : {{ t.name }}</div>
-                            <div class="col-5 text-right">
-                              {{ t.value }} / 100
+                                <div class="mt-3">
+                                    <h4 style="color: #f88538">
+                                        {{ employee?.firstName }} {{ employee?.lastName }}
+                                    </h4>
+                                    <p class="text-secondary mb-1">
+                                        {{ getRole(employee.roles) }}
+                                    </p>
+                                    <!-- <p class="text-muted font-size-sm">Full Stack Developer</p>-->
+                                </div>
                             </div>
-                          </div>
                         </div>
+                    </div>
 
-                        <progress-bar
-                          [progress]="t.value"
-                          [color-degraded]="{
+                    <div class="profile-details">
+                        <div *ngIf="authService.isMember()" class="col-md-12">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="d-flex align-items-center mb-3">
+                                                Tasks completed / Team
+                                            </h5>
+                                            <div *ngFor="let t of tasksdone">
+                                                <div class="progress-text">
+                                                    <div class="row">
+                                                        <div class="col-7">Team : {{ t.name }}</div>
+                                                        <div class="col-5 text-right">
+                                                            {{ t.value }} / 100
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <progress-bar
+                                                        [progress]="t.value"
+                                                        [color-degraded]="{
                             '20': '#dc3545',
                             '30': '#ffc107',
                             '40': '#17a2b8',
                             '60': '#28a745'
                           }"
-                        >
-                        </progress-bar>
-                      </div>
+                                                >
+                                                </progress-bar>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="col-lg-9 col-md-8 col-sm-8 right">
-        <div class="main-box clearfix">
-          <div class="card">
-            <div class="card-body">
-              <div class="profile-header">
-                <a
-                  (click)="gotoChangeModel()"
-                  style="color: #ffff"
-                  class="btn btn-sm edit-profile"
-                >
-                  <i class="fa fa-pencil-square fa-lg"></i> Edit profile
-                </a>
-                <br />
-                <div class="col-sm-6 pull-right">
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                  <div class="row mb-3">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">validity date :</h6>
-                    </div>
-                    <div
-                      *ngIf="employee.passeportValidityDate != null"
-                      class="col-sm-9 text-secondary"
-                    >
-                      {{ formatDate(employee?.passeportValidityDate) }}
-                    </div>
-                    <div
-                      *ngIf="employee.passeportValidityDate == null"
-                      class="col-sm-9 text-secondary"
-                    >
-                      -
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">validity date Visa:</h6>
-                    </div>
-                    <div
-                      *ngIf="employee.visaValidateDate != null"
-                      class="col-sm-9 text-secondary"
-                    >
-                      {{ formatDate(employee?.visaValidateDate) }}
-                    </div>
-                    <div
-                      *ngIf="employee.visaValidateDate == null"
-                      class="col-sm-9 text-secondary"
-                    >
-                      -
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="row mb-3">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Full Name :</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">
-                    {{ employee?.firstName }} {{ employee?.lastName }}
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Email :</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">
-                    {{ employee?.email }}
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Phone :</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">
-                    {{ employee?.mobile }}
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Passport :</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">
-                    {{ employee?.passportNumber }}
-                  </div>
-                </div>
+            <div class="col-lg-9 col-md-8 col-sm-8 right">
+                <div class="main-box clearfix">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="profile-header">
+                                <a
+                                        (click)="gotoChangeModel()"
+                                        style="color: #ffff"
+                                        class="btn btn-sm edit-profile"
+                                >
+                                    <i class="fa fa-pencil-square fa-lg"></i> Edit profile
+                                </a>
+                                <br/>
+                                <div class="col-sm-6 pull-right">
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">validity date :</h6>
+                                        </div>
+                                        <div
+                                                *ngIf="employee.passeportValidityDate != null"
+                                                class="col-sm-9 text-secondary"
+                                        >
+                                            {{ formatDate(employee?.passeportValidityDate) }}
+                                        </div>
+                                        <div
+                                                *ngIf="employee.passeportValidityDate == null"
+                                                class="col-sm-9 text-secondary"
+                                        >
+                                            -
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">validity date Visa:</h6>
+                                        </div>
+                                        <div
+                                                *ngIf="employee.visaValidateDate != null"
+                                                class="col-sm-9 text-secondary"
+                                        >
+                                            {{ formatDate(employee?.visaValidateDate) }}
+                                        </div>
+                                        <div
+                                                *ngIf="employee.visaValidateDate == null"
+                                                class="col-sm-9 text-secondary"
+                                        >
+                                            -
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Full Name :</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        {{ employee?.firstName }} {{ employee?.lastName }}
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Email :</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        {{ employee?.email }}
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Phone :</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        {{ employee?.mobile }}
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Passport :</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        {{ employee?.passportNumber }}
+                                    </div>
+                                </div>
 
-                <div class="row mb-3">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Address :</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">
-                    {{ employee?.adresse }}
-                  </div>
-                </div>
-                <br />
-              </div>
-            </div>
-          </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Address :</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        {{ employee?.adresse }}
+                                    </div>
+                                </div>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
 
-          <div class="tabs-wrapper profile-tabs">
-            <ul class="nav nav-tabs">
-              <li class="nav-item">
-                <button
-                  class="nav-link active"
-                  href="#tab-activity"
-                  data-toggle="tab"
-                  data-bs-target="#tab-activity"
-                  aria-selected="true"
-                >
-                  Skills
-                </button>
-              </li>
+                    <div class="tabs-wrapper profile-tabs">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <button
+                                        class="nav-link active"
+                                        href="#tab-activity"
+                                        data-toggle="tab"
+                                        data-bs-target="#tab-activity"
+                                        aria-selected="true"
+                                >
+                                    Skills
+                                </button>
+                            </li>
 
-              <li class="nav-item">
-                <button
-                  class="nav-link"
-                  href="#tab-files"
-                  data-toggle="tab"
-                  aria-selected="false"
-                >
-                  files
-                </button>
-              </li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane show active fade" id="tab-activity">
-                <br />
-                <div class="profile-header">
-                  <a
-                    (click)="showSkillForm()"
-                    style="color: #ffff"
-                    class="btn btn-sm edit-profile"
-                  >
-                    <i class="fas fa-graduation-cap"></i>Add Skill
-                  </a>
-                </div>
-                <br />
-                <hr />
-                <form
-                  *ngIf="shown"
-                  [formGroup]="addSkillForm"
-                  (ngSubmit)="onSubmit()"
-                >
-                  <div class="form-row">
-                    <div class="form-group col-md-8">
-                      <label for="inputpassportNumber">Skill : </label>
-                      <input
-                        type="text"
-                        formControlName="roleLabel"
-                        class="form-control"
-                        id="inputpassportNumber"
-                        [ngClass]="{
+                            <li class="nav-item">
+                                <button
+                                        class="nav-link"
+                                        href="#tab-files"
+                                        data-toggle="tab"
+                                        aria-selected="false"
+                                >
+                                    files
+                                </button>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane show active fade" id="tab-activity">
+                                <br/>
+                                <div class="profile-header">
+                                    <a
+                                            (click)="showSkillForm()"
+                                            style="color: #ffff"
+                                            class="btn btn-sm edit-profile"
+                                    >
+                                        <i class="fas fa-graduation-cap"></i>Add Skill
+                                    </a>
+                                </div>
+                                <br/>
+                                <hr/>
+                                <form
+                                        *ngIf="shown"
+                                        [formGroup]="addSkillForm"
+                                        (ngSubmit)="onSubmit()"
+                                >
+                                    <div class="form-row">
+                                        <div class="form-group col-md-8">
+                                            <label for="inputpassportNumber">Skill : </label>
+                                            <input
+                                                    type="text"
+                                                    formControlName="roleLabel"
+                                                    class="form-control"
+                                                    id="inputpassportNumber"
+                                                    [ngClass]="{
                           'is-invalid': submitted && f.roleLabel.errors
                         }"
-                      />
-                      <div
-                        *ngIf="submitted && f.roleLabel.errors"
-                        class="invalid-feedback"
-                      >
-                        <div *ngIf="f.roleLabel.errors.required">
-                          Skill is required!
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group col-md-2">
-                      <label for="inputState5">Percentage : </label>
-                      <input
-                        type="text"
-                        formControlName="eval"
-                        class="form-control"
-                        min="0"
-                        max="100"
-                        id="inputpassportNumber"
-                        [ngClass]="{ 'is-invalid': submitted && f.eval.errors }"
-                      />
-                      <div
-                        *ngIf="submitted && f.eval.errors"
-                        class="invalid-feedback"
-                      >
-                        <div *ngIf="f.eval.errors.required">
-                          Put value please!
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group col-md-2">
-                      <label style="color: #fff">&nbsp; </label> <br />
-                      <button type="submit" class="btn btn-sm">
-                        Save Skill
-                      </button>
-                    </div>
-                  </div>
-                </form>
-                <div class="col-sm-12">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="d-flex align-items-center mb-3">
-                        {{ employee?.firstName }}
-                        {{ employee?.lastName }} Skills
-                      </h5>
-                      <div *ngFor="let skill of employee.skills">
-                        <div class="progress-text">
-                          <div class="row">
-                            <div class="col-7">{{ skill.roleLabel }}</div>
-                            <div class="col-5 text-right">
-                              {{ skill.eval }} %
-                            </div>
-                          </div>
-                        </div>
+                                            />
+                                            <div
+                                                    *ngIf="submitted && f.roleLabel.errors"
+                                                    class="invalid-feedback"
+                                            >
+                                                <div *ngIf="f.roleLabel.errors.required">
+                                                    Skill is required!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="inputState5">Percentage : </label>
+                                            <input
+                                                    type="text"
+                                                    formControlName="eval"
+                                                    class="form-control"
+                                                    min="0"
+                                                    max="100"
+                                                    id="inputpassportNumber"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.eval.errors }"
+                                            />
+                                            <div
+                                                    *ngIf="submitted && f.eval.errors"
+                                                    class="invalid-feedback"
+                                            >
+                                                <div *ngIf="f.eval.errors.required">
+                                                    Put value please!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label style="color: #fff">&nbsp; </label> <br/>
+                                            <button type="submit" class="btn btn-sm">
+                                                Save Skill
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="d-flex align-items-center mb-3">
+                                                {{ employee?.firstName }}
+                                                {{ employee?.lastName }} Skills
+                                            </h5>
+                                            <div *ngFor="let skill of employee.skills">
+                                                <div class="progress-text">
+                                                    <div class="row">
+                                                        <div class="col-7">{{ skill.roleLabel }}</div>
+                                                        <div class="col-5 text-right">
+                                                            {{ skill.eval }} %
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                        <progress-bar
-                          [progress]="skill.eval"
-                          [color-degraded]="{
+                                                <progress-bar
+                                                        [progress]="skill.eval"
+                                                        [color-degraded]="{
                             '20': '#dc3545',
                             '30': '#ffc107',
                             '40': '#17a2b8',
                             '60': '#28a745'
                           }"
-                        >
-                        </progress-bar>
-                      </div>
+                                                >
+                                                </progress-bar>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="tab-files">
+                                <app-user-file [LoggedEmployee]="employee"></app-user-file>
+                            </div>
+
+                            <!-- <div class="tab-pane fade" id="tab-chat">
+
+                                          </div>-->
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-
-              <div class="tab-pane fade" id="tab-files">
-                <app-user-file [LoggedEmployee]="employee"></app-user-file>
-              </div>
-
-              <!-- <div class="tab-pane fade" id="tab-chat">
-
-                            </div>-->
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
