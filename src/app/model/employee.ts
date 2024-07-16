@@ -1,23 +1,24 @@
-import { Role } from "./role";
-import { Skill } from "./skill";
+import {Role} from './role';
+import {Skill} from './skill';
 
 export class Employee {
     user_id?: number;
     firstName: string;
-    lastName: String;
-    email: String;
-    mobile: String;
+    lastName: string;
+    email: string;
+    mobile: string;
     active: boolean;
-    password: String;
-    roles: String[];
-    skills: Skill[]
-    photoName: String
-    adresse: string
-    passportNumber: number
-    visaValidateDate: string
-    passeportValidityDate: string
+    password: string;
+    roles: string[];
+    skills: Skill[];
+    photoName: string;
+    adresse: string;
+    passportNumber: number;
+    visaValidateDate: string;
+    passeportValidityDate: string;
     files: string[];
-    constructor(firstName: string, lastName: String, email: String, mobile: String, password: String, roles: String[], adresse: string) {
+
+    constructor(firstName: string, lastName: string, email: string, mobile: string, password: string, roles: string[], adresse: string) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,18 +35,16 @@ export class Employee {
 
 export class User {
 
-    firstName: String;
-    lastName: String;
-    email: String;
-    mobile: String;
-    adresse: string
-    passportNumber: number
-    visaValidateDate: string
-    passeportValidityDate: string
+    firstName: string;
+    lastName: string;
+    email: string;
+    mobile: string;
+    adresse: string;
+    passportNumber: number;
+    visaValidateDate: string;
+    passeportValidityDate: string;
 
-    constructor(firstName: String, lastName: String, mobile: String, email: String, adresse: string, passportNumber: number,
-
-        passeportValidityDate: string, visaValidateDate: string) {
+    constructor(firstName: string, lastName: string, mobile: string, email: string, adresse: string, passportNumber: number, passeportValidityDate: string, visaValidateDate: string) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -58,7 +57,7 @@ export class User {
         this.visaValidateDate = visaValidateDate;
     }
 
-    // functionconstructor(firstName: String, lastName: String) 
+    // functionconstructor(firstName: string, lastName: string)
     // {
 
     //     this.firstName = firstName;

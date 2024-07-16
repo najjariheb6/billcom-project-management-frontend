@@ -13,7 +13,7 @@ export class EmployeeServiceService {
 
     // host = 'http://localhost:8080/user/'
 
-    role: String;
+    role: string;
 
     constructor(private httpClient: HttpClient) {
     }

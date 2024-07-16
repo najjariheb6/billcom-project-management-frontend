@@ -16,7 +16,7 @@
         <div *ngIf="employee" class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
                 <img
-                        [src]="hostPhoto + employee.user_id"
+                        [src]="hostPhoto + employee?.user_id"
                         class="img-circle"
                         alt="User Image"
                 />

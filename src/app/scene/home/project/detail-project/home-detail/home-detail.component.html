@@ -1,7 +1,7 @@
 <div class="content-wrapper">
     <div class="container-fluid">
         <br>
-        <div class="row" *ngIf="projectProgress" id="user-profile">
+        <div *ngIf="projectProgress" class="row" id="user-profile">
             <div class="col-lg-3 col-md-4 col-sm-4">
                 <div class="main-box clearfix">
                     <br>
@@ -10,14 +10,12 @@
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
                                 <img [src]="hostPhoto+projectProgress.project.projectLeader.user_id" alt="Admin"
-                                    class="rounded-circle p-1 " width="110">
+                                     class="rounded-circle p-1 " width="110">
                                 <div class="mt-3">
-
-                                    <h4 style="color: #f88538;">{{projectProgress.project.projectLeader.firstName}}
-                                        {{projectProgress.project.projectLeader.lastName}}</h4>
+                                    <h4 style="color: #f88538;">{{ projectProgress.project.projectLeader?.firstName }}
+                                        {{ projectProgress.project.projectLeader?.lastName }}</h4>
                                     <p class="text-muted font-size-sm">Project Leader</p>
-                                    <p class="text-muted font-size-sm">{{projectProgress.project.projectLeader.email}}</p>
-
+                                    <p class="text-muted font-size-sm">{{ projectProgress.project.projectLeader?.email }}</p>
                                 </div>
                             </div>
                         </div>
@@ -28,13 +26,14 @@
                                 <div class="col-sm-12">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h6 class="d-flex align-items-center mb-3"> Progress  :   {{projectProgress.progress}} % </h6>
-                                                <progress-bar [progress]="projectProgress.progress"
-                                                    [color-degraded]="{'20' : '#dc3545','30' : '#ffc107','40' : '#17a2b8','60' : '#28a745'}">
-                                                </progress-bar>
-                                                <br>
-                                                <h6 class="d-flex align-items-center mb-3"> Description :  </h6>
-                                                 <a>{{projectProgress.project.description}}</a>
+                                            <h6 class="d-flex align-items-center mb-3"> Progress
+                                                :   {{ projectProgress.progress }} % </h6>
+                                            <progress-bar [color-degraded]="{'20' : '#dc3545','30' : '#ffc107','40' : '#17a2b8','60' : '#28a745'}"
+                                                          [progress]="String(projectProgress.progress)">
+                                            </progress-bar>
+                                            <br>
+                                            <h6 class="d-flex align-items-center mb-3"> Description : </h6>
+                                            <a>{{ projectProgress.project.description }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -45,16 +44,20 @@
             </div>
             <div class="col-lg-9 col-md-8 col-sm-8 right">
                 <div class="main-box clearfix">
-                    <h6  *ngIf="auth.isManager()" class="mb-0 pull-right pointerr"> <a routerLink="/home/project-list"  style="color: #f88538;"> Projects</a>  / Project Detail </h6>   
-                    <h6  *ngIf="auth.isProjectLeader()" class="mb-0 pull-right pointerr"> <a routerLink="/project-leader/home" style="color: #f88538;">Projects </a> / Project Detail </h6>
-                    <br>   
+                    <h6 *ngIf="auth.isManager()" class="mb-0 pull-right pointerr"><a routerLink="/home/project-list"
+                                                                                     style="color: #f88538;">
+                        Projects</a> / Project Detail </h6>
+                    <h6 *ngIf="auth.isProjectLeader()" class="mb-0 pull-right pointerr"><a
+                            routerLink="/project-leader/home" style="color: #f88538;">Projects </a> / Project Detail
+                    </h6>
+                    <br>
                     <br>
                     <div class="card">
                         <div class="card-body">
-                            <a (click)=" goToUpdateProject()" style="color: #fff;" class="btn btn-sm  float-right">
+                            <a (click)=" goToUpdateProject()" class="btn btn-sm  float-right" style="color: #fff;">
                                 Edit Project
                             </a>
-                            <h2>{{projectProgress.project.name}}</h2>
+                            <h2>{{ projectProgress.project.name }}</h2>
                             <div class="profile-header">
                                 <br>
                                 <div class="col-sm-6 pull-right">
@@ -67,7 +70,7 @@
                                             <h6 class="mb-0">Due date : </h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            {{formatDate(projectProgress.project.endDate)}}
+                                            {{ formatDate(projectProgress.project.endDate) }}
                                         </div>
                                     </div>
                                 </div>
@@ -78,7 +81,7 @@
                                         <h6 class="mb-0">Project Leader Contact: </h6>
                                     </div>
                                     <div class="col-sm-6 text-secondary">
-                                        {{projectProgress.project.projectLeader.mobile}}
+                                        {{ projectProgress.project.projectLeader.mobile }}
                                     </div>
                                 </div>
                                 <br>
@@ -86,7 +89,9 @@
                                     <div class="col-sm-6">
                                         <h6 class="mb-0">Charge : </h6>
                                     </div>
-                                    <div class="col-sm-6 text-secondary">{{projectProgress.project.charge}} &nbsp; Mois/Hommes </div>
+                                    <div class="col-sm-6 text-secondary">{{ projectProgress.project.charge }} &nbsp;
+                                        Mois/Hommes
+                                    </div>
                                 </div>
                                 <br>
                                 <div class="row mb-6">
@@ -94,7 +99,8 @@
                                         <h6 class="mb-0">Started Date : </h6>
                                     </div>
                                     <div class="col-sm-6 text-secondary">
-                                        {{formatDate(projectProgress.project.startedDate)}} </div>
+                                        {{ formatDate(projectProgress.project.startedDate) }}
+                                    </div>
                                 </div>
                                 <br>
                             </div>
@@ -110,14 +116,16 @@
                                                 <div class="panel-options">
                                                     <ul class="nav nav-tabs">
                                                         <li class="nav-item">
-                                                            <button class="nav-link active" href="#tab-1"
-                                                                data-toggle="tab" data-bs-target="#tab-activity"
-                                                                aria-selected="false">Teams</button>
+                                                            <button aria-selected="false" class="nav-link active"
+                                                                    data-bs-target="#tab-activity" data-toggle="tab"
+                                                                    href="#tab-1">Teams
+                                                            </button>
                                                         </li>
                                                         <li class="nav-item">
-                                                            <button class="nav-link " href="#tab-2"
-                                                                data-toggle="tab" data-bs-target="#tab-activity"
-                                                                aria-selected="true">Files</button>
+                                                            <button aria-selected="true" class="nav-link "
+                                                                    data-bs-target="#tab-activity" data-toggle="tab"
+                                                                    href="#tab-2">Files
+                                                            </button>
                                                         </li>
 
                                                     </ul>
@@ -129,13 +137,16 @@
                                                 <div class="tab-content">
                                                     <div class="tab-pane show active" id="tab-1">
                                                         <br>
-                                                            <a   (click)="geToCreateTeam(projectProgress.project.id)" style="color: #fff;" class="btn btn-sm  float-right " >
-                                                                Create new team
-                                                            </a>
-                                                        <app-project-team [project]="projectProgress"></app-project-team>
+                                                        <a (click)="goToCreateTeam()"
+                                                           class="btn btn-sm  float-right " style="color: #fff;">
+                                                            Create new team
+                                                        </a>
+                                                        <app-project-team
+                                                                [project]="projectProgress"></app-project-team>
                                                     </div>
                                                     <div class="tab-pane" id="tab-2">
-                                                        <app-project-file [projectDetail]="projectProgress"></app-project-file>
+                                                        <app-project-file
+                                                                [projectDetail]="projectProgress"></app-project-file>
                                                     </div>
                                                 </div>
                                             </div>

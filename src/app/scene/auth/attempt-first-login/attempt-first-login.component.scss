@@ -1,111 +1,78 @@
-.line {
-    height: 1px;
-    width: 45%;
-    background-color: #E0E0E0;
-    margin-top: 10px
-}
+.update-password-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f0f2f5;
 
-.or {
-    width: 10%;
-    font-weight: bold
-}
-
-.text-sm {
-    font-size: 14px !important
-}
-
-::placeholder {
-    color: #BDBDBD;
-    opacity: 1;
-    font-weight: 300
-}
-
-:-ms-input-placeholder {
-    color: #BDBDBD;
-    font-weight: 300
-}
-
-::-ms-input-placeholder {
-    color: #BDBDBD;
-    font-weight: 300
-}
-
-input,
-textarea {
-    padding: 10px 12px 10px 12px;
-    border: 1px solid lightgrey;
-    border-radius: 2px;
-    margin-bottom: 5px;
-    margin-top: 2px;
-    width: 100%;
-    box-sizing: border-box;
-    color: #2C3E50;
-    font-size: 14px;
-    letter-spacing: 1px
-}
-
-input:focus,
-textarea:focus {
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    border: 1px solid #f76809;
-    outline-width: 0
-}
-
-button:focus {
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    outline-width: 0
-}
-
-a {
-    color: inherit;
-    cursor: pointer
-}
-
-.btn-blue {
-    background-color: #f76809;
-    
-    width: 150px;
-    color: #fff;
-    border-radius: 2px
-}
-
-.container-fluid {
-    height: 700px;
-}
-.btn-sm {
-    background-color: #f76809;
-    
-    width: 150px;
-    color: #fff;
-    border-radius: 2px
-}
-.bg-orange {
-    color: #fff;
-    background-color: #f76809
-}
-
-@media screen and (max-width: 991px) {
-    .logo {
-        margin-left: 0px;
-        width: 200px;
-        height: 100px
+    .update-password-card {
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        background: #fff;
     }
 
-    .image {
-        width: 200px;
-        height: 300px;
+    .update-password-header {
+        text-align: center;
+
+        .logo {
+            width: 220px;
+            margin-bottom: 10px;
+        }
+
+        .company-name {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
     }
 
-    .border-line {
-        border-right: none
-    }
+    .update-password-body {
+        .update-password-title {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
 
-    .card2 {
-        border-top: 1px solid #EEEEEE !important;
-        margin: 0px 15px
+        .form-group {
+            margin-bottom: 15px;
+
+            label {
+                margin-bottom: 5px;
+                font-size: 0.875rem;
+                color: #333;
+            }
+
+            .form-control {
+                border-radius: 5px;
+                padding: 10px;
+                font-size: 0.875rem;
+                border: 1px solid #ccc;
+
+                &.is-invalid {
+                    border-color: #e3342f;
+                }
+            }
+
+            .invalid-feedback {
+                font-size: 0.75rem;
+                color: #e3342f;
+            }
+        }
+
+        .btn {
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 1rem;
+            background: #FF5600;
+            color: #fff;
+            border: none;
+
+            &:hover {
+                background: #545454;
+            }
+        }
     }
 }

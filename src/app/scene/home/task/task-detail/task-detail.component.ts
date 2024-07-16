@@ -23,7 +23,7 @@ export class TaskDetailComponent implements OnInit {
 
   task: Task = null;
   // hostPhoto: string = 'http://localhost:8080/photoUser/'
-  hostPhoto: String = environment.urlConfig + `photoUser/`
+  hostPhoto: string = environment.urlConfig + `photoUser/`;
 
   commentForm: FormGroup;
   updateForm: FormGroup;
@@ -169,11 +169,9 @@ export class TaskDetailComponent implements OnInit {
 
   getTaskDetails(id: number) {
     this.taskService.getTaskDetail(id).subscribe(data => {
-      this.task = data
+      this.task = data;
     }
-
     );
-
   }
 
   formatDate(d: Date) {

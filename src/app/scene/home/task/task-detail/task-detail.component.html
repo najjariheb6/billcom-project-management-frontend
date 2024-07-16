@@ -1,306 +1,298 @@
-<link
-  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
-  rel="stylesheet"
-/>
-<div *ngIf="task" class="content-wrapper" [idMember]="task.teamMember.id">
-  <div class="container-fluid">
-    <br />
+<div *ngIf="task" class="content-wrapper" [idMember]="task.teamMember?.id">
+    <div class="container-fluid">
+        <br />
 
-    <div class="row">
-      <div class="col-lg-8">
-        <div class="card">
-          <div class="card-box task-detail">
-            <div class="media mt-0 m-b-30">
-              <img
-                class="d-flex mr-3 rounded-circle"
-                alt="64x64"
-                [src]="hostPhoto + task.teamMember.user.user_id"
-                style="width: 48px; height: 48px"
-              />
-              <div class="media-body">
-                <h6
-                  *ngIf="
-                    authService.isManager() || authService.isProjectLeader()
-                  "
-                  class="mb-0 pull-right pointerr"
-                >
-                  <a (click)="redirectToTask()" style="color: #f88538">
-                    Task List</a
-                  >
-                  / Task Detail
-                </h6>
-                <h6
-                  *ngIf="authService.isMember() || authService.isLeader()"
-                  class="mb-0 pull-right pointerr"
-                >
-                  <a (click)="redirectToTasksMember()" style="color: #f88538">
-                    Task List</a
-                  >
-                  / Task Detail
-                </h6>
-                <h5 class="media-heading mb-0 mt-0" style="color: #f88538">
-                  {{ task.teamMember.user.firstName }}
-                  {{ task.teamMember.user.lastName }}
-                </h5>
-                <span class="badge badge-danger">{{ task.taskPriority }}</span>
-              </div>
-            </div>
-            <h4 class="m-b-20">{{ task?.taskName }}</h4>
-            <p>{{ task.descriptionTask }}</p>
-            <ul class="list-inline task-dates m-b-0 mt-5">
-              <li>
-                <h5 class="m-b-5" class="text-info">Start Date</h5>
-                <p>
-                  {{ formatDate(task?.creationDate) }}
-                  <small class="text-muted"
-                    >{{ formathoure(task?.creationDate) }}
-                  </small>
-                </p>
-              </li>
-              <li>
-                <h5 class="m-b-5" class="text-danger">Due Date</h5>
-                <p>
-                  {{ formatDate(task?.deleveryDate)
-                  }}<small class="text-muted">{{
-                    formathoure(task?.deleveryDate)
-                  }}</small>
-                </p>
-              </li>
-            </ul>
-            <div class="clearfix"></div>
-            <div class="task-tags mt-4">
-              <h5 class="">Created By</h5>
-              <div class="bootstrap-tagsinput">
-                {{ task?.createdBy }}
-              </div>
-            </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-box task-detail">
+                        <div class="media mt-0 m-b-30">
+                            <img
+                                    class="d-flex mr-3 rounded-circle"
+                                    alt="64x64"
+                                    [src]="hostPhoto + task.teamMember?.user?.user_id"
+                                    style="width: 48px; height: 48px"
+                            />
+                            <div class="media-body">
+                                <h6
+                                        *ngIf="authService.isManager() || authService.isProjectLeader()"
+                                        class="mb-0 pull-right pointerr"
+                                >
+                                    <a (click)="redirectToTask()" style="color: #f88538">
+                                        Task List</a
+                                    >
+                                    / Task Detail
+                                </h6>
+                                <h6
+                                        *ngIf="authService.isMember() || authService.isLeader()"
+                                        class="mb-0 pull-right pointerr"
+                                >
+                                    <a (click)="redirectToTasksMember()" style="color: #f88538">
+                                        Task List</a
+                                    >
+                                    / Task Detail
+                                </h6>
+                                <h5 class="media-heading mb-0 mt-0" style="color: #f88538">
+                                    {{ task.teamMember?.user?.firstName }}
+                                    {{ task.teamMember?.user?.lastName }}
+                                </h5>
+                                <span class="badge badge-danger">{{ task.taskPriority }}</span>
+                            </div>
+                        </div>
+                        <h4 class="m-b-20">{{ task?.taskName }}</h4>
+                        <p>{{ task.descriptionTask }}</p>
+                        <ul class="list-inline task-dates m-b-0 mt-5">
+                            <li>
+                                <h5 class="m-b-5" class="text-info">Start Date</h5>
+                                <p>
+                                    {{ formatDate(task?.creationDate) }}
+                                    <small class="text-muted"
+                                    >{{ formathoure(task?.creationDate) }}
+                                    </small>
+                                </p>
+                            </li>
+                            <li>
+                                <h5 class="m-b-5" class="text-danger">Due Date</h5>
+                                <p>
+                                    {{ formatDate(task?.deleveryDate)
+                                    }}<small class="text-muted">{{
+                                        formathoure(task?.deleveryDate)
+                                    }}</small>
+                                </p>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                        <div class="task-tags mt-4">
+                            <h5 class="">Created By</h5>
+                            <div class="bootstrap-tagsinput">
+                                {{ task?.createdBy }}
+                            </div>
+                        </div>
 
-            <div class="attached-files mt-4">
-              <h5 class="">Attached Files</h5>
-              <div *ngIf="fileStatus.status === 'progress'">
-                <div class="progress">
-                  <div
-                    [style.width.%]="fileStatus.percent"
-                    class="progress-bar progress-bar-animated"
-                    role="progressbar"
-                    aria-valuenow="50"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  >
-                    {{ fileStatus.requestType }} {{ fileStatus.percent }}
-                  </div>
-                </div>
-              </div>
+                        <div class="attached-files mt-4">
+                            <h5 class="">Attached Files</h5>
+                            <div *ngIf="fileStatus.status === 'progress'">
+                                <div class="progress">
+                                    <div
+                                            [style.width.%]="fileStatus.percent"
+                                            class="progress-bar progress-bar-animated"
+                                            role="progressbar"
+                                            aria-valuenow="50"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                    >
+                                        {{ fileStatus.requestType }} {{ fileStatus.percent }}
+                                    </div>
+                                </div>
+                            </div>
 
-              <form enctype="multipart/form-data">
-                <fieldset>
-                  <div
-                    *ngIf="!fileVisible || task.files?.length == '0'"
-                    class="form-group"
-                  >
-                    <div>
-                      <input
-                        type="file"
-                        (change)="onUploadFiles($event.target.files)"
-                        name="files"
-                        multiple
-                        class="form-control"
-                      />
+                            <form enctype="multipart/form-data">
+                                <fieldset>
+                                    <div
+                                            *ngIf="!fileVisible || task.files?.length == '0'"
+                                            class="form-group"
+                                    >
+                                        <div>
+                                            <input
+                                                    type="file"
+                                                    (change)="onUploadFiles($event.target.files)"
+                                                    name="files"
+                                                    multiple
+                                                    class="form-control"
+                                            />
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                            <br />
+                            <div class="files-list" *ngIf="task.files?.length > 0">
+                                <div *ngFor="let filename of task.files" class="file-box">
+                                    <a (click)="onDownloadFile(filename)"
+                                    ><img
+                                            src="assets/file.png"
+                                            class="img-responsive img-thumbnail"
+                                            alt="attached-img"
+                                    /></a>
+                                    <p
+                                            (click)="onDownloadFile(filename)"
+                                            class="font-13 mb-1 text-muted"
+                                    >
+                                        <small> {{ filename }} </small>
+                                    </p>
+                                </div>
+
+                                <div class="file-box ml-3">
+                                    <a (click)="showAadFile()"
+                                    ><span class="add-new-plus"><i class="fa fa-plus"></i></span
+                                    ></a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </fieldset>
-              </form>
-              <br />
-              <div class="files-list" *ngIf="task.files?.length > 0">
-                <div *ngFor="let filename of task.files" class="file-box">
-                  <a (click)="onDownloadFile(filename)"
-                    ><img
-                      src="assets/file.png"
-                      class="img-responsive img-thumbnail"
-                      alt="attached-img"
-                  /></a>
-                  <p
-                    (click)="onDownloadFile(filename)"
-                    class="font-13 mb-1 text-muted"
-                  >
-                    <small> {{ filename }} </small>
-                  </p>
                 </div>
-
-                <div class="file-box ml-3">
-                  <a (click)="showAadFile()"
-                    ><span class="add-new-plus"><i class="fa fa-plus"></i></span
-                  ></a>
-                </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <!-- end col -->
-      <div class="col-lg-4">
-        <div class="card">
-          <div class="card-box">
-            <h4 class="header-title m-b-30">
-              Comments ({{ task.comments.length }})
-            </h4>
+            <!-- end col -->
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-box">
+                        <h4 class="header-title m-b-30">
+                            Comments ({{ task.comments?.length }})
+                        </h4>
 
-            <div *ngFor="let comment of task.comments">
-              <div class="media m-b-20">
-                <div class="d-flex mr-3">
-                  <a
-                    ><img
-                      class="media-object rounded-circle thumb-sm"
-                      alt="64x64"
-                      [src]="hostPhoto + comment.user.user_id"
-                  /></a>
-                </div>
-                <div class="media-body">
-                  <h5 class="mt-0">
-                    {{ comment.user.firstName }} {{ comment.user.lastName }}
-                  </h5>
-                  <p class="font-13 text-muted mb-0">
-                    <a class="text-dark"></a> {{ comment?.content }}.
-                  </p>
-                  <div *ngIf="comment.visible" class="media-body">
-                    <form
-                      [formGroup]="commentForm"
-                      (ngSubmit)="onSubmit(task.id)"
-                    >
-                      <input
-                        type="content"
-                        formControlName="content"
-                        class="form-control"
-                        [ngClass]="{
+                        <div *ngFor="let comment of task.comments">
+                            <div class="media m-b-20">
+                                <div class="d-flex mr-3">
+                                    <a
+                                    ><img
+                                            class="media-object rounded-circle thumb-sm"
+                                            alt="64x64"
+                                            [src]="hostPhoto + comment.user?.user_id"
+                                    /></a>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="mt-0">
+                                        {{ comment.user?.firstName }} {{ comment.user?.lastName }}
+                                    </h5>
+                                    <p class="font-13 text-muted mb-0">
+                                        <a class="text-dark"></a> {{ comment?.content }}.
+                                    </p>
+                                    <div *ngIf="comment.visible" class="media-body">
+                                        <form
+                                                [formGroup]="commentForm"
+                                                (ngSubmit)="onSubmit(task.id)"
+                                        >
+                                            <input
+                                                    type="content"
+                                                    formControlName="content"
+                                                    class="form-control"
+                                                    [ngClass]="{
                           'is-invalid': submitted && f.content.errors
                         }"
-                        aria-label="comment"
-                      />
+                                                    aria-label="comment"
+                                            />
 
-                      <div class="mt-2 text-right">
-                        <button
-                          type="submit"
-                          [disabled]=""
-                          class="btn btn-sm btn-custom waves-effect waves-light"
-                        >
-                          update
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                  <div *ngIf="comment.update" class="media m-b-20">
-                    <div class="d-flex mr-3">
-                      <a
-                        ><img
-                          class="media-object rounded-circle thumb-sm"
-                          alt="64x64"
-                          [src]="hostPhoto + employee.user_id"
-                      /></a>
+                                            <div class="mt-2 text-right">
+                                                <button
+                                                        type="submit"
+                                                        [disabled]=""
+                                                        class="btn btn-sm btn-custom waves-effect waves-light"
+                                                >
+                                                    update
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div *ngIf="comment.update" class="media m-b-20">
+                                        <div class="d-flex mr-3">
+                                            <a
+                                            ><img
+                                                    class="media-object rounded-circle thumb-sm"
+                                                    alt="64x64"
+                                                    [src]="hostPhoto + employee?.user_id"
+                                            /></a>
+                                        </div>
+
+                                        <div class="media-body">
+                                            <!--- <form [formGroup]="updateForm" (ngSubmit)="onSubmit(task.id)">
+                                                                      <input type="content" formControlName="content" class="form-control"
+                                                                          placeholder="Some text value..." placeholder="comment"
+                                                                          aria-label="comment">
+                                                                      <div class="mt-2 text-right">
+                                                                          <button type="submit"
+                                                                              class="btn btn-sm btn-custom waves-effect waves-light">Send</button>
+
+                                                                      </div>
+
+
+                                                                  </form>-->
+
+                                            <input
+                                                    class="form-group col-sm-9"
+                                                    max="8"
+                                                    min="-4"
+                                                    name="form-0-quantity"
+                                                    value="0"
+                                                    type="number"
+                                                    #content
+                                            />
+                                            <button
+                                                    type="submit"
+                                                    (click)="onSubmit(task.id)"
+                                                    class="btn btn-sm btn-custom waves-effect waves-light"
+                                            >
+                                                Send
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <a
+                                            (click)="comment.visible = !comment.visible"
+                                            (click)="edit(comment.id)"
+                                            class="text-info font-13 pointerr"
+                                            [disabled]="comment.isReading"
+                                    >
+                                        Update</a
+                                    >
+                                    &nbsp;
+                                    <a
+                                            (click)="deleteComment(comment.id)"
+                                            class="text-danger font-13 pointerr"
+                                    >Remove</a
+                                    >
+                                    &nbsp;
+                                    <a class="font-13 text-muted mb-0"
+                                    >{{ formatDate(comment?.createdDate) }}
+                                        {{ formathoure(comment?.createdDate) }}</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div *ngIf="employee" class="media m-b-20">
+                            <div class="d-flex mr-3">
+                                <a
+                                ><img
+                                        class="media-object rounded-circle thumb-sm"
+                                        alt="64x64"
+                                        [src]="hostPhoto + employee?.user_id"
+                                /></a>
+                            </div>
+                            <a
+                                    *ngIf="showMe"
+                                    (click)="showMe=!showMe"
+                                    class="text-info font-13 pointerr"
+                            >Add Comment</a
+                            >
+                        </div>
+
+                        <div class="media m-b-20">
+                            <form [formGroup]="commentForm" (ngSubmit)="onSubmit(task.id)">
+                                <input
+                                        type="content"
+                                        formControlName="content"
+                                        class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.content.errors }"
+                                        placeholder="Some text value..."
+                                        placeholder="comment"
+                                        aria-label="comment"
+                                />
+                                <div class="mt-2 text-right">
+                                    <button
+                                            type="submit"
+                                            class="btn btn-sm btn-custom waves-effect waves-light"
+                                    >
+                                        Send
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-
-                    <div class="media-body">
-                      <!--- <form [formGroup]="updateForm" (ngSubmit)="onSubmit(task.id)">
-                                                <input type="content" formControlName="content" class="form-control"
-                                                    placeholder="Some text value..." placeholder="comment"
-                                                    aria-label="comment">
-                                                <div class="mt-2 text-right">
-                                                    <button type="submit"
-                                                        class="btn btn-sm btn-custom waves-effect waves-light">Send</button>
-
-                                                </div>
-
-
-                                            </form>-->
-
-                      <input
-                        class="form-group col-sm-9"
-                        max="8"
-                        min="-4"
-                        name="form-0-quantity"
-                        value="0"
-                        type="number"
-                        #content
-                      />
-                      <button
-                        type="submit"
-                        (click)="onSubmit(task.id)"
-                        class="btn btn-sm btn-custom waves-effect waves-light"
-                      >
-                        Send
-                      </button>
-                    </div>
-                  </div>
-
-                  <a
-                    (click)="comment.visible = !comment.visible"
-                    (click)="edit(comment.id)"
-                    class="text-info font-13 pointerr"
-                    [disabled]="comment.isReading"
-                  >
-                    Update</a
-                  >
-                  &nbsp;
-                  <a
-                    (click)="deleteComment(comment.id)"
-                    class="text-danger font-13 pointerr"
-                    >Remove</a
-                  >
-                  &nbsp;
-                  <a class="font-13 text-muted mb-0"
-                    >{{ formatDate(comment?.createdDate) }}
-                    {{ formathoure(comment?.createdDate) }}</a
-                  >
                 </div>
-              </div>
             </div>
-            <br />
-            <div *ngIf="employee" class="media m-b-20">
-              <div class="d-flex mr-3">
-                <a
-                  ><img
-                    class="media-object rounded-circle thumb-sm"
-                    alt="64x64"
-                    [src]="hostPhoto + employee.user_id"
-                /></a>
-              </div>
-              <a
-                *ngIf="showMe"
-                (click)="ShowAddComment()"
-                class="text-info font-13 pointerr"
-                >Add a comment</a
-              >
-
-              <div *ngIf="!showMe" class="media-body">
-                <form
-                  [update]="false"
-                  [formGroup]="commentForm"
-                  (ngSubmit)="onSubmit(task.id)"
-                >
-                  <input
-                    formControlName="content"
-                    class="form-control"
-                    placeholder="comment"
-                    aria-label="comment"
-                  />
-
-                  <div class="mt-2 text-right">
-                    <button
-                      type="submit"
-                      [disabled]="!commentForm.valid"
-                      class="btn btn-sm btn-custom waves-effect waves-light"
-                    >
-                      Add comment
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+            <!-- end col -->
         </div>
-      </div>
-      <!-- end col -->
+        <!-- end row -->
     </div>
-    <!-- end row -->
-  </div>
-  <!-- container -->
+    <!-- end container -->
 </div>
+<!-- end content -->

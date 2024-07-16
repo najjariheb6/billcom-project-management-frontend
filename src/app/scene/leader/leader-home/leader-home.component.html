@@ -1,62 +1,61 @@
 <div class="content-wrapper">
-  <div class="container-fluid">
-    <br />
-    <div class="row">
-      <div class="col-lg-2 left">
-        <div class="card-header">
-          <h5 class="text-center" style="color: #f88538">Period</h5>
+    <div class="container-fluid">
+        <br/>
+        <div class="row">
+            <div class="col-lg-2 left">
+                <div class="card-header">
+                    <h5 class="text-center" style="color: #f88538">Period</h5>
 
-          <ul (click)="getTeamList()" class="card">
-            <strong class="nav-link pointerr"> work in progress </strong>
-          </ul>
-          <ul (click)="FutureList()" class="card">
-            <strong class="nav-link pointerr"> work not started </strong>
-          </ul>
-          <ul (click)="PassedList()" class="card">
-            <strong class="nav-link pointerr"> closed work </strong>
-          </ul>
-        </div>
-      </div>
-
-      <div class="col-lg-9 right">
-        <div class="card">
-          <div class="card-body">
-            <div class="table-responsive project-list">
-              <div class="col-lg-3 float-right">
-                <div class="input-group">
-                  <input
-                    type="search"
-                    (ngModelChange)="searchTeams(key.value)"
-                    #key="ngModel"
-                    ngModel
-                    name="key"
-                    id="searchName"
-                    class="form-control"
-                    placeholder="Search Team..."
-                    required
-                  />
-
-                  <div class="input-group-append">
-                    <button class="btn btn-secondary">
-                      <i class="fa fa-search"></i>
-                    </button>
-                  </div>
+                    <ul (click)="getTeamList()" class="card">
+                        <strong class="nav-link pointerr"> work in progress </strong>
+                    </ul>
+                    <ul (click)="FutureList()" class="card">
+                        <strong class="nav-link pointerr"> work not started </strong>
+                    </ul>
+                    <ul (click)="PassedList()" class="card">
+                        <strong class="nav-link pointerr"> closed work </strong>
+                    </ul>
                 </div>
-              </div>
+            </div>
 
-              <table class="table project-table table-centered table-nowrap">
-                <thead>
-                  <br />
-                  <tr>
-                    <th scope="col" style="color: #f88538">Team</th>
-                    <th scope="col" style="color: #f88538">Due date</th>
-                    <th scope="col" style="color: #f88538">Team Member</th>
-                    <th scope="col" style="color: #f88538">Tasks</th>
-                    <th scope="col" style="color: #f88538">Events</th>
-                  </tr>
-                </thead>
-                <tbody
-                  *ngFor="
+            <div class="col-lg-9 right">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive project-list">
+                            <div class="col-lg-3 float-right">
+                                <div class="input-group">
+                                    <input
+                                            type="search"
+                                            (ngModelChange)="searchTeams(key.value)"
+                                            #key="ngModel"
+                                            ngModel
+                                            name="key"
+                                            id="searchName"
+                                            class="form-control"
+                                            placeholder="Search Team..."
+                                            required
+                                    />
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <table class="table project-table table-centered table-nowrap">
+                                <thead>
+                                <br/>
+                                <tr>
+                                    <th scope="col" style="color: #f88538">Team</th>
+                                    <th scope="col" style="color: #f88538">Due date</th>
+                                    <th scope="col" style="color: #f88538">Team Member</th>
+                                    <th scope="col" style="color: #f88538">Tasks</th>
+                                    <th scope="col" style="color: #f88538">Events</th>
+                                </tr>
+                                </thead>
+                                <tbody
+                                        *ngFor="
                     let team of teams
                       | paginate
                         : {
@@ -67,68 +66,69 @@
                           };
                     let index = index
                   "
-                >
-                  <tr>
-                    <td (click)="goToTeamDetails(team.id)">
-                      {{ team?.teamName }}
-                    </td>
-                    <td (click)="goToTeamDetails(team.id)">
-                      {{ formatDate(team?.dueDate) }}
-                    </td>
+                                >
+                                <tr>
+                                    <td (click)="goToTeamDetails(team.id)">
+                                        {{ team?.teamName }}
+                                    </td>
+                                    <td (click)="goToTeamDetails(team.id)">
+                                        {{ formatDate(team?.dueDate) }}
+                                    </td>
 
-                    <td>
-                      <div class="team">
-                        <a
-                          *ngFor="let t of team?.teamMember"
-                          href="javascript: void(0);"
-                          class="team-member"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title=""
-                          data-original-title="Roger Drake"
-                        >
-                          <img
-                            [src]="hostPhoto + t.user.user_id"
-                            (click)="goToTask(t.id, team.id)"
-                            class="rounded-circle avatar-xs"
-                            alt=""
-                          />
-                        </a>
-                      </div>
-                    </td>
+                                    <td>
+                                        <div class="team">
+                                            <a
+                                                    *ngFor="let t of team?.teamMember"
+                                                    href="javascript: void(0);"
+                                                    class="team-member"
+                                                    data-toggle="tooltip"
+                                                    data-placement="top"
+                                                    title=""
+                                                    data-original-title="Roger Drake"
+                                            >
+                                                <img
+                                                        *ngIf="t.user"
+                                                        [src]="hostPhoto + t.user.user_id"
+                                                        (click)="goToTask(t.id, team.id)"
+                                                        class="rounded-circle avatar-xs"
+                                                        alt=""
+                                                />
+                                            </a>
+                                        </div>
+                                    </td>
 
-                    <td>
-                      <a
-                        ><i
-                          (click)="showTaskTeam(team.id)"
-                          class="nav-icon fas fa-edit"
-                        ></i
-                      ></a>
-                    </td>
+                                    <td>
+                                        <a
+                                        ><i
+                                                (click)="showTaskTeam(team.id)"
+                                                class="nav-icon fas fa-edit"
+                                        ></i
+                                        ></a>
+                                    </td>
 
-                    <td>
-                      <a (click)="goToCalendar(team.id)"
-                        ><i class="nav-icon fas fa-calendar-alt"></i
-                      ></a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                                    <td>
+                                        <a (click)="goToCalendar(team.id)"
+                                        ><i class="nav-icon fas fa-calendar-alt"></i
+                                        ></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <div class="pull-right">
+                                <pagination-controls
+                                        class="custom-pagination"
+                                        id="listing_pagination"
+                                        maxSize="10"
+                                        directionLinks="true"
+                                        (pageChange)="page = $event"
+                                ></pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-              <div class="pull-right">
-                <pagination-controls
-                  class="custom-pagination"
-                  id="listing_pagination"
-                  maxSize="10"
-                  directionLinks="true"
-                  (pageChange)="page = $event"
-                ></pagination-controls>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>

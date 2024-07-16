@@ -1,72 +1,65 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable, Subject} from 'rxjs';
+import {tap} from 'rxjs/operators';
+import {environment} from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class EventService {
-  //host = 'http://localhost:8080/event/'
-  constructor(private httpClient: HttpClient) { }
-  private refresh = new Subject<void>();
+    private refresh = new Subject<void>();
 
-  get refreshNeeded() {
-    return this.refresh;
-  }
-  public liste(idTeam:number): Observable<any> {
-    return this.httpClient.get<any>(environment.urlConfig + `event/eventTeamList/${idTeam}`);
-  }
+    //  host = 'http://localhost:8080/event/'
+    constructor(private httpClient: HttpClient) {
+    }
 
-  public save(idTeam:number,event: Event): Observable<Event> {
-    return this.httpClient
-     .put<Event>(environment.urlConfig + `event/addEventToList/${idTeam}`, event  )
-     .pipe(
-       tap(() => {
-         this.refresh.next();
-       })
-     );
+    get refreshNeeded() {
+        return this.refresh;
+    }
 
+    public liste(idTeam: number): Observable<any> {
+        return this.httpClient.get<any>(environment.urlConfig + `event/eventTeamList/${idTeam}`);
+    }
 
-
-  
- }
-
- public update(idTeam:number, event: any): Observable<any> {
-  return this.httpClient
-   .put<any>(environment.urlConfig + `event/updateEvent/${idTeam}`,event  )
-   .pipe(
-     tap(() => {
-       this.refresh.next();
-     })
-   );}
-
-   public updateDetailEvent(idTeam:number, event: any): Observable<any> {
-    return this.httpClient
-     .put<any>(environment.urlConfig + `event/updateDetailEvent/${idTeam}`,event  )
-     .pipe(
-       tap(() => {
-         this.refresh.next();
-       })
-     );}
+    public save(idTeam: number, event: Event): Observable<Event> {
+        return this.httpClient
+            .put<Event>(environment.urlConfig + `event/addEventToList/${idTeam}`, event)
+            .pipe(tap(() => {
+                this.refresh.next();
+            }));
 
 
-   public detail(id: number): Observable<any> {
-    return this.httpClient.get<any>(environment.urlConfig + `event/getEventDetail/${id}`)}
-  
-   public deleteEventFromList(idTeam:number, event: any): Observable<any> {
-    return this.httpClient
-     .put<any>(environment.urlConfig + `event/deleteEventFromList/${idTeam}`, event)
-     .pipe(
-       tap(() => {
-         this.refresh.next();
-       })
-     );}
+    }
+
+    public update(idTeam: number, event: any): Observable<any> {
+        return this.httpClient
+            .put<any>(environment.urlConfig + `event/updateEvent/${idTeam}`, event)
+            .pipe(tap(() => {
+                this.refresh.next();
+            }));
+    }
+
+    public updateDetailEvent(idTeam: number, event: any): Observable<any> {
+        return this.httpClient
+            .put<any>(environment.urlConfig + `event/updateDetailEvent/${idTeam}`, event)
+            .pipe(tap(() => {
+                this.refresh.next();
+            }));
+    }
 
 
+    public detail(id: number): Observable<any> {
+        return this.httpClient.get<any>(environment.urlConfig + `event/getEventDetail/${id}`);
+    }
 
-
+    public deleteEventFromList(idTeam: number, event: any): Observable<any> {
+        return this.httpClient
+            .put<any>(environment.urlConfig + `event/deleteEventFromList/${idTeam}`, event)
+            .pipe(tap(() => {
+                this.refresh.next();
+            }));
+    }
 
 
 }

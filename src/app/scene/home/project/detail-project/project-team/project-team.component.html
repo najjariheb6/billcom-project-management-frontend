@@ -6,21 +6,20 @@
 
 <br />
 <br />
-
 <div class="row justify-content-center">
   <div class="col-lg-2.75" *ngFor="let team of project.project.teamList">
     <div class="card card-one">
       <div class="header" (click)="goToTeamDetails(team.id)">
         <div class="avatar">
-          <img [src]="hostPhoto + team.leader.user.user_id" alt="" />
+<!--          <img [src]="hostPhoto + team.leader.user.user_id" alt="" />-->
+
         </div>
       </div>
       <h3>{{ team.teamName }}</h3>
       <div class="desc">
-        Team Lead : {{ team.leader.user.firstName }}
-        {{ team.leader.user.lastName }}
+          Team Lead : {{ team.leader.user?.firstName || 'N/A' }}
+          {{ team.leader.user?.lastName || 'N/A' }}
       </div>
-
       <ul class="agent-contact-details">
         <li>
           <i class="fa fa-mobile" aria-hidden="true"></i>
@@ -31,7 +30,6 @@
           >&nbsp;&nbsp;&nbsp;<span>{{ team.leader.user.email }} </span>
         </li>
       </ul>
-
       <div class="footer">
         <a (click)="removeTeam(team.id)"><i class="fas fa-user-times"></i></a>
       </div>

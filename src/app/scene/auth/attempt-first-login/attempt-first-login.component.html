@@ -1,76 +1,38 @@
-<div class="container-fluid px-10 px-md-5 px-lg-1 px-xl-5 py-4 mx-auto">
-  <div class="card card0 ">
-    <div class="row d-flex">
-      <div class="col-lg-6">
-        <div class="card1 pb-5">
+<div class="update-password-container">
+    <div class="card update-password-card">
+        <div class="update-password-header">
+            <img src="assets/logo.png" alt="The Billcom Company" class="logo">
+            <h2 class="company-name">The Billcom Company</h2>
+        </div>
+        <div class="update-password-body">
+            <h4 class="update-password-title">Update Password</h4>
+            <form [formGroup]="updatePasswordForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="password">Enter Received Password</label>
+                    <input type="password" formControlName="password" class="form-control" id="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Password is required</div>
+                        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">Enter New Password</label>
+                    <input type="password" formControlName="newPassword" class="form-control" id="newPassword" [ngClass]="{ 'is-invalid': submitted && f.newPassword.errors }">
+                    <div *ngIf="submitted && f.newPassword.errors" class="invalid-feedback">
+                        <div *ngIf="f.newPassword.errors.required">Password is required</div>
+                        <div *ngIf="f.newPassword.errors.minlength">Password must be at least 6 characters</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm New Password</label>
+                    <input type="password" formControlName="confirmPassword" class="form-control" id="confirmPassword" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }">
+                    <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                        <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                        <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Update Password</button>
+            </form>
         </div>
     </div>
-
-      <div class="card2 card border-0 px-4 py-5">
-        <div class="row mb-4 px-3">
-          <h5 class="mb-0 mr-4 mt-2">Welcome! </h5>
-        </div>
-        <h6 class="mb-0 mr-4 mt-2">this is your first login! Enter a password that you have receive and update your
-          password please! </h6>
-
-        <div class="row px-2 mb-4">
-          <div class="row px-3 justify-content-center mt-4 mb-5 border-line"> <img src="assets/logo.png" class="image">
-          </div>
-        </div>
-        <form [formGroup]="updatePasswordForm" (submit)="onSubmit()">
-
-          <div class="row px-3"> <label class="mb-1"></label>
-            <h6 class="mb-0 text-sm">Enter Received Password</h6>
-            <input type="password" formControlName="password" class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-              <div *ngIf="f.password.errors.required">Password is required</div>
-              <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-            </div>
-          </div>
-          <div class="row px-3"> <label class="mb-1"></label>
-            <h6 class="mb-0 text-sm">Enter Password</h6>
-            <input type="password" formControlName="newPassword" class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.newPassword.errors }" />
-            <div *ngIf="submitted && f.newPassword.errors" class="invalid-feedback">
-              <div *ngIf="f.newPassword.errors.required">Password is required</div>
-              <div *ngIf="f.newPassword.errors.minlength">Password must be at least 6 characters</div>
-            </div>
-          </div>
-          <div class="row px-3"> <label class="mb-1"></label>
-            <h6 class="mb-0 text-sm">Confirm Password</h6>
-            <input type="password" formControlName="confirmPassword" class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
-            <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-              <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
-              <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
-            </div>
-          </div>
-
-          <div class="row  px-3">
-            <div>
-              <button class="btn btn-sm mr-1"> Update Password</button> </div>
-            <div class="custom-control custom-checkbox custom-control-inline"> <input id="chk1"
-              type="checkbox" name="chk" class="custom-control-input">  </div> <a
-          routerLink="/login" class="ml-auto mb-0 text-sm">Login</a>
-            </div>
-            
-            
-
-        </form>
-      
-      </div>
-
-
-    </div>
-    <div class="bg-orange py-3">
-      <div class="row px-3"> <small class="ml-4 ml-sm-5 mb-2">Facebook</small><small
-          class="ml-4 ml-sm-5 mb-2">Linkedin</small>
-        <div class="social-contact ml-4 ml-sm-auto"> <span class="fa fa-facebook mr-4 text-sm"></span> <span
-            class="fa fa-google-plus mr-4 text-sm"></span> <span class="fa fa-linkedin mr-4 text-sm"></span> <span
-            class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span> </div>
-      </div>
-    </div>
-
-  </div>
 </div>
