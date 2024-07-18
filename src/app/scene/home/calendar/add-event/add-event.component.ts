@@ -16,64 +16,46 @@ export class AddEventComponent implements OnInit {
   eventForm: FormGroup
   submitted = false;
 
-  constructor(public webNotifSocket :WebSocketNotificationService ,public dialogRef: MatDialogRef<any>, private notifInteraction : NotifInteractionService ,private formBuilder: FormBuilder,private notifyService: NotficationService,private eventService: EventService,@Inject(MAT_DIALOG_DATA) public data) { }
+  constructor(public webNotifSocket:WebSocketNotificationService,
+              public dialogRef: MatDialogRef<any>,
+              private notifInteraction: NotifInteractionService,
+              private formBuilder: FormBuilder,
+              private notifyService: NotficationService,
+              private eventService: EventService,
+              @Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit(): void {
     this.eventForm = this.formBuilder.group({
       title: ['', Validators.required],
-      start: ['', [Validators.required,dateValidator]],
-      end: ['', [Validators.required,dueDateValidator]],
-
+      start: ['', [Validators.required, dateValidator]],
+      end: ['', [Validators.required, dueDateValidator]],
     }, {
-      validator: [dueDateValidator('start','end'),
+      validator: [dueDateValidator('start', 'end'),
        dateValidator('start')]
-     
-
-    }, 
-
+    },
     );
-
-
-
-
-
-
   }
-  
-  close() {
+
+  close = () => {
     this.dialogRef.close();
-
   }
-  get  f() { return this.eventForm.controls; }
-  onSubmit() {
 
+  get  f() { return this.eventForm.controls; }
+
+  onSubmit = () => {
     this.submitted = true;
-  
     if (this.eventForm.invalid){
       return ;
     } else {
-  
-  
       this.eventService.save(this.data, this.eventForm.value).subscribe(
         data => {
-            this.notifyService.showSuccess("Event added successfully !!", "Congratulations!")
-            this.dialogRef.close()
-
-
+            this.notifyService.showSuccess('Event added successfully !!', 'Congratulations!');
+            this.dialogRef.close();
         },
         err => {
-
             console.log(err);
-
         }
     );
     }
-  
-  
-  
-  
-  
-  
   }
-
 }

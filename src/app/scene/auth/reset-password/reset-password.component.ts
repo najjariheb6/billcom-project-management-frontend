@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { AuthService } from 'src/app/rest-service/auth.service';
-import { CheckCodeComponent } from '../check-code/check-code.component';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {Router} from '@angular/router';
+import {NgxSpinnerService} from 'ngx-spinner';
+import {AuthService} from 'src/app/rest-service/auth.service';
+import {CheckCodeComponent} from '../check-code/check-code.component';
 
 @Component({
-    selector: 'app-reset-password',
-    templateUrl: './reset-password.component.html',
-    styleUrls: ['./reset-password.component.scss']
+    selector: 'app-reset-password', templateUrl: './reset-password.component.html', styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent implements OnInit {
 
@@ -19,20 +17,22 @@ export class ResetPasswordComponent implements OnInit {
     submitted = false;
     isLogged = false;
     test = false;
-    role: String[]
-    constructor(private formBuilder: FormBuilder, private _auth: AuthService,
-        private router: Router, private spinner: NgxSpinnerService, private dialog?: MatDialog) { }
+    role: string[];
+
+    constructor(private formBuilder: FormBuilder, private _auth: AuthService, private router: Router, private spinner: NgxSpinnerService, private dialog?: MatDialog) {
+    }
+
+    get f() {
+        return this.ResetForm.controls;
+    }
 
     ngOnInit() {
         this.ResetForm = this.formBuilder.group({
-            email: ['', Validators.required, , Validators.pattern("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")],
+            email: ['', Validators.required, , Validators.pattern('^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$')],
         });
 
 
     }
-
-
-    get f() { return this.ResetForm.controls; }
 
     onSubmit() {
         this.submitted = true;
@@ -44,7 +44,7 @@ export class ResetPasswordComponent implements OnInit {
             this.isLogged = true;
             this.spinner.show();
 
-            const email = this.ResetForm.value.email
+            const email = this.ResetForm.value.email;
             this._auth.sendEmail(email)
                 .subscribe(data => {
 
@@ -59,15 +59,13 @@ export class ResetPasswordComponent implements OnInit {
                     const dialogRef = this.dialog.open(CheckCodeComponent, dialogConfig);
 
                     dialogRef.afterClosed().subscribe(result => {
-                        //this.ResetForm.reset();
+                        // this.ResetForm.reset();
 
                     });
-                },
-                    err => {
-                        this.isLogged = false;
-                        this.onReset()
-                    }
-                );
+                }, err => {
+                    this.isLogged = false;
+                    this.onReset();
+                });
 
 
         }

@@ -1,6 +1,6 @@
-<div *ngIf="task" class="content-wrapper" [idMember]="task.teamMember?.id">
+<div *ngIf="task" [idMember]="task.teamMember?.id" class="content-wrapper">
     <div class="container-fluid">
-        <br />
+        <br/>
 
         <div class="row">
             <div class="col-lg-8">
@@ -8,9 +8,9 @@
                     <div class="card-box task-detail">
                         <div class="media mt-0 m-b-30">
                             <img
-                                    class="d-flex mr-3 rounded-circle"
-                                    alt="64x64"
                                     [src]="hostPhoto + task.teamMember?.user?.user_id"
+                                    alt="64x64"
+                                    class="d-flex mr-3 rounded-circle"
                                     style="width: 48px; height: 48px"
                             />
                             <div class="media-body">
@@ -43,7 +43,7 @@
                         <p>{{ task.descriptionTask }}</p>
                         <ul class="list-inline task-dates m-b-0 mt-5">
                             <li>
-                                <h5 class="m-b-5" class="text-info">Start Date</h5>
+                                <h5 class="m-b-5 text-info">Start Date</h5>
                                 <p>
                                     {{ formatDate(task?.creationDate) }}
                                     <small class="text-muted"
@@ -54,7 +54,8 @@
                             <li>
                                 <h5 class="m-b-5" class="text-danger">Due Date</h5>
                                 <p>
-                                    {{ formatDate(task?.deleveryDate)
+                                    {{
+                                        formatDate(task?.deleveryDate)
                                     }}<small class="text-muted">{{
                                         formathoure(task?.deleveryDate)
                                     }}</small>
@@ -75,11 +76,11 @@
                                 <div class="progress">
                                     <div
                                             [style.width.%]="fileStatus.percent"
+                                            aria-valuemax="100"
+                                            aria-valuemin="0"
+                                            aria-valuenow="50"
                                             class="progress-bar progress-bar-animated"
                                             role="progressbar"
-                                            aria-valuenow="50"
-                                            aria-valuemin="0"
-                                            aria-valuemax="100"
                                     >
                                         {{ fileStatus.requestType }} {{ fileStatus.percent }}
                                     </div>
@@ -94,24 +95,24 @@
                                     >
                                         <div>
                                             <input
-                                                    type="file"
                                                     (change)="onUploadFiles($event.target.files)"
-                                                    name="files"
-                                                    multiple
                                                     class="form-control"
+                                                    multiple
+                                                    name="files"
+                                                    type="file"
                                             />
                                         </div>
                                     </div>
                                 </fieldset>
                             </form>
-                            <br />
-                            <div class="files-list" *ngIf="task.files?.length > 0">
+                            <br/>
+                            <div *ngIf="task.files?.length > 0" class="files-list">
                                 <div *ngFor="let filename of task.files" class="file-box">
                                     <a (click)="onDownloadFile(filename)"
                                     ><img
-                                            src="assets/file.png"
-                                            class="img-responsive img-thumbnail"
                                             alt="attached-img"
+                                            class="img-responsive img-thumbnail"
+                                            src="assets/file.png"
                                     /></a>
                                     <p
                                             (click)="onDownloadFile(filename)"
@@ -144,9 +145,9 @@
                                 <div class="d-flex mr-3">
                                     <a
                                     ><img
-                                            class="media-object rounded-circle thumb-sm"
-                                            alt="64x64"
                                             [src]="hostPhoto + comment.user?.user_id"
+                                            alt="64x64"
+                                            class="media-object rounded-circle thumb-sm"
                                     /></a>
                                 </div>
                                 <div class="media-body">
@@ -158,24 +159,24 @@
                                     </p>
                                     <div *ngIf="comment.visible" class="media-body">
                                         <form
-                                                [formGroup]="commentForm"
                                                 (ngSubmit)="onSubmit(task.id)"
+                                                [formGroup]="commentForm"
                                         >
                                             <input
-                                                    type="content"
-                                                    formControlName="content"
-                                                    class="form-control"
                                                     [ngClass]="{
                           'is-invalid': submitted && f.content.errors
                         }"
                                                     aria-label="comment"
+                                                    class="form-control"
+                                                    formControlName="content"
+                                                    type="content"
                                             />
 
                                             <div class="mt-2 text-right">
                                                 <button
-                                                        type="submit"
                                                         [disabled]=""
                                                         class="btn btn-sm btn-custom waves-effect waves-light"
+                                                        type="submit"
                                                 >
                                                     update
                                                 </button>
@@ -186,9 +187,9 @@
                                         <div class="d-flex mr-3">
                                             <a
                                             ><img
-                                                    class="media-object rounded-circle thumb-sm"
-                                                    alt="64x64"
                                                     [src]="hostPhoto + employee?.user_id"
+                                                    alt="64x64"
+                                                    class="media-object rounded-circle thumb-sm"
                                             /></a>
                                         </div>
 
@@ -207,18 +208,18 @@
                                                                   </form>-->
 
                                             <input
+                                                    #content
                                                     class="form-group col-sm-9"
                                                     max="8"
                                                     min="-4"
                                                     name="form-0-quantity"
-                                                    value="0"
                                                     type="number"
-                                                    #content
+                                                    value="0"
                                             />
                                             <button
-                                                    type="submit"
                                                     (click)="onSubmit(task.id)"
                                                     class="btn btn-sm btn-custom waves-effect waves-light"
+                                                    type="submit"
                                             >
                                                 Send
                                             </button>
@@ -228,8 +229,8 @@
                                     <a
                                             (click)="comment.visible = !comment.visible"
                                             (click)="edit(comment.id)"
-                                            class="text-info font-13 pointerr"
                                             [disabled]="comment.isReading"
+                                            class="text-info font-13 pointerr"
                                     >
                                         Update</a
                                     >
@@ -247,39 +248,39 @@
                                 </div>
                             </div>
                         </div>
-                        <br />
+                        <br/>
                         <div *ngIf="employee" class="media m-b-20">
                             <div class="d-flex mr-3">
                                 <a
                                 ><img
-                                        class="media-object rounded-circle thumb-sm"
-                                        alt="64x64"
                                         [src]="hostPhoto + employee?.user_id"
+                                        alt="64x64"
+                                        class="media-object rounded-circle thumb-sm"
                                 /></a>
                             </div>
                             <a
-                                    *ngIf="showMe"
                                     (click)="showMe=!showMe"
+                                    *ngIf="showMe"
                                     class="text-info font-13 pointerr"
                             >Add Comment</a
                             >
                         </div>
 
                         <div class="media m-b-20">
-                            <form [formGroup]="commentForm" (ngSubmit)="onSubmit(task.id)">
+                            <form (ngSubmit)="onSubmit(task.id)" [formGroup]="commentForm">
                                 <input
-                                        type="content"
-                                        formControlName="content"
-                                        class="form-control"
                                         [ngClass]="{ 'is-invalid': submitted && f.content.errors }"
-                                        placeholder="Some text value..."
-                                        placeholder="comment"
                                         aria-label="comment"
+                                        class="form-control"
+                                        formControlName="content"
+                                        placeholder="comment"
+                                        placeholder="Some text value..."
+                                        type="content"
                                 />
                                 <div class="mt-2 text-right">
                                     <button
-                                            type="submit"
                                             class="btn btn-sm btn-custom waves-effect waves-light"
+                                            type="submit"
                                     >
                                         Send
                                     </button>

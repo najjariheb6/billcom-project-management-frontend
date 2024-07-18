@@ -1,95 +1,75 @@
-.card-header{
+.card-header {
     background-color: #f76809;
-    color: #fff;}
-.card-title{
-    text-align:center
-}
-.fas fa-minus{
     color: #fff;
-}
-.line {
-    height: 1px;
-    width: 45%;
-    background-color: #E0E0E0;
-    margin-top: 10px
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .card-title {
+        text-align: center;
+        flex-grow: 1;
+        font-size: 1.25rem;
+    }
+
+    .card-tools {
+        button {
+            color: #fff;
+
+            .fas {
+                font-size: 1rem;
+            }
+        }
+    }
 }
 
-.or {
-    width: 10%;
-    font-weight: bold
-}
+.card-body {
+    padding: 20px;
 
-.text-sm {
-    font-size: 14px !important
-}
+    .image-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
 
-::placeholder {
-    color: #BDBDBD;
-    opacity: 1;
-    font-weight: 300
-}
+        .success-image {
+            height: 200px;
+            width: 200px;
+        }
+    }
 
-:-ms-input-placeholder {
-    color: #BDBDBD;
-    font-weight: 300
-}
+    .form-group {
+        margin-bottom: 15px;
 
-::-ms-input-placeholder {
-    color: #BDBDBD;
-    font-weight: 300
-}
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.875rem;
+            color: #333;
+        }
 
-input,
-textarea {
-    padding: 10px 12px 10px 12px;
-    border: 1px solid lightgrey;
-    border-radius: 2px;
-    margin-bottom: 5px;
-    margin-top: 2px;
-    width: 100%;
-    box-sizing: border-box;
-    color: #2C3E50;
-    font-size: 14px;
-    letter-spacing: 1px
-}
+        .form-control {
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 0.875rem;
+            border: 1px solid #ccc;
 
-input:focus,
-textarea:focus {
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    border: 1px solid #f76809;
-    outline-width: 0
-}
+            &:focus {
+                border-color: #f76809;
+                outline: none;
+                box-shadow: none;
+            }
+        }
+    }
 
-button:focus {
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    outline-width: 0
-}
+    .btn {
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 1rem;
+        background: #f76809;
+        color: #fff;
+        border: none;
 
-a {
-    color: inherit;
-    cursor: pointer
+        &:hover {
+            background: #545454;
+        }
+    }
 }
-
-.btn-blue {
-    background-color: #f76809;
-    
-    width: 150px;
-    color: #fff;
-    border-radius: 2px
-}
-
-.btn btn-tool{
-    color: #fff;
-}
-.btn-sm {
-    background-color: #f76809;
-    
-    width: 100px;
-    color: #fff;
-    border-radius: 2px
-}
-

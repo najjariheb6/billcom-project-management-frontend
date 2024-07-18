@@ -1,27 +1,20 @@
 <div class="content-wrapper">
-  <div class="container-fluid">
-    <br>
-    <h6 *ngIf="authService.isManager() || authService.isProjectLeader() pointerr" class="mb-0 pull-right"> <a (click)="redirectToTeam()"   style="color: #f88538;"> Team</a>  / calendar </h6>   
-    <h6 *ngIf=" authService.isLeader() " class="mb-0 pull-right pointerr"> <a (click)="redirectTeamLeadToTeam()"   style="color: #f88538;"> Team</a>  / Calendar </h6>   
-    <h6  *ngIf=" authService.isMember() " class="mb-0 pull-right pointerr"> <a routerLink="/member/member-home"  style="color: #f88538;"> Team List</a>  / Calendar </h6>   
-
-     <br>
-    <div class="text-right">
-      
-      <button  *ngIf="shown" class="btn btn-sm" (click)="goToAddEvent()">Add event</button>&nbsp;
-      <button class="btn btn-sm" (click)="toggleWeekends()">toggle weekends</button> 
-
+    <div class="container-fluid">
+        <br>
+        <h6 *ngIf="authService.isManager() || authService.isProjectLeader() " class="mb-0 pull-right pointerr"><a
+                (click)="redirectToTeam()" style="color: #f88538;"> Team</a> / calendar </h6>
+        <h6 *ngIf=" authService.isLeader() " class="mb-0 pull-right pointerr"><a (click)="redirectTeamLeadToTeam()"
+                                                                                 style="color: #f88538;"> Team</a> /
+            Calendar </h6>
+        <h6 *ngIf=" authService.isMember() " class="mb-0 pull-right pointerr">
+            <a routerLink="/member/member-home" style="color: #f88538;"> Team List</a>
+            / Calendar
+        </h6>
+        <br>
+        <div class="text-right">
+            <button (click)="goToAddEvent()" *ngIf="shown" class="btn btn-sm">Add event</button>&nbsp;
+            <button (click)="toggleWeekends()" class="btn btn-sm">toggle weekends</button>
+        </div>
+        <full-calendar [options]="calendarOptions"></full-calendar>
     </div>
-    <full-calendar deepChangeDetection="true"  [options]="calendarOptions">
-
-
-
-
-
-
-
-
-      
-</full-calendar>
-  </div>
 </div>
