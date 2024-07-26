@@ -13,7 +13,7 @@ import {DetailEventComponent} from '../detail-event/detail-event.component';
 import {UpdateEventComponent} from '../update-event/update-event.component';
 
 interface CalendarEvent {
-    id: number;
+    id: string; // Change id to string
     title: string;
     start: string | Date;
     end?: string | Date;
@@ -55,7 +55,7 @@ export class ListEventComponent implements OnInit {
 
             // Transform events to match FullCalendar event structure
             this.eventList = events.map(event => ({
-                id: event.id,
+                id: event.id.toString(), // Convert id to string
                 title: event.title,
                 start: new Date(event.start[0], event.start[1] - 1, event.start[2], event.start[3], event.start[4]),
                 end: event.end ? new Date(event.end[0], event.end[1] - 1, event.end[2], event.end[3], event.end[4]) : null
@@ -147,4 +147,3 @@ export class ListEventComponent implements OnInit {
         });
     }
 }
-

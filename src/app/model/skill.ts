@@ -1,5 +1,5 @@
 export class Skill {
-    id? : number;
-    roleLabel:String;
-    eval:number;
+    id?: number;
+    roleLabel: string;
+    eval: number;
 }
