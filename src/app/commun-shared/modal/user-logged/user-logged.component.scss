@@ -4,26 +4,26 @@ body{margin-top:20px;
     .rounded-circle {
         background-color: #f88538;
     }
-    
+
     h2 {
         clear: both;
         font-size: 1.8em;
         margin-bottom: 10px;
         padding: 10px 0 10px 30px;
     }
-    
+
     h3 > span {
         border-bottom: 2px solid #C2C2C2;
         display: inline-block;
         padding: 0 5px 5px;
     }
-    
+
     /* USER PROFILE */
     #user-profile h2 {
         padding-right: 15px;
     }
 
-   
+
     #user-profile .profile-label {
         text-align: center;
         padding: 5px 0;
@@ -52,7 +52,7 @@ body{margin-top:20px;
     #user-profile .profile-details ul > li > i {
         padding-top: 2px;
     }
- 
+
     #user-profile .profile-header {
         position: relative;
     }
@@ -75,10 +75,10 @@ body{margin-top:20px;
         position: relative;
         padding: 4px 0;
     }
-   
- 
-    
-    
+
+
+
+
     .main-box {
         background: #FFFFFF;
         -webkit-box-shadow: 1px 1px 2px 0 #CCCCCC;
@@ -94,10 +94,10 @@ body{margin-top:20px;
         padding: 5px 0 5px 20px;
         border-left: 10px solid #c2c2c2; /*7e8c8d*/
     }
-    
- 
 
-   
+
+
+
     .btn-default .caret {
         border-top-color: #FFFFFF;
     }
@@ -107,9 +107,9 @@ body{margin-top:20px;
         border: none;
     }
 
- 
- 
-    
+
+
+
     .icon-box {
         color: #f88538;
 
@@ -123,7 +123,7 @@ body{margin-top:20px;
         background-color: #eee;
         color: #f88538;
     }
-    
+
     a {
         color: #f88538;
         outline: none !important;
@@ -132,13 +132,13 @@ body{margin-top:20px;
     a:focus {
         color: #f88538;
     }
-    
-    
-  
-   
 
-  
- 
+
+
+
+
+
+
     textarea.form-control {
         height: auto;
     }
@@ -152,14 +152,14 @@ body{margin-top:20px;
         background-color: #f88538;
         color: #fff;
         padding: 7px 12px;
-    
+
     }
     .parent-div {
         display: inline-block;
         position: relative;
         overflow: hidden;
       }
-      
+
       .parent-div input[type=file] {
         left: 0;
         top: 0;
@@ -167,7 +167,7 @@ body{margin-top:20px;
         position: absolute;
         font-size: 90px;
       }
-      
+
       .btn-upload {
         background-color: #fff;
         border: 3px solid #fff;

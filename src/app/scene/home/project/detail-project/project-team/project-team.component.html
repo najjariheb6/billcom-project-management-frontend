@@ -11,7 +11,7 @@
     <div class="card card-one">
       <div class="header" (click)="goToTeamDetails(team.id)">
         <div class="avatar">
-<!--          <img [src]="hostPhoto + team.leader.user.user_id" alt="" />-->
+          <img [src]="hostPhoto + team.leader.user?.user_id" alt="" />
 
         </div>
       </div>
@@ -23,11 +23,11 @@
       <ul class="agent-contact-details">
         <li>
           <i class="fa fa-mobile" aria-hidden="true"></i>
-          &nbsp;&nbsp;&nbsp;<span>{{ team.leader.user.mobile }}</span>
+          &nbsp;&nbsp;&nbsp;<span>{{ team.leader.user?.mobile }}</span>
         </li>
         <li>
           <i class="fa fa-envelope" aria-hidden="true"></i
-          >&nbsp;&nbsp;&nbsp;<span>{{ team.leader.user.email }} </span>
+          >&nbsp;&nbsp;&nbsp;<span>{{ team.leader.user?.email }} </span>
         </li>
       </ul>
       <div class="footer">

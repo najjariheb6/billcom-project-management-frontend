@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./employee-detail.component.scss']
 })
 export class EmployeeDetailComponent implements OnInit {
-  hostPhoto: String = environment.urlConfig  + `photoUser/`;
+  hostPhoto: string = environment.urlConfig  + `photoUser/`;
 
   employee: Employee = null;
 

@@ -172,6 +172,7 @@
                                     <td (click)="goToProjectDetail(p.project.id)">{{ p.project.name }}</td>
                                     <td (click)="goToProjectDetail(p.project.id)">{{ formatDate(p.project.startedDate) }}</td>
                                     <td (click)="goToProjectDetail(p.project.id)">{{ formatDate(p.project.endDate) }}</td>
+<!--                                    {{console.log('Raw end date from backend:', p.project.endDate)}}-->
                                     <td *ngIf="p.project.statusProject == 'COMPLETED'"><span
                                             class="badge badge-success pull-center">completed</span></td>
                                     <td *ngIf="p.project.statusProject == 'PROGRESSING'"><span
@@ -193,20 +194,20 @@
                                     </td>
                                     <td>
                                         <div *ngIf="p.project.statusProject != 'COMPLETED'" class="action">
-                                            <a class="btn btn-outline-secondary pull-center" data-toggle="tooltip"><i
-                                                    (click)="updateStatus(p.project.id, 'PAUSED')"
-                                                    class="fas fa-pause-circle"></i></a>
+                                            <a class="btn btn-outline-secondary pull-center" data-toggle="tooltip" title="Pause Project">
+                                                <i (click)="updateStatus(p.project.id, 'PAUSED')" class="fas fa-pause-circle"></i>
+                                            </a>
                                             &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <a (click)="updateStatus(p.project.id, 'STOPPED')" class="btn btn-outline-danger"
-                                               data-toggle="tooltip"><i
-                                                    class="fas fa-stop-circle"></i></a>
+                                            <a (click)="updateStatus(p.project.id, 'STOPPED')" class="btn btn-outline-danger" data-toggle="tooltip" title="Stop Project">
+                                                <i class="fas fa-stop-circle"></i>
+                                            </a>
                                             &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <a (click)="updateStatus(p.project.id, 'PROGRESSING')" class="btn btn-outline-success"
-                                               data-toggle="tooltip"><i
-                                                    class="fas fa-play-circle"></i></a>
-
+                                            <a (click)="updateStatus(p.project.id, 'PROGRESSING')" class="btn btn-outline-success" data-toggle="tooltip" title="Resume Project">
+                                                <i class="fas fa-play-circle"></i>
+                                            </a>
                                         </div>
                                     </td>
+
                                 </tr>
 
                                 </tbody>

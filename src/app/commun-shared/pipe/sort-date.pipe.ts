@@ -17,9 +17,6 @@ export class SortDatePipe implements PipeTransform {
             } else {
                 return -1;
             }
-
-
         });
     }
-
 }

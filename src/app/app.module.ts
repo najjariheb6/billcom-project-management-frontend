@@ -28,7 +28,7 @@ import {CommunSharedModule} from './commun-shared/commun-shared.module';
 import {AttemptFirstLoginComponent} from './scene/auth/attempt-first-login/attempt-first-login.component';
 import {Ng2OrderModule} from 'ng2-order-pipe';
 import {DemandeComponent} from './scene/home/dayOff/demande/demande.component';
-
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
     declarations: [
@@ -55,6 +55,7 @@ import {DemandeComponent} from './scene/home/dayOff/demande/demande.component';
         FormsModule,
         NgxSpinnerModule,
         BrowserAnimationsModule,
+        ChartsModule,
         ToastrModule.forRoot(
             {
                 timeOut: 1000,

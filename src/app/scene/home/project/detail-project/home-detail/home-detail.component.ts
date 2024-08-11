@@ -44,7 +44,10 @@ export class HomeDetailComponent implements OnInit {
         });
     }
 
-    formatDate = (d: Date) => moment(d).format('DD MMMM,YY h:mm a ');
+    formatDate1 = (d) => moment(d).format('DD MMMM,YY h:mm a ');
+    formatDate2 = (d) => moment(d).format('YYYY-MM-DDTHH:mm');
+
+
 
     goToCreateTeam = () => {
         this.modalComponent.implementProject(this.projectProgress, AddTeamComponent, '700px', '710px');

@@ -20,17 +20,17 @@ import * as moment from 'moment';
   styleUrls: ['./user-logged.component.scss']
 })
 export class UserLoggedComponent implements OnInit {
-  public employee: Employee
-  shown: boolean = false;
-  addSkillForm: FormGroup
+  public employee: Employee;
+  shown = false;
+  addSkillForm: FormGroup;
   submitted = false;
   selectedFiles;
   editPhoto: boolean;
-  added: boolean = true
+  added = true;
   progress: number;
   currentFileUpload: any;
   currentTime: number;
-  hostPhoto: String = environment.urlConfig + `photoUser/`
+  hostPhoto: string = environment.urlConfig + `photoUser/`;
 
   tasksdone: TypePercentage[] = [];
 
@@ -44,7 +44,7 @@ export class UserLoggedComponent implements OnInit {
       this.getUser();
 
     }
-    )
+    );
     this.getUser();
 
     this.addSkillForm = this.formBuilder.group({
@@ -52,12 +52,12 @@ export class UserLoggedComponent implements OnInit {
       eval: ['', [Validators.required, Validators.max(100)]]
     });
     if (this.authService.isMember()) {
-      this.taskDoneTeamMeber()
+      this.taskDoneTeamMeber();
     }
   }
   url = 'assets/';
 
-  onSelectedFile(event) {
+  onSelectedFile = event => {
     this.selectedFiles = event.target.files;
     this.progress = 0;
     this.currentFileUpload = this.selectedFiles.item(0)
@@ -72,27 +72,14 @@ export class UserLoggedComponent implements OnInit {
         reader.onload = (event: any) => {
           this.url = event.target.result;
           this.added = false
-
-        }
-
-
-        this.notifyService.showSuccess("congratulations!", "Photo aploaded");
-
+        };
+        this.notifyService.showSuccess('congratulations!', 'Photo aploaded');
       }
     }, err => {
-      this.notifyService.showError("Fail!", "Photo could not be  aploaded");
-    })
+      this.notifyService.showError('Fail!', 'Photo could not be aploaded');
+    });
 
-
-
-    this.selectedFiles = undefined
-
-
-
-
-
-
-
+    this.selectedFiles = undefined;
   }
 
 
@@ -108,7 +95,7 @@ export class UserLoggedComponent implements OnInit {
 
       },
       err => {
-        console.log(err)
+        console.log(err);
       }
     );
   }
@@ -134,10 +121,10 @@ export class UserLoggedComponent implements OnInit {
       this.employeeService.adSkillsToUser(this.employee.user_id, this.addSkillForm.value).subscribe(
         data => {
           //    this.notifService.showSuccess("Skill added Successfully", "Done!");
-          this.addSkillForm.reset()
+          this.addSkillForm.reset();
           this.submitted = false;
 
-          this.shown = !this.shown
+          this.shown = !this.shown;
         },
         err => {
 
@@ -146,34 +133,28 @@ export class UserLoggedComponent implements OnInit {
         }
       );
 
-
-
-
     }
 
   }
 
 
 
-  gotoChangeModel() {
-    this.dialogConfig.implementUserLoggedUpdateDialog(this.employee, UpdateLoggedUserComponent, '700px', '700px')
+  gotoChangeModel = () => {
+    this.dialogConfig.implementUserLoggedUpdateDialog(this.employee, UpdateLoggedUserComponent, '700px', '780px');
+  }
 
-  }
-  formatDate(d: Date) {
-    return moment(d).format('DD-MM-YYYY')
-  }
-  taskDoneTeamMeber() {
+  formatDate = (d: Date) => moment(d).format('DD-MM-YYYY');
+
+  taskDoneTeamMeber = () => {
     this.teamService.taskDoneTeamMeber().subscribe(
       (data: TypePercentage[]) => {
 
         this.tasksdone = data;
       },
       err => {
-        console.log(err)
+        console.log(err);
 
       }
-
-
     );
   }
 }

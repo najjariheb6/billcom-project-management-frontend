@@ -35,8 +35,14 @@ export class SidebarComponent implements OnInit {
     }
 
     getList() {
-        this.notificationService.getNotifRemember().subscribe((data: Notification[]) => {
-            this.reminds = data;
+        this.notificationService.getNotifRemember().subscribe({
+            next: (data: Notification[]) => {
+                this.reminds = data;
+            },
+            error: (error) => {
+                console.error('Failed to load notifications', error);
+                // Optionally update the UI to reflect the error state
+            }
         });
     }
 

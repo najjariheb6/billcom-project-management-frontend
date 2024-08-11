@@ -3,14 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  urlLogin : "http://localhost:8081/login",
-  urlConfig : "http://localhost:8081/",
+    production: false, urlLogin: 'http://localhost:8081/login', urlConfig: 'http://localhost:8081/',
 
-  wbsConfig : "ws://localhost:8081/chat",
-  wbsNotif : "ws://localhost:8081/notif",
+    wbsConfig: 'ws://localhost:8081/chat', wbsNotif: 'ws://localhost:8081/notif',
 
-  
 
 };
 

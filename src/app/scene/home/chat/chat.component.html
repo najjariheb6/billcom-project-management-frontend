@@ -80,11 +80,9 @@
               class="direct-chat-msg"
             >
               <div class="direct-chat-infos clearfix">
-                <span class="direct-chat-name float-right">{{
-                  chatMessage.user
-                }}</span>
+                <span class="direct-chat-name float-right">{{ chatMessage.user }}</span>
                 <span class="direct-chat-timestamp float-left"
-                  >{{ today | date }} {{ today | date : "h:mm " }}</span
+                  >{{ formatDate(chatMessage.createdAt) }}</span
                 >
               </div>
               <!-- /.direct-chat-infos -->

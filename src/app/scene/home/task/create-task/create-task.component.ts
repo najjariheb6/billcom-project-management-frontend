@@ -64,7 +64,7 @@ export class CreateTaskComponent implements OnInit {
     }
 
     getTeamMember() {
-        this.teamService.getTeamMember(this.data).subscribe(data => {
+        this.teamService.getTeamMemberDto(this.data).subscribe(data => {
             this.members = data;
         });
     }
@@ -119,37 +119,29 @@ export class CreateTaskComponent implements OnInit {
     }
 
     getListTaksPeriod() {
+        console.log('idMember', this.addTaskForm.value.idMember);
+        console.log('startedDate', this.addTaskForm.value.startedDate);
+        console.log('deleveryDate', this.addTaskForm.value.deleveryDate);
         this.taskService.teamMembersTaskTwoDate(this.addTaskForm.value.idMember, this.addTaskForm.value.startedDate, this.addTaskForm.value.deleveryDate).subscribe(data => {
             this.teamTask = data;
-
-            if (this.teamTask.length == 0) {
-
+            if (this.teamTask.length === 0) {
                 const task = new Task(this.addTaskForm.value.deleveryDate, this.addTaskForm.value.startedDate, this.addTaskForm.value.descriptionTask, this.addTaskForm.value.idMember, this.addTaskForm.value.priority, this.addTaskForm.value.idStatus, this.addTaskForm.value.taskName);
                 this.taskService.save(task).subscribe(data => {
                     this.notifService.showSuccess('Task is created', 'Done!');
-
                     //this.onReset()
                     this.dashboardInteractionService.sendValue(true);
                     this.dialogRef.close();
                 }, err => {
-
                     console.log('error');
-
                 });
-
-
             } else {
                 this.modalComponent.implementTaskList(this.teamTask, ListTaskTeamComponent, '1000px', '800px');
-
             }
-
-
         });
     }
 
     showFormStatus() {
         this.showForm = !this.showForm;
     }
-
 
 }

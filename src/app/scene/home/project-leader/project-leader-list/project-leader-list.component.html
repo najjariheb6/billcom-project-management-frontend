@@ -23,7 +23,7 @@
                                     <span class="slider round"></span>
                                 </label>
                                 <a class="d-flex nav-link">
-                                    <span class="pointerr">Added on : {{ formatDate(p.project.createdDate) }}</span>
+                                    <span class="pointerr">Added on : {{ p.project.createdDate | date: 'yyyy-MM-dd'}}</span>
                                 </a>
                             </a>
                         </li>

@@ -73,7 +73,7 @@ export class EmployeeListComponent implements OnInit {
 
     getDetails(id: number) {
         console.log('Employee ID:', id);
-        this.modalComponent.implementDialogConfig(id, EmployeeDetailComponent, '500px', '530px');
+        this.modalComponent.implementDialogConfig(id, EmployeeDetailComponent, '500px', '430px');
 
     }
 
@@ -101,7 +101,7 @@ export class EmployeeListComponent implements OnInit {
 
     }
 
-    toggleEmployeeStatus(id: number, currentStatus: boolean) {
+    toggleEmployeeStatus = (id: number, currentStatus: boolean) => {
         const newStatus = currentStatus === true ? 0 : 1;
         const action = newStatus === 1 ? 'enabled' : 'disabled';
 
@@ -124,7 +124,7 @@ export class EmployeeListComponent implements OnInit {
         const results: Employee[] = [];
         for (const employee of this.employees) {
             if (employee.firstName.toLowerCase().indexOf(key.toLowerCase()) !== -1
-                || employee.email.toLowerCase().indexOf(key.toLowerCase()) !== -1
+                || employee.lastName.toLowerCase().indexOf(key.toLowerCase()) !== -1
                 || employee.mobile.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
                 results.push(employee);
             }
@@ -218,10 +218,7 @@ export class EmployeeListComponent implements OnInit {
                 });
             }
         });
-
-
     }
-
 }
 
 

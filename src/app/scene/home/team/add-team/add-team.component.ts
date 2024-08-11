@@ -19,7 +19,7 @@ import { WebSocketNotificationService } from 'src/app/rest-service/web-socket-no
   styleUrls: ['./add-team.component.scss']
 })
 export class AddTeamComponent implements OnInit {
-  titleTeam: String = ' Add Team'
+  titleTeam: String = ' Add Team';
 
   employees: Employee[] = [];
   emp: Employee

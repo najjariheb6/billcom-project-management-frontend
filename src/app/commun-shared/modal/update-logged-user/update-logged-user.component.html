@@ -36,8 +36,8 @@
     <div class="form-group">
         <label for="inputmobile">Mobile</label>
         <input type="text" class="form-control" Pattern="^9[0-9]{7}" size="10" minlength="8"
-               maxlength="8" id="inputmobile" required [(ngModel)]="employee.mobile" name="mobile"
-               #mobileref="ngModel"/>
+               maxlength="8" id="inputmobile" required name="mobile"
+               #mobileref="ngModel" [(ngModel)]="employee.mobile"/>
         <div *ngIf="mobileref.errors" class="alert alert-danger">
             <div [hidden]="!mobileref.errors?.pattern">
                 mobile ref
@@ -63,6 +63,9 @@
                     Passeport length should be 8!
                 </div>
             </div>
+
+
+
 
         </div>
 <!--        <div class="form-group col-md-6">-->

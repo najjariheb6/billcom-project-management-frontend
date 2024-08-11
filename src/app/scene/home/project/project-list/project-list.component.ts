@@ -10,6 +10,7 @@ import {AddProjectComponent} from '../add-project/add-project.component';
 import {DashboardProjectsComponent} from '../dashboard-projects/dashboard-projects.component';
 
 
+
 @Component({
     selector: 'app-project-list', templateUrl: './project-list.component.html', styleUrls: ['./project-list.component.scss']
 })
@@ -30,7 +31,7 @@ export class ProjectListComponent implements OnInit {
     showStatus = false;
     totalRecords: number;
     page: number;
-
+    console = console;
 
     constructor(private projectService: ProjectService,
                 private modalComponent: DialogConfigModalComponent,
@@ -129,7 +130,10 @@ export class ProjectListComponent implements OnInit {
 
     getEmployeeDetails = (idEmployee: number) => {};
 
-    formatDate = (d: Date) => moment(d).format('DD MMMM,YYYY');
+    // formatDate = (d: Date) => moment(d).format('DD MMMM,YYYY');
+
+    formatDate = (d) =>   moment.utc(d).format('DD MMMM,YYYY');
+
 
     goToAddProject = () => {
 

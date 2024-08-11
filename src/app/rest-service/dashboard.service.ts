@@ -16,14 +16,14 @@ export class DashboardService {
   get refreshNeeded() {
     return this.refresh;
   }
- 
+
   countTaskDelayed(idTeamMember: number): Observable<TaskStatistic>{
-    return this.httpClient.get<TaskStatistic>(environment.urlConfig + `test/countTaskMemberDelayed/${idTeamMember}`)  
+    return this.httpClient.get<TaskStatistic>(environment.urlConfig + `test/countTaskMemberDelayed/${idTeamMember}`);
 }
 
-  
+
   getTypePercentageCount(idTeam: number): Observable<CountTaskTeamMember[]>{
-    return this.httpClient.get<CountTaskTeamMember[]>(environment.urlConfig + `test/countTaskTeamMemberDto/${idTeam}`)
+    return this.httpClient.get<CountTaskTeamMember[]>(environment.urlConfig + `test/countTaskTeamMemberDto/${idTeam}`);
 
   }
   countKpiTeam(idTeam: number): Observable<TypePercentage[]>{

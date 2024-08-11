@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ProjectService } from 'src/app/rest-service/project.service';
 import { NotficationService } from 'src/app/shared/service/notfication.service';
 import * as moment from 'moment';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-update-project',
@@ -10,7 +11,7 @@ import * as moment from 'moment';
     styleUrls: ['./update-project.component.scss']
 })
 export class UpdateProjectComponent implements OnInit {
-    hostPhoto = 'http://localhost:8080/photoUser/';
+    hostPhoto = environment.urlConfig  + `photoUser/`;
     @Input() titleUpdate = 'Update Project';
 
     constructor(
@@ -39,7 +40,7 @@ export class UpdateProjectComponent implements OnInit {
         if (isNaN(date.getTime())) {
             return 'Invalid date';
         }
-        return moment(date).format('DD MMMM, YY h:mm a');
+        return moment(date).format('YYYY-MM-DDTHH:mm');
     }
 
     onSubmit = () => {

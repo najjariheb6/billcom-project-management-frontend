@@ -44,21 +44,14 @@ export class TeamDetailComponent implements OnInit {
     id: any;
     idProject: any;
 
-    constructor(public authService: AuthService,
-                private modalComponent: DialogConfigModalComponent,
-                private formBuilder: FormBuilder,
-                private dialogService: DialogconfirmService,
-                private teamService: TeamService,
-                private route: ActivatedRoute,
-                private employeeService: EmployeeServiceService,
-                public router: Router) {
+    constructor(public authService: AuthService, private modalComponent: DialogConfigModalComponent, private formBuilder: FormBuilder, private dialogService: DialogconfirmService, private teamService: TeamService, private route: ActivatedRoute, private employeeService: EmployeeServiceService, public router: Router) {
     }
 
     ngOnInit(): void {
 
         this.memberForm = this.formBuilder.group({
             idmembers: ['']
-        }, );
+        },);
 
         // let id = this.route.snapshot.params.id
         let decode = decodeURIComponent(this.route.snapshot.params.id);
@@ -70,13 +63,13 @@ export class TeamDetailComponent implements OnInit {
 
         this.teamService.detail(this.id).subscribe(data => {
             this.team = data;
-            this.getTeamMember(this.id);
+            this.getTeamMemberDto(this.id);
         }, err => {
             console.log(err);
 
         });
         this.teamService.refreshDetail.subscribe(() => {
-            this.getTeamMember(this.id);
+            this.getTeamMemberDto(this.id);
         });
     }
 
@@ -87,18 +80,23 @@ export class TeamDetailComponent implements OnInit {
     }
 
 
-    getProjectDetail(id: number) {
+    getProjectDetail = (id: number) => {
         this.teamService.projectTeamDetail(id).subscribe(data => {
             this.project = data;
         }, err => {
             console.log(err);
 
         });
-    }
-
+    };
 
     getTeamMember(nb: number) {
         this.teamService.getTeamMember(nb).subscribe(data => {
+            this.members = data;
+        });
+    }
+
+    getTeamMemberDto(nb: number) {
+        this.teamService.getTeamMemberDto(nb).subscribe(data => {
             this.members = data;
         });
     }
@@ -216,15 +214,12 @@ export class TeamDetailComponent implements OnInit {
     }
 
     addTask(id: number) {
-
         this.modalComponent.implementTaskList(id, CreateTaskComponent, '1200px', '750px');
-
-
     }
 
 
     formatDate(d: Date) {
-        return moment(d).format('DD MMMM,YYYY');
+        return moment(d).format('DD MMMM,YY h:mm a ');
     }
 
 

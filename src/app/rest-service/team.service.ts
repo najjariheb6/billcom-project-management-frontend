@@ -37,11 +37,15 @@ export class TeamService {
 
   }
   public detail(idTeam: number): Observable<Team> {
-    return this.httpClient.get<Team>(environment.urlConfig + `team/detailTeam/${idTeam}`)
+    return this.httpClient.get<Team>(environment.urlConfig + `team/detailTeam/${idTeam}`);
   }
 
   public getTeamMember(idTeam: number): Observable<Member[]> {
-    return this.httpClient.get<Member[]>(environment.urlConfig + `team/getTeamMember/${idTeam}`)
+    return this.httpClient.get<Member[]>(environment.urlConfig + `team/getTeamMember/${idTeam}`);
+  }
+
+  public getTeamMemberDto(idTeam: number): Observable<Member[]> {
+    return this.httpClient.get<Member[]>(environment.urlConfig + `team/getTeamMemberDto/${idTeam}`);
   }
 
   public addMemberToTeam(idTeam: number, list: number[]): Observable<Team[]> {

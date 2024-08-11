@@ -13,7 +13,7 @@ export class UserFileComponent implements OnInit {
 
 
   @Input()
-  LoggedEmployee: Employee
+  LoggedEmployee: Employee;
 
   filenames: string[] = [];
   fileStatus = { status: '', requestType: '', percent: 0 };
@@ -83,7 +83,7 @@ export class UserFileComponent implements OnInit {
   }
 
   showAadFile() {
-    this.fileVisible = !this.fileVisible
+    this.fileVisible = !this.fileVisible;
   }
 
 

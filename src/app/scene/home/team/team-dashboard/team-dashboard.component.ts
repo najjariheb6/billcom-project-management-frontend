@@ -60,12 +60,8 @@ export class TeamDashboardComponent implements OnInit {
 
   getAllCountTaskMember(id: number) {
     this.taskMemberStatistic = []
-
     this.dashboardService.getTypePercentageCount(id).subscribe((data: CountTaskTeamMember[]) => {
-
-
       this.typeData = data;
-
       data.forEach((type1: CountTaskTeamMember) => {
         this.member = type1.teamMember
         this.taskDateStatusDto = type1.taskDateStatusDto
@@ -73,18 +69,15 @@ export class TeamDashboardComponent implements OnInit {
         type1.countTaskDto.forEach((type: TypePercentage) => {
           this.doughnutChartData.push(type.value);
           this.doughnutChartLabels.push(type.name);
-
         })
         const test = new TaskMemberStatistic(this.member, this.doughnutChartLabels, this.doughnutChartData, this.taskDateStatusDto, this.tasksAdvanced)
         this.taskMemberStatistic.push(test)
         this.doughnutChartData = []
         this.doughnutChartLabels = []
-
       })
     }, error => {
       console.log(error)
     })
-
   }
 
   checkTaskdetail(id: number) { this.router.navigateByUrl("home/task-detail/" + id) }

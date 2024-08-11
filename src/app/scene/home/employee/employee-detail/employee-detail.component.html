@@ -52,42 +52,42 @@
                 <span class="float-center"> {{ employee.mobile }} </span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link">
-                <i class="fas fa-sticky-note" aria-hidden="true"></i>
-                Passport Validity:
-                <span
-                  *ngIf="employee.passeportValidityDate != null"
-                  class="float-center"
-                >
-                  {{ formatDate(employee?.passeportValidityDate) }}
-                </span>
-                <span
-                  *ngIf="employee.passeportValidityDate == null"
-                  class="float-center"
-                >
-                  -
-                </span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link">
-                <i class="fas fa-sticky-note" aria-hidden="true"></i>
-                Visa validity :
-                <span
-                  *ngIf="employee.passeportValidityDate != null"
-                  class="float-center"
-                >
-                  {{ formatDate(employee?.visaValidateDate) }}
-                </span>
-                <span
-                  *ngIf="employee.visaValidateDate == null"
-                  class="float-center"
-                >
-                  -
-                </span>
-              </a>
-            </li>
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link">-->
+<!--                <i class="fas fa-sticky-note" aria-hidden="true"></i>-->
+<!--                Passport Validity:-->
+<!--                <span-->
+<!--                  *ngIf="employee.passeportValidityDate != null"-->
+<!--                  class="float-center"-->
+<!--                >-->
+<!--                  {{ formatDate(employee?.passeportValidityDate) }}-->
+<!--                </span>-->
+<!--                <span-->
+<!--                  *ngIf="employee.passeportValidityDate == null"-->
+<!--                  class="float-center"-->
+<!--                >-->
+<!--                  - -->
+<!--                </span>-->
+<!--              </a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link">-->
+<!--                <i class="fas fa-sticky-note" aria-hidden="true"></i>-->
+<!--                Visa validity :-->
+<!--                <span-->
+<!--                  *ngIf="employee.passeportValidityDate != null"-->
+<!--                  class="float-center"-->
+<!--                >-->
+<!--                  {{ formatDate(employee?.visaValidateDate) }}-->
+<!--                </span>-->
+<!--                <span-->
+<!--                  *ngIf="employee.visaValidateDate == null"-->
+<!--                  class="float-center"-->
+<!--                >-->
+<!--                  - -->
+<!--                </span>-->
+<!--              </a>-->
+<!--            </li>-->
             <li class="nav-item">
               <a class="nav-link"
                 ><i class="fas fa-address-card" aria-hidden="true"></i>
@@ -105,6 +105,7 @@
                 </span>
               </a>
             </li>
+
           </ul>
         </div>
         &nbsp;&nbsp;&nbsp;&nbsp;

@@ -3,8 +3,8 @@
     <div *ngIf="fileStatus.status==='progress'">
         <div class="progress">
             <div [style.width.%]="fileStatus.percent"
-                class="progress-bar progress-bar-animated" role="progressbar"
-               aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                 class="progress-bar progress-bar-animated" role="progressbar"
+                 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
                 {{ fileStatus.requestType }} {{ fileStatus.percent }}
             </div>
         </div>
@@ -15,23 +15,24 @@
             <div *ngIf="!fileVisible  ||  LoggedEmployee.files?.length == '0'" class="form-group">
                 <div>
                     <input type="file" (change)="onUploadFiles($event.target.files)"
-                        name="files" multiple class="form-control" />
+                           name="files" multiple class="form-control" />
                 </div>
             </div>
 
         </fieldset>
     </form>
     <br>
-    <div class="files-list" *ngIf="LoggedEmployee.files?.length > 0">
+    <div class="file-box ml-3"><a (click)="showAadFile()"><span class="add-new-plus"><i
+            class="fa fa-plus"></i></span></a></div>
+    <div class="files-list" >
         <div *ngFor="let filename of LoggedEmployee.files " class="file-box">
             <a (click)="onDownloadFile(filename)"><img src="assets/file.png"
-                    class="img-responsive img-thumbnail" alt="attached-img"></a>
+                                                       class="img-responsive img-thumbnail" alt="attached-img"></a>
             <p (click)="onDownloadFile(filename)" class="font-13 mb-1 text-muted"><small> {{
                     filename }} </small></p>
         </div>
 
-        <div class="file-box ml-3"><a (click)="showAadFile()"><span class="add-new-plus"><i
-                        class="fa fa-plus"></i></span></a></div>
+
 
     </div>
 

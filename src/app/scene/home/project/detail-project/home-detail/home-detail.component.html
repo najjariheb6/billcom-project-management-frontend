@@ -70,7 +70,8 @@
                                             <h6 class="mb-0">Due date : </h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            {{ formatDate(projectProgress.project.endDate) }}
+                                            {{ formatDate1(projectProgress.project.endDate) }}
+<!--                                            {{ projectProgress.project.createdDate | date: 'yyyy-MM-dd'}}-->
                                         </div>
                                     </div>
                                 </div>
@@ -99,7 +100,7 @@
                                         <h6 class="mb-0">Started Date : </h6>
                                     </div>
                                     <div class="col-sm-6 text-secondary">
-                                        {{ formatDate(projectProgress.project.startedDate) }}
+                                        {{ formatDate1(projectProgress.project.startedDate) }}
                                     </div>
                                 </div>
                                 <br>

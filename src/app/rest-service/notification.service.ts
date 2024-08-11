@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import {Observable, Subject, throwError} from 'rxjs';
+import {catchError, tap} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Notification } from 'src/app/model/notification';
 @Injectable({
@@ -19,9 +19,20 @@ export class NotificationService {
   public liste(): Observable<Notification[]> {
     return this.httpClient.get<Notification[]>(environment.urlConfig + `notification/NotificationList`);
   }
+  // public getNotifRemember(): Observable<Notification[]> {
+  //   return this.httpClient.get<Notification[]>(environment.urlConfig + `notification/getNotifRemember`);
+  // }
+
   public getNotifRemember(): Observable<Notification[]> {
-    return this.httpClient.get<Notification[]>(environment.urlConfig + `notification/getNotifRemember`);
+    return this.httpClient.get<Notification[]>(environment.urlConfig + 'notification/getNotifRemember')
+        .pipe(
+            catchError(error => {
+              console.error('Error fetching notifications:', error);
+              return throwError(error);
+            })
+        );
   }
+
   public updateStatus(id: number, data: any): Observable<any> {
     return this.httpClient.put(environment.urlConfig + `notification/updateNotificationStatus/${id}`, data).pipe(
       tap(() => { this.refresh.next(); }));
